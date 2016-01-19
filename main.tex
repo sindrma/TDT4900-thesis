@@ -1,0 +1,181 @@
+% (C) Anders Kofod-Petersen
+\documentclass[a4paper,hyphens]{book}
+%\documentclass[a4paper,oneside,hyphens]{book}
+\usepackage[english]{babel}						% Correct English hyphenation
+\usepackage[utf8]{inputenc}						% Allow for non-English letters
+\usepackage{graphicx}							% To include graphics
+%\usepackage{natbib}								% Correct citations
+\usepackage{fancyhdr}						% Nice header and footer
+\usepackage[Bjarne]{fncychap}
+\usepackage[linktocpage,colorlinks]{hyperref}			% PDF hyperlink
+\usepackage{geometry} 							% Better geometry
+%\usepackage[center]					% For cropping documents
+\usepackage{glossaries}
+\usepackage{listings}
+%\usepackage{lstlisting}
+\usepackage{color}
+%\usepackage{pdfpages}
+\usepackage[section]{placeins}
+\usepackage{url}
+\usepackage{pdfpages}
+\usepackage[titletoc]{appendix}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% B5 (uncomment to convert to B5 format)
+\geometry{b5paper}
+
+% Make glossaries
+\loadglsentries{glossary}
+\makeglossaries
+
+% Author
+% Fill in here, and use commands in the text.
+\newcommand{\thesisAuthor}{Sindre Magnussen}
+\newcommand{\thesisTitle}{Climbing Mont Blanc}
+\newcommand{\thesisUnderTitle}{Improving System Usability}
+\newcommand{\thesisType}{TDT4900: Master Thesis}
+\newcommand{\thesisDate}{Spring 2016}
+\renewcommand\_{\textunderscore\allowbreak}
+
+\newcommand\NoIndent[1]{%
+  \begingroup
+  \par
+  \parshape0
+  #1\par
+  \endgroup
+}
+
+\setlength\parindent{0pt}
+
+% PDF info
+\hypersetup{pdfauthor={\thesisAuthor}}
+\hypersetup{pdftitle={\thesisTitle}}
+\hypersetup{pdfsubject={\thesisType}}
+\hypersetup{linkcolor=black}
+\hypersetup{citecolor=black}
+\hypersetup{urlcolor=black}
+
+%Fancy headings
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+%\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\renewcommand{\headrulewidth}{0.1ex}
+\renewcommand{\footrulewidth}{0.1ex}
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\thepage}\renewcommand{\headrulewidth}{0ex}}
+
+% Citation format
+%\bibliographystyle{alpha}
+
+%\bibliographystyle{apalike}
+%\bibpunct{[}{]}{;}{a}{,}{,}
+
+\begin{document}
+
+%BEGIN TITLE PAGE
+\begin{titlepage}
+\noindent {\large \textbf{\thesisAuthor}}
+\vspace{2cm}
+
+\noindent {\Huge \thesisTitle}
+\vspace{0.5cm}
+
+\noindent {\Large \thesisUnderTitle}
+\vspace{2cm}
+
+\noindent \thesisType, \thesisDate
+\vspace{2cm}
+
+\noindent The Computer Architecture and Design Research Group \\ Department of Computer and Information Science\\ Faculty of Information Technology, Mathematics and Electrical Engineering
+\vspace{1cm}
+\\Supervisor:\\Lasse Natvig\vspace{0.1cm}
+\\Co-supervisor:\\Magnus Själander\vspace{0.1cm} \\
+\vfill
+\begin{center}
+\includegraphics[width=3cm]{figs/NTNUlogo.jpg}
+\end{center}
+\end{titlepage}
+
+\thispagestyle{empty}
+
+\null\cleardoublepage
+%END TITLE PAGE
+
+%BEGIN FRONTMATTER
+\frontmatter
+
+\input{content/problemstatement}
+
+%\null\clearpage
+%\null\clearpage
+
+% \input{content/abstract}
+
+%\clearpage
+
+%\input{content/sammendrag}
+
+%\null\clearpage
+%\null\clearpage
+
+% \input{content/preface}
+
+\null\clearpage
+\null\clearpage
+
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+%% include if relevant
+\printglossary[title=List of Acronyms,type=\acronymtype]
+\cleardoublepage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\mainmatter
+
+\input{content/introduction}
+%\input{content/background}
+
+
+\bibliographystyle{alpha}
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{bibliography}
+
+%\begin{appendices}
+  %\input{appendices/paper}
+%\end{appendices}
+
+\end{document}
