@@ -6,11 +6,11 @@
 \usepackage{graphicx}							% To include graphics
 %\usepackage{natbib}								% Correct citations
 \usepackage{fancyhdr}						% Nice header and footer
-\usepackage[Bjarne]{fncychap}
+%\usepackage[Lenny]{fncychap}
 \usepackage[linktocpage,colorlinks]{hyperref}			% PDF hyperlink
 \usepackage{geometry} 							% Better geometry
 %\usepackage[center]					% For cropping documents
-\usepackage{glossaries}
+\usepackage[toc]{glossaries}
 \usepackage{listings}
 %\usepackage{lstlisting}
 \usepackage{color}
@@ -166,7 +166,13 @@
 \mainmatter
 
 \input{content/introduction}
-%\input{content/background}
+\input{content/background}
+\input{content/related}
+\input{content/design}
+\input{content/improvements}
+\input{content/testing}
+\input{content/evaluation}
+\input{content/conclusion}
 
 
 \bibliographystyle{alpha}
@@ -174,8 +180,8 @@
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibliography{bibliography}
 
-%\begin{appendices}
-  %\input{appendices/paper}
-%\end{appendices}
+\begin{appendices}
+  \input{appendices/setup}
+\end{appendices}
 
 \end{document}

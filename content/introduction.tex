@@ -4,12 +4,19 @@ In this chapter, the motivation (\ref{sec:mot}), problem statement interpretatio
 
 \section{Motivation}
 \label{sec:mot}
-The limits of smart phone processors in terms of computational power and energy effiency are constantly being pushed for each new smart phone model. As a result, mobile processors, or so called Mulit Processor System On Chip (MPSOCs) or heterogenous multicores, has gained increasing interest as components in systems outside the mobile market. The \gls{mb} has shown that are ready to be used in \gls{hpc} as the performance gap between MPSoCs and microprocessors are closing quickly \cite{a:MB:Raj13}. The Barcelone Supercomputing Center coordinate the project, and the project has received funding to last until 2017. The project goal are to build a new type of super computer architecture, using 15 to 30 times less energy compared to other HPC systems. The project has already constructed multiple prototypes using Samsung Exynos \cite{m:Exy} heterogenous processors. \\
+The limits of smartphone processors regarding computational power and energy efficiency are pushed for each new smartphone model. As a result, mobile processors or so-called heterogeneous multicores\footnote{Also referred to as Multi-Processor System On Chips (MPSOCs)}, has gained increasing interest as components in systems outside the mobile market. The \gls{mb} \cite{m:MB} has shown that heterogeneous multicores are potential candidates for building \gls{hpc} systems, as the performance gap between MPSoCs and microprocessors are closing quickly \cite{a:MB:Raj13}. Increasing performance has been a priority in HPC, and HPC systems performance are expected to hit Exascale performance ($10^{18}$ floating point operations per second (exaFLOPS)) within few years \cite{m:Top500}. The project goals are to build a new type of Super Computer architecture, reaching Exascale performance using 15 to 30 times less energy compared to other HPC systems. The project has already constructed multiple prototypes by using heterogeneous processors like the Samsung Exynos \cite{m:Exy} processor among others. The Barcelona Supercomputing Center coordinate the project, and the project has received funding to last until September 2016. \\
 
-Modern mobile phones, or smart phones, are becoming more and more computationally powerful for every release. The increased computing power makes the phone consume more energy, which poses a huge challenges both for software and hardware developers.
+Smartphones are becoming more and more computationally powerful for every release. The increased computing power makes the phone consume more energy, which poses enormous challenges regarding energy efficiency both for hardware and software developers. ARM has developed hardware energy aware big.LITTLE technology for their heterogeneous cores, which consist of both high performance and energy efficient processors. The technology uses Global Task Scheduling to assign threads to the most appropriate CPU based on dynamic runtime information \cite{a:ARM:bL}. Other well-known hardware techniques are also massively used, such as Dynamic Voltage and Frequency Scaling. Among others, Task-Based Programming has gained increasing interest in recent time and has shown to deliver energy efficient results \cite{a:Lien2012}. Both research areas are expected to become even more important in the future. \\
+
+There will be a large need for programmers skilled in developing energy efficient code for heterogeneous multicores. Many \gls{ojs} such as PKU Online Judge and Kattis has existed for years, making it possible for programmers to compete, and self-educate in creating efficient code. However, none of the known Online Judges are known to evaluate and focus on energy efficiency of submitted programs. Noticing the need to focus on energy efficient programming against heterogeneous multicores, Lasse Natvig started the \gls{cmb} to train programmers in developing energy efficient code for heterogeneous multicores by providing a new Online Judge. The project began in 2014, and Torbjørn Follan and Simen Støa developed the first prototype version during the Spring of 2014 \cite{mt:T&S}. The system uses an Exynos Odroid-XU3 \cite{m:XU3} to run and measure the energy consumption of submitted programs. This thesis aims to improve further the system and extend with more functionality with a focus on usability. \\
+
+Developing energy efficient code for heterogeneous systems is challenging. One challenge is to develop high-performance code that uses multiple processor cores of different types. Another challenge is to make the same high-performance code energy efficient. The \gls{cmb} wants to stimulate students and programmers to develop energy efficient high-performance code for heterogeneous multicores. The PKU Online Judge had almost a total of 1,3 million submissions last year, and we believe that increasing the number of submissions on the CMB system might help to solve some of the challenges related to programming heterogeneous multicores. \\
+
+\clearpage
 
 \section{Problem Statement Interpretation}
 \label{sec:rq}
+This project aims to improve the usability of the \gls{cmb} system. Furthermore  
 
 
 \paragraph*{Main objectives} \hfill
@@ -21,6 +28,9 @@ Modern mobile phones, or smart phones, are becoming more and more computationall
 
 \section{Project Contributions}
 \label{sec:cont}
+This project wil contribute towards improving the usability of the Climbing Mont Blanc system. System usability is here defined as the easy of use, easy of learning, logic design of the system as well as providing sufficient feedback to it's users. Usability is a broad term and there is always room for usability improvements in a software system. This thesis it is restricted to improve a subset of the usability aspects listed in Appendix \ref{ch:setup}, as well as urgent usability aspects discovered throughout this thesis. Users of the system is defined in this thesis as both administrators using the admin interface and regular users using the frontend (the website \url{https://climb.idi.ntnu.no}). Furthermore, this thesis also aims to further extend the functionality of the system with focus on contributing towards usability. Contributions are summarized in table \ref{}.
+
+%awesome table
 
 
 \section{Outline}
@@ -28,4 +38,6 @@ Modern mobile phones, or smart phones, are becoming more and more computationall
 This report is structured as follows:\\
 
 \noindent
-\textbf{Chapter \ref{ch:bck}}: Explains the state-of-art.
+\textbf{Chapter \ref{ch:background}}: Explains the state-of-art. It will present the Mont Blanc project, the project which motivates the Climbing Mont Blanc project. The chapter will also present the Climbing Mont Blanc project, and the system architecture, energy measurement method, the system environment, and system security will be presented. The chapter ends with a presentation of the extensions planned during the Spring of 2016. \\
+
+\textbf{Chapter \ref{ch:related}}: Explains related work. The chapter will present other Online Judges as well as programmering competitions. It will also present work relevant for the system which, might further extend the system with improved or new functionality some time in the future.
