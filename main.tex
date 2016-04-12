@@ -153,8 +153,12 @@
 
 \tableofcontents
 
+\phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 
+\phantomsection
+\addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 
 %% include if relevant
@@ -181,6 +185,7 @@
 \bibliography{bibliography}
 
 \begin{appendices}
+  \input{appendices/backlog}
   \input{appendices/setup}
 \end{appendices}
 

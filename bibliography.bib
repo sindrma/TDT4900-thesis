@@ -36,12 +36,18 @@
   year = {2013}
 }
 
-@article{a:MB:Tib,
-    title     = "\textit{Tibidabo: Making the Case for an ARM-Based HPC System}",
-    author    = "Nikola Rajovica, Alejandro Ricoa, Nikola Puzovica, Chris Adeniyi-Jonesc, Alex Ramireza",
-    year      = "2012",
-    month    = "November"
+@misc{a:MB:Tib,
+    abstract = {It is widely accepted that future HPC systems will be limited by their power consumption. Current HPC systems are built from commodity server processors, designed over years to achieve maximum performance, with energy efficiency being an after-thought. In this paper we advocate a different approach: building HPC systems from low-power embedded and mobile technology parts, over time designed for maximum energy efficiency, which now show promise for competitive performance. We introduce the architecture of Tibidabo, the first large-scale HPC cluster built from ARM multicore chips, and a detailed performance and energy efficiency evaluation. We present the lessons learned for the design and improvement in energy efficiency of future HPC systems based on such low-power cores. Based on our experience with the prototype, we perform simulations to show that a theoretical cluster of 16-core ARM Cortex-A15 chips would increase the energy efficiency of our cluster by 8.7??, reaching an energy efficiency of 1046??MFLOPS/W. ?? 2013 Elsevier B.V. All rights reserved.},
+    author = {Rajovic, Nikola and Rico, Alejandro and Puzovic, Nikola and Adeniyi-Jones, Chris and Ramirez, Alex},
+    booktitle = {Future Generation Computer Systems},
+    doi = {10.1016/j.future.2013.07.013},
+    issn = {0167739X},
+    keywords = {Cortex-A15,Cortex-A9,Embedded processors,Energy efficiency,High-performance computing,Low power,Mobile processors},
+    mendeley-groups = {TDT4900},
+    title = {{Tibidabo : Making the case for an ARM-based HPC system}},
+    year = {2013}
 }
+
 
 @article{a:CMB,
     title     = "\textit{Climbing Mont Blanc — A Training Site for Energy Efficient Programming on Heterogeneous Multicore Processors}",
@@ -64,16 +70,20 @@
 }
 
 @misc{m:MB:MB-prot,
+    key = {{MBPROT}},
     author = {{Alex Ramirez}},
     title = {\textit{The Mont-Blanc prototype}},
     year = 2014,
+    howpublished = {\url{https://www.montblanc-project.eu/sites/default/files/publications/20140522montblanc-prototypes-workshop.pdf}}
     note = "Presentation"
 }
 
 @misc{m:MB:Pedr,
+    key = {{MDPEDR}},
     author = {{Filippo Mantovani}},
     title = {\textit{Pedraforca: ARM + GPU prototype}},
     year = 2014,
+    howpublished = {\url{https://www.montblanc-project.eu/sites/default/files/publications/workshopProto-Pedraforca.pdf}}
     note = "Presentation"
 }
 
@@ -84,10 +94,33 @@
     note = "Last accessed 3rd of April 2016"
 }
 
+@misc{m:bull,
+    key = {{BULL}},
+    title = {{Bull Atos Technologies}},
+    howpublished = {\url{http://www.bull.com/}},
+    note = "Last accessed 12th of April 2016"
+}
+
+@misc{m:ompss,
+    key = {{OMPSS}},
+    title = {{The OmpSs Programming Model}},
+    howpublished = {\url{https://pm.bsc.es/ompss}},
+    note = "Last accessed 12th of April 2016"
+
+}
+
+@misc{m:bsc,
+    key = {{BSC}},
+    title = {{Barcelona Supercomputer Center}},
+    howpublished = {\url{https://www.bsc.es/}},
+    note = "Last accessed 12th of April 2016"
+}
+
 @misc{m:Gr500,
+    key = {{G500}},
     title = {{Green 500}},
     howpublished = {\url{http://www.green500.org/}},
-    note = "Last accessed 12th of October 2015"
+    note = "Last accessed 12th of April 2016"
 }
 
 @misc{m:XU3,
@@ -130,16 +163,20 @@
 }
 
 @misc{m:MB-15,
+    key = {{FM15}},
     author = {{Filippo Mantovani}},
     title = {\textit{High Performance Computing Based on Mobile Embedded Technology}},
     year = 2015,
+    howpublished = {\url{https://www.montblanc-project.eu/sites/default/files/publications/Mont-Blanc-EMiT15-lq-public.pdf}}
     note = "International conferences"
 }
 
 @misc{m:MB-PRACE-14,
+    key = {{AR14}},
     author = {{Alex Ramirez}},
     title = {\textit{Building supercomputers from embedded technologies}},
     year = 2014,
+    howpublished = {\url{https://www.montblanc-project.eu/sites/default/files/publications/20140521mont-blanc-pracedays14.pdf}}
     note = "Presentation"
 }
 
@@ -268,13 +305,23 @@
     title     =     {\textit{Climbing Mont Blanc: A Prototype System for Online Energy Efficiency Based Programming Competitions on ARM Platforms}},
     school     =     {Norwegian University of Science and Technology},
     address     =     {Norway},
-    year     =     {2015},
-    note = "Cited pages[p.8-11, p.31-33, p.35-37, p.47-55]"
+    year     =     {2015}
 }
 
-@phdthesis{phd:rtf,
-    author = {Roy T. Fielding and Richard N. Taylor},
-    title = {{Principled Design of the Modern Web Architecture}},
-    school = {{University of California, Irvine}},
-    year = {{2002}}
+@article{a:rtf,
+    abstract = {The World Wide Web has succeeded in the large part because its$\backslash$nsoftware architecture has been designed to meet the needs of an$\backslash$nInternet-scale distributed hypermedia system. The modern Web$\backslash$narchitecture emphasizes scalability of component interactions,$\backslash$ngenerality of interfaces, independent deployment of components, and$\backslash$nintermediary components to reduce interaction latency, enforce security,$\backslash$nand encapsulate legacy systems. We introduce the Representational State$\backslash$nTransfer (REST) architectural style, developed as an abstract model of$\backslash$nthe Web architecture to guide our redesign and definition of the$\backslash$nHypertext Transfer Protocol and Uniform Resource Identifiers. We$\backslash$ndescribe the software engineering principles guiding REST and the$\backslash$ninteraction constraints chosen to retain those principles, contrasting$\backslash$nthem to the constraints of other architectural styles. We then compare$\backslash$nthe abstract model to the currently deployed Web architecture in order$\backslash$nto elicit mismatches between the existing protocols and the applications$\backslash$nthey are intended to support},
+    archivePrefix = {arXiv},
+    arxivId = {10.1145/514183.514185},
+    author = {Fielding, R.T. and Taylor, R.N.},
+    doi = {10.1109/ICSE.2000.870431},
+    eprint = {514183.514185},
+    isbn = {1-58113-206-9},
+    issn = {0270-5257},
+    journal = {Proceedings of the 2000 International Conference on Software Engineering. ICSE 2000 the New Millennium},
+    number = {2},
+    pages = {115--150},
+    primaryClass = {10.1145},
+    title = {{Principled design of the modern Web architecture}},
+    volume = {2},
+    year = {2000}
 }
