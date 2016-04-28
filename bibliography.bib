@@ -35,6 +35,15 @@
   year = {2013}
 }
 
+@mastersthesis{mt:T&S,
+    author     =     {Follan, Torbjørn and Støa, Simen},
+    title     =     {{Climbing Mont Blanc: A Prototype System for Online Energy Efficiency Based Programming Competitions on ARM Platforms}},
+    school     =     {Norwegian University of Science and Technology},
+    address     =     {Norway},
+    year     =     {2015}
+}
+
+
 @misc{a:MB:Tib,
     abstract = {It is widely accepted that future HPC systems will be limited by their power consumption. Current HPC systems are built from commodity server processors, designed over years to achieve maximum performance, with energy efficiency being an after-thought. In this paper we advocate a different approach: building HPC systems from low-power embedded and mobile technology parts, over time designed for maximum energy efficiency, which now show promise for competitive performance. We introduce the architecture of Tibidabo, the first large-scale HPC cluster built from ARM multicore chips, and a detailed performance and energy efficiency evaluation. We present the lessons learned for the design and improvement in energy efficiency of future HPC systems based on such low-power cores. Based on our experience with the prototype, we perform simulations to show that a theoretical cluster of 16-core ARM Cortex-A15 chips would increase the energy efficiency of our cluster by 8.7??, reaching an energy efficiency of 1046??MFLOPS/W. ?? 2013 Elsevier B.V. All rights reserved.},
     author = {Rajovic, Nikola and Rico, Alejandro and Puzovic, Nikola and Adeniyi-Jones, Chris and Ramirez, Alex},
@@ -78,22 +87,66 @@
 }
 
 @article{a:F:CI,
-abstract = {Continuous Integration is a software development practice where members of a team integrate their work frequently, usually each person integrates at least daily - leading to multiple integrations per day. Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible. Many teams find that this approach leads to significantly reduced integration problems and allows a team to develop cohesive software more rapidly. This article is a quick overview of Continuous Integration summarizing the technique and its current usage.},
-author = {Fowler, Martin},
-doi = {10.1007/978-1-4302-0142-7{\_}9},
-isbn = {8131722910},
-journal = {Integration The Vlsi Journal},
-number = {1},
-pages = {1--6},
-title = {{Continuous Integration}},
-url = {http://martinfowler.com/articles/continuousIntegration.html},
-volume = {26},
-year = {2006}
+    abstract = {Continuous Integration is a software development practice where members of a team integrate their work frequently, usually each person integrates at least daily - leading to multiple integrations per day. Each integration is verified by an automated build (including test) to detect integration errors as quickly as possible. Many teams find that this approach leads to significantly reduced integration problems and allows a team to develop cohesive software more rapidly. This article is a quick overview of Continuous Integration summarizing the technique and its current usage.},
+    author = {Fowler, Martin},
+    doi = {10.1007/978-1-4302-0142-7{\_}9},
+    isbn = {8131722910},
+    journal = {Integration The Vlsi Journal},
+    number = {1},
+    pages = {1--6},
+    title = {{Continuous Integration}},
+    url = {http://martinfowler.com/articles/continuousIntegration.html},
+    volume = {26},
+    year = {2006}
 }
 
+@inproceedings{b:mvc,
+    abstract = {Design Patterns is a modern classic in the literature of object-oriented development, offering timeless and elegant solutions to common problems in software design. It describes patterns for managing object creation, composing objects into larger structures, and coordinating control flow between objects. The book provides numerous examples where using composition rather than inheritance can improve the reusability and flexibility of code. Note, though, that it's not a tutorial but a catalog that you can use to find an object-oriented design pattern that's appropriate for the needs of your particular application-a selection for virtuoso programmers who appreciate (or require) consistent, well-engineered object-oriented designs. Now on CD, this internationally acclaimed bestseller is more valuable than ever! Use the contents of the CD to create your own design documents and reusable components. The CD contains: 23 patterns you can cut and paste into your own design documents; sample code demonstrating pattern implementation; complete Design Patterns content in standard HTML format, with numerous hyperlinked cross-references; accessed through a standard web browser; Java-based dynamic search mechanism, enhancing online seach capabilities; graphical user environment, allowing ease of navigation. First published in 1995, this landmark work on object-oriented software design presents a catalog of simple and succinct solutions to common design problems. Created by four experienced designers, the 23 patterns contained herein have become an essential resource for anyone developing reusable object-oriented software. In response to reader demand, the complete text and pattern catalog are now available on CD-ROM. This electronic version of Design Patterns enables programmers to install the book directly onto a computer or network for use as an online reference for creating reusable object-oriented software. The authors first describe what patterns are and how they can help you in the design process. They then systematically name, explain, evaluate, and catalog recurring designs in object-oriented systems. All patterns are compiled from real-world examples and include code that demonstrates how they may be implemented in object-oriented programming languages such as C++ and Smalltalk. Readers who already own the book will want the CD to take advantage of its dynamic search mechanism and ready-to-install patterns.},
+    author = {Gamma, Erich and Helm, Richard and Johnson, Ralph and Vlissides, John},
+    booktitle = {Elements},
+    doi = {10.1016/j.artmed.2009.05.004},
+    isbn = {0201633612},
+    issn = {18732860},
+    mendeley-groups = {TDT4900},
+    number = {February},
+    pages = {1--429},
+    pmid = {19500956},
+    title = {{Design Patterns}},
+    url = {http://www.amazon.co.uk/exec/obidos/ASIN/0201633612/citeulike-21},
+    volume = {47},
+    year = {1995}
+}
 
-@misc{m:MB:MB-prot,
-    key = {{MBPROT}},
+@article{a:edp,
+    abstract = {Introduction Recently there has been a surge of interest in low-power devices and design techniques. While many papers have been published describing power-saving techniques for use in digital systems, trade-offs between the methods are rarely discussed. We address this issue by using an energy-delay metric to compare many of the proposed techniques. Using this metric also provides insight into some of the basic trade-offs in low-power design. The next section describes the energy-loss mechanisms that are present in CMOS circuits, which provides the parameters that must be changed to lower the power dissipation. With these factors in mind, the rest of the paper reviews the energy saving techniques that have been proposed. These proposals fall into one of three main strategies: trade speed for power, don't waste power, and find a lower power problem. CMOS Power Dissipation Power dissipation in CMOS circuits arises from two different mechanisms: static power, which results from resistive paths from the power supply to ground, and dynamic power, which results from switching capacitive loads between two different voltage states. Dynamic power is frequency dependent, since no power is dissipated if the node values don't change, while static power is independent of frequency and exists whenever the chip is powered on. For uses where the electronics will be inactive for much of the time (most portable applications), the static power must be made very low in the inactive state.},
+    author = {Horowitz, Mark and Indermaur, Thomas and Gonzalez, Ricardo},
+    doi = {10.1109/LPE.1994.573184},
+    isbn = {0-7803-1953-2},
+    journal = {Lpe},
+    pages = {8--11},
+    title = {{Low-Power Digital Design}},
+    year = {1994}
+}
+
+@article{a:rtf,
+    abstract = {The World Wide Web has succeeded in the large part because its$\backslash$nsoftware architecture has been designed to meet the needs of an$\backslash$nInternet-scale distributed hypermedia system. The modern Web$\backslash$narchitecture emphasizes scalability of component interactions,$\backslash$ngenerality of interfaces, independent deployment of components, and$\backslash$nintermediary components to reduce interaction latency, enforce security,$\backslash$nand encapsulate legacy systems. We introduce the Representational State$\backslash$nTransfer (REST) architectural style, developed as an abstract model of$\backslash$nthe Web architecture to guide our redesign and definition of the$\backslash$nHypertext Transfer Protocol and Uniform Resource Identifiers. We$\backslash$ndescribe the software engineering principles guiding REST and the$\backslash$ninteraction constraints chosen to retain those principles, contrasting$\backslash$nthem to the constraints of other architectural styles. We then compare$\backslash$nthe abstract model to the currently deployed Web architecture in order$\backslash$nto elicit mismatches between the existing protocols and the applications$\backslash$nthey are intended to support},
+    archivePrefix = {arXiv},
+    arxivId = {10.1145/514183.514185},
+    author = {Fielding, R.T. and Taylor, R.N.},
+    doi = {10.1109/ICSE.2000.870431},
+    eprint = {514183.514185},
+    isbn = {1-58113-206-9},
+    issn = {0270-5257},
+    journal = {Proceedings of the 2000 International Conference on Software Engineering. ICSE 2000 the New Millennium},
+    number = {2},
+    pages = {115--150},
+    primaryClass = {10.1145},
+    title = {{Principled design of the modern Web architecture}},
+    volume = {2},
+    year = {2000}
+}
+
+@misc{p:MB:MB-prot,
     author = {{Alex Ramirez}},
     title = {\textit{The Mont-Blanc prototype}},
     year = 2014,
@@ -101,8 +154,7 @@ year = {2006}
     note = "Presentation"
 }
 
-@misc{m:MB:Pedr,
-    key = {{MDPEDR}},
+@misc{p:MB:Pedr,
     author = {{Filippo Mantovani}},
     title = {\textit{Pedraforca: ARM + GPU prototype}},
     year = 2014,
@@ -110,65 +162,56 @@ year = {2006}
     note = "Presentation"
 }
 
-@misc{m:MB,
-    key = {{MB}},
+@misc{MB,
     title = {{The Mont Blanc Project}},
     howpublished = {\url{https://www.montblanc-project.eu/}},
     note = "Last accessed 3rd of April 2016"
 }
 
-@misc{m:bull,
-    key = {{BULL}},
+@misc{BULL,
     title = {{Bull Atos Technologies}},
     howpublished = {\url{http://www.bull.com/}},
     note = "Last accessed 12th of April 2016"
 }
 
-@misc{m:ompss,
-    key = {{OMPSS}},
+@misc{OMPSS,
     title = {{The OmpSs Programming Model}},
     howpublished = {\url{https://pm.bsc.es/ompss}},
     note = "Last accessed 12th of April 2016"
-
 }
 
-@misc{m:bsc,
+@misc{BSC,
     key = {{BSC}},
     title = {{Barcelona Supercomputer Center}},
     howpublished = {\url{https://www.bsc.es/}},
     note = "Last accessed 12th of April 2016"
 }
 
-@misc{m:Gr500,
-    key = {{G500}},
+@misc{GREEN500,
     title = {{Green 500}},
     howpublished = {\url{http://www.green500.org/}},
     note = "Last accessed 12th of April 2016"
 }
 
-@misc{m:XU3,
-    key={{XU3}},
+@misc{XU3,
     title = {{Odroid XU3}},
     howpublished = {\url{http://www.hardkernel.com/main/products/prdt_info.php?g_code=G140448267127}},
     note = "Last accessed 4th of April 2016"
 }
 
-@misc{m:XU3-block,
-    key = {{XU3DETAIL}},
-    title = {{Odroid XU-3 Board Block Diagram}},
+@misc{XU3-BLOCK,
+    title = {{Odroid XU3 Board Block Diagram}},
     howpublished = {\url{http://dn.odroid.com/homebackup/201407071202252748.jpg}},
     note = "Last accessed 14th of April 2016"
 }
 
-@misc{m:Exy,
-    key = {{Exy}},
+@misc{EXY,
     title = {{Samsung Exynos Processors}},
     howpublished = {\url{http://www.samsung.com/semiconductor/minisite/Exynos/w/}},
     note = "Last accessed 8th of February 2016"
 }
 
-@misc{m:Top500,
-    key = {{Top}},
+@misc{TOP500,
     title = {{Top 500}},
     howpublished = {\url{http://www.top500.org/}},
     note = "Last accessed 3rd of April 2016"
@@ -192,8 +235,7 @@ year = {2006}
     note = "Last accessed 14th of April 2016"
 }
 
-@misc{m:MB-15,
-    key = {{FM15}},
+@misc{p:MB-15,
     author = {{Filippo Mantovani}},
     title = {\textit{High Performance Computing Based on Mobile Embedded Technology}},
     year = 2015,
@@ -201,8 +243,7 @@ year = {2006}
     note = "International conferences"
 }
 
-@misc{m:MB-PRACE-14,
-    key = {{AR14}},
+@misc{p:MB-PRACE-14,
     author = {{Alex Ramirez}},
     title = {\textit{Building supercomputers from embedded technologies}},
     year = 2014,
@@ -210,146 +251,202 @@ year = {2006}
     note = "Presentation"
 }
 
-@misc{m:git,
-    key = {{GIT}},
+@misc{GIT,
     title = {{Git Version Control}},
     howpublished = {\url{https://git-scm.com/}},
     note = "Last accessed 14th of April 2016"
 
 }
 
-@misc{m:angular,
-    key = {{ANGULARJS}},
+@misc{ANGULARJS,
     title = {{AngularJS}},
     howpublished = {\url{https://angularjs.org/}},
     note = "Last accessed 14th of April 2016"
 }
 
-@misc{m:flask,
-    title = {\textit{Python Flask}},
+@misc{FLASK,
+    title = {{Python Flask}},
     howpublished = {\url{http://flask.pocoo.org/}},
-    note = "Last accessed 19th of Oktober 2015"
+    note = "Last accessed 20th of April 2015"
 }
 
-@misc{m:guni,
-    title = {\textit{Gunicorn}},
+@misc{GUNICORN,
+    title = {{Gunicorn}},
     howpublished = {\url{http://gunicorn.org/}},
-    note = "Last accessed 19th of Oktober 2015"
+    note = "Last accessed 20th of April 2016"
 }
 
-@misc{m:nginx,
-    title = {\textit{Nginx}},
+@misc{NGINX,
+    title = {{Nginx}},
     howpublished = {\url{http://nginx.org/en/}},
-    note = "Last accessed 19th of Oktober 2015"
+    note = "Last accessed 20th of April 2015"
 }
 
-@misc{m:sqlite,
-    title = {\textit{Sqlite}},
+@misc{SQLITE,
+    title = {{Sqlite}},
     howpublished = {\url{https://www.sqlite.org/}},
-    note = "Last accessed 19th of Oktober 2015"
+    note = "Last accessed 20th of April 2015"
 }
 
-@misc{m:sqlalc,
-    title = {\textit{SQLAlchemy}},
+@misc{SQLALCHEMY,
+    title = {{SQLAlchemy}},
     howpublished = {\url{http://www.sqlalchemy.org/}},
-    note = "Last accessed 19th of Oktober 2015"
+    note = "Last accessed 20th of April 2015"
 }
 
-@misc{m:big-little,
-    title = {\textit{ARM big.LITTLE Technology}},
-    howpublished = {\url{https://www.arm.com/products/processors/technologies/biglittleprocessing.php}},
-    note = "Last accessed 25th of Oktober 2015"
+@misc{ABL,
+    title = {{ARM big.LITTLE Technology}},
+    howpublished = {\url{http://www.arm.com/products/processors/technologies/biglittleprocessing.php}},
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:bitbucket,
-    key = {{BITBUCKET}},
-    title = {\textit{Bitbucket Website}},
+@misc{OEM,
+    title = {{Odroid EnergyMonitor git repository}},
+    howpublished = {\url{https://github.com/hardkernel/EnergyMonitor}},
+    note = "Last accessed 21st of April 2016"
+}
+
+@misc{BITBUCKET,
+    title = {{Bitbucket Website}},
     howpublished = {\url{https://bitbucket.org/}},
     note = "Last accessed 14th of April 2016"
 }
 
-@misc{m:jenkins,
-    title = {\textit{Jenkins Website}},
-    howpublished = {\url{https://jenkins-ci.org/}},
-    note = "Last accessed 25th of Oktober 2015"
+@misc{VIRTUALENV,
+    title = {{Python Virtual Environment - virtualenv}},
+    howpublished = {\url{https://virtualenv.pypa.io/en/latest/}},
+    note = "Last accessed 20th of April 2016"
 }
 
-@misc{m:nose,
-    title = {\textit{Nose Documentation}},
-    howpublished = {\url{https://nose.readthedocs.org/en/latest/}},
-    note = "Last accessed 25th of Oktober 2015"
+@misc{JENKINS,
+    title = {{Jenkins Website}},
+    howpublished = {\url{https://jenkins.io/}},
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:flake8,
-    title = {\textit{Flake8 Documentation}},
-    howpublished = {\url{https://flake8.readthedocs.org/en/2.4.1/}},
-    note = "Last accessed 25th of Oktober 2015"
+@misc{NOSE,
+    title = {{Nose Documentation}},
+    howpublished = {\url{http://nose.readthedocs.org/en/latest/}},
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:pip,
-    title = {\textit{Pip Documentation}},
+@misc{KARMA,
+    title = {{Karma Website}},
+    howpublished = {\url{http://karma-runner.github.io/0.13/index.html}},
+    note = "Last accessed 21st of April 2016"
+}
+
+@misc{JASMINE,
+    title = {{Jasmine Website}},
+    howpublished = {\url{http://jasmine.github.io/}},
+    note = "Last accessed 21st of April 2015"
+}
+
+@misc{FLAKE8,
+    title = {{Flake8 Documentation}},
+    howpublished = {\url{https://flake8.readthedocs.org/en/latest/}},
+    note = "Last accessed 21st of April 2016"
+}
+
+@misc{PIP,
+    title = {{Pip Documentation}},
     howpublished = {\url{http://pip.readthedocs.org/en/stable/installing/}},
     note = "Last accessed 26th of Oktober 2015"
 }
 
-@misc{m:stress,
-    title = {\textit{Stress command}},
+@misc{STRESS,
+    title = {{Stress command}},
     howpublished = {\url{http://linux.die.net/man/1/stress}},
-    note = "Last accessed 26th of Oktober 2015"
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:gulp,
-    title = {\textit{Gulp Build System Website}},
+@misc{GULP,
+    title = {{Gulp Build System}},
     howpublished = {\url{http://gulpjs.com/}},
-    note = "Last accessed 26th of Oktober 2015"
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:npm,
-    title = {\textit{Package Manager npm Website}},
+@misc{NPM,
+    title = {{npm Package Manager}},
     howpublished = {\url{https://www.npmjs.com/}},
-    note = "Last accessed 26th of Oktober 2015"
+    note = "Last accessed 21st of April 2016"
 }
 
-@misc{m:bower,
-    title = {\textit{Bower Package Manager Website}},
+@misc{BOWER,
+    title = {{Bower Package Manager}},
     howpublished = {\url{http://bower.io/}},
-    note = "Last accessed 26th of Oktober 2015"
+    note = "Last accessed 21st of April 2015"
+}
+
+@misc{JSHINT,
+    title = {{JSHint Website}},
+    howpublished = {\url{http://jshint.com/}},
+    note = "Last accessed 21st of April 2015"
 }
 
 @misc{m:sphere,
-    title = {\textit{Sphere Website}},
+    title = {{Sphere Website}},
     howpublished = {\url{http://www.spoj.com/}},
     note = "Last accessed 26th of Oktober 2015"
 }
 
 @misc{m:hr,
-    title = {\textit{HackerRank Website}},
+    title = {{HackerRank Website}},
     howpublished = {\url{https://www.hackerrank.com/}},
     note = "Last accessed 26th of Oktober 2015"
 }
 
-@mastersthesis{mt:T&S,
-    author     =     {Follan, Torbjørn and Støa, Simen},
-    title     =     {\textit{Climbing Mont Blanc: A Prototype System for Online Energy Efficiency Based Programming Competitions on ARM Platforms}},
-    school     =     {Norwegian University of Science and Technology},
-    address     =     {Norway},
-    year     =     {2015}
+@misc{JSON,
+    title = {{JSON Data Format}},
+    howpublished = {\url{http://www.json.org/}},
+    note = "Last accessed 20th of April 2016"
+
 }
 
-@article{a:rtf,
-    abstract = {The World Wide Web has succeeded in the large part because its$\backslash$nsoftware architecture has been designed to meet the needs of an$\backslash$nInternet-scale distributed hypermedia system. The modern Web$\backslash$narchitecture emphasizes scalability of component interactions,$\backslash$ngenerality of interfaces, independent deployment of components, and$\backslash$nintermediary components to reduce interaction latency, enforce security,$\backslash$nand encapsulate legacy systems. We introduce the Representational State$\backslash$nTransfer (REST) architectural style, developed as an abstract model of$\backslash$nthe Web architecture to guide our redesign and definition of the$\backslash$nHypertext Transfer Protocol and Uniform Resource Identifiers. We$\backslash$ndescribe the software engineering principles guiding REST and the$\backslash$ninteraction constraints chosen to retain those principles, contrasting$\backslash$nthem to the constraints of other architectural styles. We then compare$\backslash$nthe abstract model to the currently deployed Web architecture in order$\backslash$nto elicit mismatches between the existing protocols and the applications$\backslash$nthey are intended to support},
-    archivePrefix = {arXiv},
-    arxivId = {10.1145/514183.514185},
-    author = {Fielding, R.T. and Taylor, R.N.},
-    doi = {10.1109/ICSE.2000.870431},
-    eprint = {514183.514185},
-    isbn = {1-58113-206-9},
-    issn = {0270-5257},
-    journal = {Proceedings of the 2000 International Conference on Software Engineering. ICSE 2000 the New Millennium},
-    number = {2},
-    pages = {115--150},
-    primaryClass = {10.1145},
-    title = {{Principled design of the modern Web architecture}},
-    volume = {2},
-    year = {2000}
+@misc{DIFF,
+    title = {{Diff program}},
+    howpublished = {\url{http://man7.org/linux/man-pages/man1/diff.1.html}},
+    note = "Last accessed 20th of April 2016"
+}
+
+@misc{WERKZEUG,
+    title = {{Werkzeug Utility Library}},
+    howpublished = {\url{http://werkzeug.pocoo.org/}},
+    note = "Last accessed 25th of April 2016"
+}
+
+@misc{UFW,
+    title = {{Uncomplicated FireWall Ubuntu Documentation}},
+    howpublished = {\url{https://help.ubuntu.com/community/UFW}},
+    note = "Last accessed 26th of April 2016"
+}
+
+@misc{FAIL2BAN,
+    title = {{Fail2Ban Website}},
+    howpublished = {\url{http://www.fail2ban.org/wiki/index.php/Main_Page}},
+    note = "Last accessed 26th of April 2016"
+}
+
+@misc{UNATTENDED,
+    title = {{Unattended Updates Ubuntu Documentation}},
+    howpublished = {\url{https://help.ubuntu.com/12.04/serverguide/automatic-updates.html}},
+    note = "Last accessed 26th of April 2016"
+}
+
+@misc{TDT4200,
+    title = {{TDT4200 Parallel Computing Website}},
+    howpublished = {\url{http://www.ntnu.edu/studies/courses/TDT4200#tab=omEmnet}},
+    note = "Last accessed 27th of April 2016"
+}
+
+@misc{ICPC,
+    title = {{ICPC Website}},
+    howpublished = {\url{https://icpc.baylor.edu/}},
+    note = "Last accessed 27th of April 2016"
+}
+
+@misc{IDIOPEN,
+    title = {{IDIOpen Website}},
+    howpublished = {\url{https://idiopen.idi.ntnu.no}},
+    note = "Last accessed 27th of April 2016"
 }

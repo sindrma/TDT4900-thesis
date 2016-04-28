@@ -21,6 +21,7 @@
 \usepackage[titletoc]{appendix}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{rotating}
 
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -78,6 +79,8 @@
 \hypersetup{citecolor=black}
 \hypersetup{urlcolor=black}
 
+\newcommand\tab[1][5cm]{\hspace*{#1}}
+
 %Fancy headings
 \setlength{\headheight}{15.2pt}
 \pagestyle{fancy}
@@ -86,11 +89,13 @@
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter.\ #1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 \renewcommand{\headrulewidth}{0.1ex}
-\renewcommand{\footrulewidth}{0.1ex}
-\fancyfoot[LE,RO]{\thepage}
-\fancyhead[LE]{\leftmark}
-\fancyhead[RO]{\rightmark}
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\thepage}\renewcommand{\headrulewidth}{0ex}}
+%\renewcommand{\footrulewidth}{0.1ex}
+%\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE]{\thepage}
+\fancyhead[RO]{\thepage}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[CE,CO]{\thepage}\renewcommand{\headrulewidth}{0ex}}
 
 % Citation format
 %\bibliographystyle{alpha}
@@ -99,6 +104,7 @@
 %\bibpunct{[}{]}{;}{a}{,}{,}
 
 \begin{document}
+\raggedbottom
 
 %BEGIN TITLE PAGE
 \begin{titlepage}
@@ -148,16 +154,11 @@
 
 % \input{content/preface}
 
-\null\clearpage
-\null\clearpage
-
 \tableofcontents
 
-\phantomsection
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 
-\phantomsection
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 
@@ -171,7 +172,6 @@
 
 \input{content/introduction}
 \input{content/background}
-\input{content/related}
 \input{content/design}
 \input{content/improvements}
 \input{content/testing}
