@@ -1,3 +1,45 @@
 %!TEX root=../main.tex
 \chapter{Backlog}
 \label{apdx:backlog}
+
+\begin{itemize}
+\item \textbf{Bugs and known issues}:
+    \begin{itemize}
+        \item Uploads: OSX uploads of zip does not work.
+        \item A SSH connection timeout should be added, to kill the SSH connection and stop the program on the backend if timeout is reached.
+        \item Highscore list sorting bug: sorting on another metric should still hide private submissions.
+        \item Disappearing submissions when entering a problem from the group view, while still present when entering from the overview page.
+        \item Remove highscore lists with no successful submissions.
+    \end{itemize}
+\item \textbf{Stability}:
+    \begin{itemize}
+        \item Non-blocking database: The database access is, as of now, blocking (synchronous), which means that entire tables are locked when the database is accessed. The access pattern should be changed from blocking to non-blocking (asynchronous).
+        \item Improve stability of measurements: Extend the backend with the possibility to assign programs to cores at the backend. Better control over processor and board temperature is also wanted.
+        \item Improved stability test: The stability test should automatically calculate mean, standard deviation and relative standard deviation of runs.
+        \item Automatic system monitoring and recovery: The system should be able to detect irregularities such as long submission queues, and take action automatically if things should fail.
+    \end{itemize}
+\item \textbf{Scalability}
+    \begin{itemize}
+        \item Broker: Extend with multiple Odroid XU3 boards. If there is a submission in the queue, the broker should assign a board to the submission for execution.
+        \item Multiple architectures: Extend with different architectures, like Odroid XU4 and others.
+    \end{itemize}
+\item \textbf{Usability}:
+    \begin{itemize}
+        \item Improved feedback: Compilation and runtime errors should have more clear error messages.
+        \item Compilation-Run Single action: Compilation and running a program should be a single step. Progress bars and feedback during the different phases should also be added.
+        \item Upload improvement: Should be possible to upload single source and header files. Also checking of the zip file content, and automatic removal of unnecessary files is wanted.
+        \item Highscore list improvement: Should sort on EDP or energy next if the running time between two submission matches. It should also be possible to run the same submission again, and chose which run that should be visible in the highscore list.
+        \item Compilation improvement: Users or admins should be able to specify compiler flags. The makefile should also be made on a per problem basis or on a per programming language basis, instead of having a huge static makefile.
+        \item Discussion forum.
+        \item Login via Feide: It should be possible to login using your NTNU user.
+        \item Group extensions: Add deadline and "Late" mark. Leaders should have the possibility to promote users to leaders.
+        \item Add supported languages: Java, Python and more languages.
+        \item More advanced low level statistics: Cache misses, cache hits, memory usage etc. on submissions.
+        \item News Bulletin and Newsletter.
+        \item Searching for problems, users, and groups.
+        \item Seasons: Highscores by seasons/timespan.
+        \item Command line interface for submitting, compiling and running programs. Release API documentation.
+        \item Secrecy in groups: Group results and user names should have the possibility to be secret.
+        \item Frontend statistics: Per users, per group, global etc.
+    \end{itemize}
+\end{itemize}
