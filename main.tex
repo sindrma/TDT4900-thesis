@@ -52,6 +52,8 @@
 \loadglsentries{glossary}
 \makeglossaries
 
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+
 % Author
 % Fill in here, and use commands in the text.
 \newcommand{\thesisAuthor}{Sindre Magnussen}
@@ -156,9 +158,13 @@
 
 \tableofcontents
 
+\cleardoublepage
+\phantomsection
 \addcontentsline{toc}{chapter}{\listfigurename}
 \listoffigures
 
+\cleardoublepage
+\phantomsection
 \addcontentsline{toc}{chapter}{\listtablename}
 \listoftables
 
