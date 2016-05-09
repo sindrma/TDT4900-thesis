@@ -20,11 +20,7 @@ Socket.io \cite{SOCKETIO} is an \gls{api} for enabling real time communication b
 
 Rohit Rai states the communication protocols supported by the Socket.io \gls{api} \cite{Rai2013}. Figure \ref{fig:cmb-protocols} shows the communication protocols enabled in the new version of \gls{cmb}. The WebSocket protocol \cite{a:Fette2011}, shown in Figure \ref{fig:websocket}, has become more popular since its introduction in 2011 and is now supported by the most popular browsers. The protocol is a bit different from the well known HTTP protocol, as there is a persistent connection, or socket, between the client and the server as long as both entities are connected to the socket. The socket connection is closed if the client closes the browser window or the server goes down, or if the code explicitly indicates to close the socket. WebSockets enables easy two-way communication by letting two entities emit (read: send) messages back and forth on the socket connection, and respond differently depending on the type of message emitted on the socket. \\
 
-Polling and long-polling are very similar as they both rely on the HTTP protocol. However, in long-polling, the server keeps the connection between the two entities open until there is an update to the requested data as shown in Figure \ref{fig:long-polling}. In polling, as shown in Figure \ref{fig:polling}, the client continously requests data with some constant delay between each request, while the server respond on each request with the data currently stored at the server. \\
-
-Socket.io makes it easier for the programmer as well. The programmer does not need to worry about the functionality of the underlaying protocol, and can focus at writing code at high level of abstraction. Socket.io also enables the programmer to define their own \textit{events}, and have the \gls{api} listen for these events. If a given event is emitted (read:sent), and there . Both the server and client can set up listeners for events.
-
-The two below sub-sections describes the changes done on the server and frontend code in order to support real time communication with Socket.io.
+Polling and long-polling are very similar as they both rely on the HTTP protocol. However, in long-polling, the server keeps the connection between the two entities open until there is an update to the requested data as shown in Figure \ref{fig:long-polling}. In polling, as shown in Figure \ref{fig:polling}, the client continuously requests data with some constant delay between each request, while the server respond on each request with the data currently stored at the server. Independent of the protocol, we as programmers can abstract away the connection and think of it as a "socket" connecting the client and the server. \\
 
 \begin{figure}
     \centering
@@ -48,10 +44,17 @@ The two below sub-sections describes the changes done on the server and frontend
     \caption{\gls{cmb} Socket.io communication protocols}\label{fig:cmb-protocols}
 \end{figure}
 
-\subsection{Frontend Changes}
+Each socket can be "\textit{namespaced}" into separate communication channels within an application. A namespace can be viewed as a endpoint or network path, for example in the new \gls{cmb} prototype the namespace \textit{/cmb} is used as default namespace to emit messages between the client and the server. Every client initiating a socket on the namespace receives all messages emitted to the namespace, which makes it easy to share information between the server and clients connected to the namespace. \\
 
-\subsection{Server Changes}
-The Python module Flask-SocketIO \cite{FLASKSOCKETIO} enables Flask applications to use the SocketIO \gls{api}. To support
+Each namespace can also define a set of \textit{rooms}, which can be viewed as sub-channels of a given namespace. A client needs to explicitly join a room to receive the messages emitted in the sub-channel. Figure \ref{} shows an example use case of rooms and namespaces in the new \gls{cmb} system. Socket.io also lets the programmer define \textit{events}, which can be emitted between the server and connected clients. Table \ref{} shows the events currently defined for the \gls{cmb}, and the actions taken either by the server or client depending on which entity that emitted the event. The two below sub-sections describes the technologies used by the server and frontend in order to support real time communication with Socket.io.
+
+\subsection{Frontend Technology}
+The frontend uses the client Socket.io library through a existing Socket.io component called \texttt{angular-socket-io} \cite{ANGULARSOCKETIO}.
+
+\subsection{Server Technology}
+The Python module Flask-SocketIO \cite{FLASKSOCKETIO} enables Flask applications to use the SocketIO \gls{api}. In addition, the modules gevent \cite{GEVENT} and gevent-websocket \cite{GEVENTWEBSOCKET} is installed in combination with the Socket.io module to enable the use of the WebSocket protocol. Gevent is a coroutine based networking library providing a high-level synchronous API on top of a asynchronous webserver. Asynchronous coroutines is used to handle multiple concurrent requests from multiple clients, and is required by the Flask-Socketio module to support the WebSocket transport. \\
+
+To fully support the WebSocket protocol Gunicorn also needs to make use a custom gevent worker supporting the WebSocket protocol. As stated by Miguel Grinberg on the Flask-Socketio documentation website, Gunicorn can only enable one worker due to limitations in the implemented load balancing algorithm. The Gunicorn load balancing algorithm cannot simply handle multiple workers and persistent WebSockets connections, which limits us to one worker per server. However, the worker uses coroutines to handle multiple concurrent requests as stated above. The gevent worker is enabled on the development server of \gls{cmb}, which also required some changes to the Nginx setup to fully support the WebSocket protocol. Appendix \ref{apdx:setup} describes setup information necessary to setup servers with Gunicorn and Nginx, while section \ref{sec:eval-tech} discusses pros and cons with selected technologies as well as presenting alternatives to the selected technology stack.
 
 \section{Frontend}
 \subsection{Bug Fixes}
@@ -59,10 +62,10 @@ Upload fixes in frontend
 Sorting bug
 
 \subsection{Views and Feedback}
-Spinners + better error messages. Bulletin board to display administrator messages.
+Spinners + better error messages. Bulletin board to display administrator messages. Colored feedback messages.
 
 \subsection{Group Functionality Improvements}
-Moved
+Gathered group functionality. JSON stat file download.
 
 \section{Server}
 
@@ -71,13 +74,16 @@ SQLAlchemy MYSQL adapter + possible async library.
 
 \subsection{Database Model Updates}
 Detailed state field added and can be replaced with json structures as more information is needed about a run.
+Bulletins table added. Cascading delete.
 
 \subsection{Admin Interface}
-Bug fix: Unix vs DOS files.
-Cascading delete.
+Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, many of the
+Bug fix: Unix vs DOS files. Delete files in file system after model is deleted in the database.
+
 
 \section{Backend}
-Some small changes needed to be done at the backend in order to improve the feedback given to the user
+There have been some small changes in the backend code. The \gls{cmb} team discovered that there were no timeout when running the small correctness test, which could potentially lock the backend if the submitted code contained infinite loops. Locking the backend should not be acceptable under any condition, and the Unix program \texttt{timeout} \cite{TIMEOUT} is therefore used as during the big correctness test to kill the submitted program after some time if it stalls to long. Since the small input set is much smaller than the big correctness test, it is currently set to a third of the timeout of the big correctness or 30 seconds. \\
 
+The \gls{json} returned by the backend is also slightly changed. A "state" field were added to better track the state of the program as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the "detailed state" database field as described above, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend are done executing. A quick further discussion of the field and its potential are described in section \ref{sec:eval-tech}.
 
 \section{Improvement Proposals}
