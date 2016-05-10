@@ -56,12 +56,12 @@ Socket.io also lets the programmer define \textit{events}, which can be emitted 
     \hline
     \textbf{Event Name} & \textbf{Emitted by} & \textbf{Received by} & \textbf{Action}\\
     \hline
-    \textit{join-problem} & Client & Server & Server adds the client to the problem room specified in the emitted message. \\ \hline
-    \textit{leave-problem} & Client & Server & Server removes the client from the problem room specified in the emitted message. \\ \hline
-    \textit{submission-deleted} & Server & Client & Client fetches updated submission data from the server. \\ \hline
-    \textit{submission-enqueued} & Server & Client & Client displays a message in the browser window, notifying about queue size and information present in the emitted message. \\ \hline
-    \textit{submission-dequeued} & Server & Client & Client displays a message in the browser window, notifying about queue size and information present in the emitted message. \\ \hline
-    \textit{submission-finished} & Server & Client & Client loads own submissions as well as possible updates to the highscore list. \\ \hline
+    \textit{join-problem} & Client(s) & Server & Server adds the client to the problem room specified in the emitted message. \\ \hline
+    \textit{leave-problem} & Client(s) & Server & Server removes the client from the problem room specified in the emitted message. \\ \hline
+    \textit{submission-deleted} & Server & Client(s) & Client fetches updated submission data from the server. \\ \hline
+    \textit{submission-enqueued} & Server & Client(s) & Client displays a message in the browser window, notifying about queue size and information present in the emitted message. \\ \hline
+    \textit{submission-dequeued} & Server & Client(s) & Client displays a message in the browser window, notifying about queue size and information present in the emitted message. \\ \hline
+    \textit{submission-finished} & Server & Client(s) & Client loads own submissions as well as possible updates to the highscore list. \\ \hline
     \end{tabular}
     \caption[\gls{cmb} Socket.io events and corresponding actions]{\gls{cmb} Socket.io events and corresponding actions. Each submission event is sent within a room which simply is the database id of a given problem. Since we have one room per problem, we know that all submission events within a room has information about submissions made to a given problem.}
     \label{tab:cmb-socketio-events}
@@ -89,17 +89,22 @@ Upload fixes in frontend
 Sorting bug
 
 \subsection{Views and Feedback}
-Spinners + better error messages. Bulletin board to display administrator messages. Colored feedback messages.
+Spinners + better error messages. Symbols added for usability. Bulletin board to display administrator messages. Colored feedback messages.
 
 \subsection{Group Functionality Improvements}
-Gathered group functionality. JSON stat file download.
+JSON stat file download. Gathered group functionality.
 
 \section{Server}
 
 \subsection{Database Management System Updates}
-SQLAlchemy MYSQL adapter + possible async library.
+The old version of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms} which requires minimal configuration before use and is therefore popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal were to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it uneccassery to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
 
-\subsection{Database Model Updates}
+Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cmb} team and the IDI Department. We therefore changed the \gls{dbms} to MySQL due to its usage in other applications developed at the IDI Department. IDI provided the databases used by the system, and we also gained access to a database adminstrator interface available at \url{https://phpmyadmin.idi.ntnu.no/}. SQLAlchemy made the switch onto the new \gls{dbms} easy as it has a predefined MySQL adapter, and had no problems in setting up the new databases for our development and production servers. Further, Flask-Migrate \cite{FLASKMIGRATE}, used for database \textit{migrations}\footnote{Database magration is the task of managing versions of a database schema without altering previously stored database content.}, also worked without any changes in configuration. \\
+
+A complete database dump were made from the SQLite databases. All SQL \texttt{INSERT} statements in the database dump were extracted and executed against the new development and production databases, to move all previously stored data in the SQLite databases over to the MySQL databases. The actions were performed with a combination of terminal commands and the database admin interface provided by IDI. MySQL and SQLAlchemy has not had any performance issues in the IDI Department, so the system uses the standard MySQL adapter provided by SQLALchemy. Implementing and enabling non-blocking database access has been added back to the backlog found in Appendix \ref{apdx:backlog} as a performance improvement.
+
+\subsection{Database Schema Updates}
+The updated database schema is shown in Figure \ref{}. The Submissions-table have been updated with two new fields. The ``detailed state''-field was added to provide more information about a run to the user. In the current improved system, it contains a detailed string about a submissions state as it returns from the backend as explained in the below section. 
 Detailed state field added and can be replaced with json structures as more information is needed about a run.
 Bulletins table added. Cascading delete.
 
@@ -107,9 +112,9 @@ Bulletins table added. Cascading delete.
 The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{}.
 
 \subsection{Admin Interface}
-Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker program locked itself, as the backend and server is Unix based systems and uses Unix line endings (LF).
+Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker program locked itself, as the backend and server is Unix based systems and uses Unix line endings (LF). \\
 
-The bug is removed in the new admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through \texttt{vim} \cite{VIM}, by using the command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
+The bug is removed in the new admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
 
 In addition some errors occured when administrators tried to remove locked submissions in the database through the admin interface. Due to lack of training, it often left the database and the server file system in a inconsistent state. As explained above, cascading delete were added between the \texttt{Run} and \texttt{Submission} tables to partially solve the problem, but the files associated with a submission would still remain in the server file system and had to be removed manually. However, deletion of submission files were often forgotten and it caused filename conflicts if the user re-submitted zip files with equal folder and file names as a previous submission.\footnote{A suggested future improvement is presented in section \ref{sec:future-work}, which is based upon storing submission files by the uniquely generated database id instead of using user defined folder and file names.}\\
 
@@ -118,6 +123,14 @@ The Flask-Admin \cite{FLASKADMIN} procedure \texttt{on\_model\_delete} solves th
 \section{Backend}
 There have been some small changes in the backend code. The \gls{cmb} team discovered that there were no timeout when running the small correctness test, which could potentially lock the backend if the submitted code contained infinite loops. Locking the backend should not be acceptable under any condition, and the Unix program \texttt{timeout} \cite{TIMEOUT} is therefore used as during the big correctness test to kill the submitted program after some time if it stalls to long. Since the small input set is much smaller than the big correctness test, it is currently set to a third of the timeout of the big correctness or 30 seconds. \\
 
-The \gls{json} returned by the backend is also slightly changed. A "state" field were added to better track the state of the program as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the "detailed state" database field as described above, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend are done executing. A quick further discussion of the field and its potential are described in section \ref{sec:eval-tech}.
+The \gls{json} returned by the backend is also slightly changed. A ``state'' field were added to better track the state of the program as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the ``detailed state'' database field as described above, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend are done executing. A quick further discussion of the field and its potential are described in section \ref{sec:eval-tech}.
 
 \section{Improvement Proposals}
+
+\subsection{Stability Test}
+
+\subsection{How-To Page and About Page}
+
+\subsection{Adding Problems}
+
+\subsection{Discussion Forum}
