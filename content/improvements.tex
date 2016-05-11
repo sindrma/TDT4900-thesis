@@ -5,6 +5,7 @@
 In this chapter it is assumed that a web interface follows the \gls{mvc} pattern. As briefly mentioned in sub-section \ref{subsec:cmb-arch-frontend}, Angular structures the HTML and Javascript code according to the \gls{mvc} pattern, and the reader should have the abstraction in mind when reading about browser or frontend implementations.
 
 \section{Real Time Updates}
+\label{sec:real-time}
 The frontend view changes when a user performes actions against the frontend models as mentioned in sub-section \ref{subsec:cmb-arch-frontend}. However, the frontend view presented to a given user does not update automatically as other users interract and changes their data models, as models is stored locally in each of the user's browser. If the updated model contains data that should be known\footnote{Hereby known as \textit{shared data}.} to all users, the users does not get notified about the model changes dynamically and views may therefore display out of date information. Figure \ref{fig:update-problem} shows an example of the problem, as Alice updates some of her browser's model data when she interacts with the system. If Alice changes some data present in Bob's models, Bob will not be notified of the changes as all data transfer are done with HTTP requests between Alice and the server. However, Bob can fetch up to date data by manually refreshing his webpage. \\
 
 \begin{sidewaysfigure}
@@ -20,7 +21,7 @@ Socket.io \cite{SOCKETIO} is an \gls{api} for enabling real time communication b
 
 Rohit Rai states the communication protocols supported by the Socket.io \gls{api} \cite{Rai2013}. Figure \ref{fig:cmb-protocols} shows the communication protocols enabled in the new version of \gls{cmb}. The WebSocket protocol \cite{a:Fette2011}, shown in Figure \ref{fig:websocket}, has become more popular since its introduction in 2011 and is now supported by the most popular browsers. The protocol is a bit different from the well known HTTP protocol, as there is a persistent connection, or socket, between the client and the server as long as both entities are connected to the socket. The socket connection is closed if the client closes the browser window or the server goes down, or if the code explicitly indicates to close the socket. WebSockets enables easy two-way communication by letting two entities emit (read: send) messages back and forth on the socket connection, and respond differently depending on the type of message emitted on the socket. \\
 
-Polling and long-polling both use the HTTP protocol and may seem similar at first glance. However, in long-polling, the server keeps the connection between the two entities open until there is an update to the requested data as shown in Figure \ref{fig:long-polling}. In polling, as shown in Figure \ref{fig:polling}, the client continuously requests data with some constant delay between each request, while the server respond on each request with the data currently stored at the server. Independent of the protocol, we as programmers can abstract away the connection and think of it as a "socket" connecting the client and the server. \\
+Polling and long-polling both use the HTTP protocol and may seem similar at first glance. However, in long-polling, the server keeps the connection between the two entities open until there is an update to the requested data as shown in Figure \ref{fig:long-polling}. In polling, as shown in Figure \ref{fig:polling}, the client continuously requests data with some constant delay between each request, while the server respond on each request with the data currently stored at the server. Independent of the protocol, we can think of the connection between the server and client(s) and think of it as a "socket". \\
 
 \begin{figure}
     \centering
@@ -52,7 +53,7 @@ Socket.io also lets the programmer define \textit{events}, which can be emitted 
 
 \begin{table}[t!]
     \centering
-    \begin{tabular}{ | c | c | c | p{4cm} | }
+    \begin{tabular}{ | c | c | c | p{3.5cm} | }
     \hline
     \textbf{Event Name} & \textbf{Emitted by} & \textbf{Received by} & \textbf{Action}\\
     \hline
@@ -84,6 +85,7 @@ The Python module Flask-SocketIO \cite{FLASKSOCKETIO} enables Flask applications
 To fully support the WebSocket protocol Gunicorn also needs to make use a custom gevent worker supporting the WebSocket protocol. As stated by Miguel Grinberg on the Flask-Socketio documentation website, Gunicorn can only enable one worker due to limitations in the implemented load balancing algorithm. The Gunicorn load balancing algorithm cannot simply handle multiple workers and persistent WebSockets connections, which limits us to one worker per server. However, the worker uses coroutines to handle multiple concurrent requests as stated above. The gevent worker is enabled on the development server of \gls{cmb}, which also required some changes to the Nginx setup to fully support the WebSocket protocol. Appendix \ref{apdx:setup} describes setup information necessary to setup servers with Gunicorn and Nginx, while section \ref{sec:eval-tech} discusses pros and cons with selected technologies as well as presenting alternatives to the selected technology stack.
 
 \section{Frontend}
+\label{sec:impr-frontend}
 \subsection{Bug Fixes}
 Upload fixes in frontend
 Sorting bug
@@ -95,7 +97,7 @@ Spinners + better error messages. Symbols added for usability. Bulletin board to
 JSON stat file download. Gathered group functionality.
 
 \section{Server}
-
+\label{sec:impr-server}
 \subsection{Database Management System Updates}
 The old version of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms} which requires minimal configuration before use and is therefore popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal were to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it uneccassery to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
 
@@ -104,12 +106,31 @@ Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cm
 A complete database dump were made from the SQLite databases. All SQL \texttt{INSERT} statements in the database dump were extracted and executed against the new development and production databases, to move all previously stored data in the SQLite databases over to the MySQL databases. The actions were performed with a combination of terminal commands and the database admin interface provided by IDI. MySQL and SQLAlchemy has not had any performance issues in the IDI Department, so the system uses the standard MySQL adapter provided by SQLALchemy. Implementing and enabling non-blocking database access has been added back to the backlog found in Appendix \ref{apdx:backlog} as a performance improvement.
 
 \subsection{Database Schema Updates}
-The updated database schema is shown in Figure \ref{}. The Submissions-table have been updated with two new fields. The ``detailed state''-field was added to provide more information about a run to the user. In the current improved system, it contains a detailed string about a submissions state as it returns from the backend as explained in the below section. 
-Detailed state field added and can be replaced with json structures as more information is needed about a run.
-Bulletins table added. Cascading delete.
+The updated database schema is shown in Figure \ref{}. The Submissions-table have been updated with two new fields. The ``detailed state''-field was added to provide more information about a run to the user. In the current improved system, it contains a detailed string about a submissions state as it returns from the backend as explained in section \ref{sec:impr-backend}. The field can be modified in the future to store \gls{json} instead of simple text, if more information about a submission becomes available when executing code on the backend. \textit{Future developers should stribe to always keep users up-to-date with the state of their submissions}, and the new field aims to enable such feedback as explained in the section \ref{sec:impr-frontend} above. \\
+
+A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called \textit{valid\_until} which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in section \ref{sec:impr-frontend} above. \\
+
+Cascading deletes has also been added between the Submission- and Run-tables. This ensures that all rows in the Run-table associated with a Submission-row gets deleted upon delition of a submission, which ensures that there are no dangling rows in the Run-table and the database is left in a consistent state after deleting submissions. This is particularly important as both administrators and users are able to delete submissions.
 
 \subsection{Routes}
-The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{}.
+The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{tab:cmb-updated-routes}. The table does not include changes made to \gls{api} routes due to the implementation of the real time update improvement explained in section \ref{sec:real-time}, as the improvements does not change the internal logic of the original routes and has only added code to emit events to enable real-time updates of possible connected clients. \\
+
+Add example from postman + image.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ | c | c | p{4cm} | }
+    \hline
+    \textbf{\gls{api} Route} & \textbf{Method} & \textbf{Description} \\
+    \hline
+    \textit{/api/submission/$<$int:sub\_id$>$} & DELETE & If the submission with the given \texttt{id} exists and have been created by the current logged in user, the submission is deleted from the database as well as the file system. Requires login.\\ \hline
+    \textit{/api/group/$<$int:group\_id$>$} & GET & Fetches information about a group by \texttt{id} depending on login status. If the user is not logged in, only public groups can be fetched. However, if the user is logged in, the user can also request information about private groups. If the query parameter \texttt{with-submissions} is set equal to 1, submissions made from group members is included in the response if the user is either a group member or leader. The response for leaders also include those submissions set to be unvisible. \\ \hline
+    \textit{/api/bulletins} & GET & Returns all created bulletins. \\ \hline
+    \textit{/api/bulletins/active} & GET & Returns all bulletins currently active. \\ \hline
+    \end{tabular}
+    \caption[\gls{cmb} API route updates with responses]{\gls{cmb} API route updates with responses. The routes listed shows the substring necessary to query the \gls{api}, and need to be combined with the \textit{path} of the server providing the \gls{api}. For example to delete a submission with \texttt{id} 1 from the development server \gls{api}, a delete request needs to be made against \url{http://climb-dev.idi.ntnu.no/api/submission/1}.}
+    \label{tab:cmb-updated-routes}
+\end{table}
 
 \subsection{Admin Interface}
 Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker program locked itself, as the backend and server is Unix based systems and uses Unix line endings (LF). \\
@@ -118,9 +139,12 @@ The bug is removed in the new admin interface. When uploading files to the serve
 
 In addition some errors occured when administrators tried to remove locked submissions in the database through the admin interface. Due to lack of training, it often left the database and the server file system in a inconsistent state. As explained above, cascading delete were added between the \texttt{Run} and \texttt{Submission} tables to partially solve the problem, but the files associated with a submission would still remain in the server file system and had to be removed manually. However, deletion of submission files were often forgotten and it caused filename conflicts if the user re-submitted zip files with equal folder and file names as a previous submission.\footnote{A suggested future improvement is presented in section \ref{sec:future-work}, which is based upon storing submission files by the uniquely generated database id instead of using user defined folder and file names.}\\
 
-The Flask-Admin \cite{FLASKADMIN} procedure \texttt{on\_model\_delete} solves the above inconsistency problem. It has been added to handle when submissions are deleted from the database, and takes care of removing all files in the server file system assoociated with a deleted submission. However, it is still possible to leave the database in a inconsistent state if one do not use the admin interface to delete database content. If other tools than the Flask-Admin module are to be used in the future to handle database, SQLALchemy provides event listeners which can be used instead of the above mentioned procedure. As the \gls{cmb} team currently uses the admin interface to handle database content, the \texttt{on\_model\_delete} procedure in the Flask-Admin interface is used.
+The Flask-Admin \cite{FLASKADMIN} procedure \texttt{on\_model\_delete} solves the above inconsistency problem. It has been added to handle when submissions are deleted from the database, and takes care of removing all files in the server file system assoociated with a deleted submission. However, it is still possible to leave the database in a inconsistent state if one do not use the admin interface to delete database content. If other tools than the Flask-Admin module are to be used in the future to handle database, SQLALchemy provides event listeners which can be used instead of the above mentioned procedure. As the \gls{cmb} team currently uses the admin interface to handle database content, the \texttt{on\_model\_delete} procedure in the Flask-Admin interface is used. \\
+
+Bulletin board admin view + images.
 
 \section{Backend}
+\label{sec:impr-backend}
 There have been some small changes in the backend code. The \gls{cmb} team discovered that there were no timeout when running the small correctness test, which could potentially lock the backend if the submitted code contained infinite loops. Locking the backend should not be acceptable under any condition, and the Unix program \texttt{timeout} \cite{TIMEOUT} is therefore used as during the big correctness test to kill the submitted program after some time if it stalls to long. Since the small input set is much smaller than the big correctness test, it is currently set to a third of the timeout of the big correctness or 30 seconds. \\
 
 The \gls{json} returned by the backend is also slightly changed. A ``state'' field were added to better track the state of the program as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the ``detailed state'' database field as described above, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend are done executing. A quick further discussion of the field and its potential are described in section \ref{sec:eval-tech}.
