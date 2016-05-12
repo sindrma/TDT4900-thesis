@@ -49,7 +49,9 @@ Each socket can be "\textit{namespaced}" into separate communication channels wi
 
 Each namespace can also define a set of \textit{rooms}, which can be viewed as sub-channels of a given namespace. A client needs to explicitly join a room to receive the messages emitted in a given sub-channel. Figure \ref{fig:namespaces-and-rooms} illustrates the concept. Each message emitted to the namespace \textit{/cmb} are received by both client one and two. Client three will only receive those messages emitted to the namespace \textit{/test}. If a message are emitted to room one within the \textit{/cmb} namespace, only client one will receive the message. \\
 
-Socket.io also lets the programmer define \textit{events}, which can be emitted between the server and connected clients. Table \ref{tab:cmb-socketio-events} shows the events currently defined for the \gls{cmb}, and the actions taken either by the server or client depending on which enitity that emitted the event. The two below sub-sections describes the technologies used by the server and frontend in order to support real time communication with Socket.io.
+Socket.io also lets the programmer define \textit{events}, which can be emitted between the server and connected clients. Table \ref{tab:cmb-socketio-events} shows the events currently defined for the \gls{cmb}, and the actions taken either by the server or client depending on which enitity that emitted the event. The actions are only taken if the code defines event listeners for each event, and for the frontend it depends on the view that is displayed in each users' browser. As an example, the submission events shown in Table \ref{tab:cmb-socketio-events} are only valid if a given user is viewing the problem-screen shown in Figure \ref{}. This makes sense, because we are trying to do real time updates to the highscore list and the user's own submissions while he or she stays in the problem-screen. Events will therefore not be received if the users navigates to another view, as Socket.io event listeners in the frontend code are bound to views or rather the views' controllers.  \\
+
+The two sub-sections below describes the technologies used by the server and frontend in order to support real time communication with Socket.io.
 
 \begin{table}[t!]
     \centering
@@ -75,9 +77,7 @@ Socket.io also lets the programmer define \textit{events}, which can be emitted 
 \end{figure}
 
 \subsection{Frontend Technology}
-The frontend uses the client Socket.io library \cite{SOCKETIO} through a existing Angular component called \texttt{angular-socket-io} provided by Brian Ford \cite{ANGULARSOCKETIO}. The component is used to define a Angular \textit{factory}, which is simply gathers and structures the setup of Socket.io in the client in a single service. The defined factory can then be used by other components in the Angular app, by marking components as dependent of the Socket.io factory. \\
-
-The problem-controller uses the defined Socket.io factory. The controller is associated with the problem-view, which describes a problem provided by \gls{cmb} as well as submissions made by users. More about the view + explanation with table.
+The frontend uses the client Socket.io library \cite{SOCKETIO} through a existing Angular component called \texttt{angular-socket-io} provided by Brian Ford \cite{ANGULARSOCKETIO}. The component is used to define a Angular \textit{factory}, which is simply a component that gathers and structures the setup of Socket.io in the client into a single service. The defined factory can then be used by other components in the Angular app, by marking components as dependent of the Socket.io factory. \\
 
 \subsection{Server Technology}
 The Python module Flask-SocketIO \cite{FLASKSOCKETIO} enables Flask applications to use the SocketIO \gls{api}. In addition, the modules gevent \cite{GEVENT} and gevent-websocket \cite{GEVENTWEBSOCKET} is installed in combination with the Socket.io module to enable the use of the WebSocket protocol. Gevent is a coroutine based networking library providing a high-level synchronous API on top of a asynchronous webserver. Asynchronous coroutines is used to handle multiple concurrent requests from multiple clients, and is required by the Flask-SocketIO module to support the WebSocket transport. \\
@@ -86,12 +86,16 @@ To fully support the WebSocket protocol Gunicorn also needs to make use a custom
 
 \section{Frontend}
 \label{sec:impr-frontend}
+This section will present figures of the views in the frontend that have changed in the new version of the system. The below sub-sections will explain the improvements and updates done to the views. The views not mentioned here has not been
+
 \subsection{Bug Fixes}
 Upload fixes in frontend
 Sorting bug
 
 \subsection{Views and Feedback}
 Spinners + better error messages. Symbols added for usability. Bulletin board to display administrator messages. Colored feedback messages.
+
+Figure \ref{} shows active bulletins
 
 \subsection{Group Functionality Improvements}
 JSON stat file download. Gathered group functionality.
@@ -106,16 +110,28 @@ Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cm
 A complete database dump were made from the SQLite databases. All SQL \texttt{INSERT} statements in the database dump were extracted and executed against the new development and production databases, to move all previously stored data in the SQLite databases over to the MySQL databases. The actions were performed with a combination of terminal commands and the database admin interface provided by IDI. MySQL and SQLAlchemy has not had any performance issues in the IDI Department, so the system uses the standard MySQL adapter provided by SQLALchemy. Implementing and enabling non-blocking database access has been added back to the backlog found in Appendix \ref{apdx:backlog} as a performance improvement.
 
 \subsection{Database Schema Updates}
-The updated database schema is shown in Figure \ref{}. The Submissions-table have been updated with two new fields. The ``detailed state''-field was added to provide more information about a run to the user. In the current improved system, it contains a detailed string about a submissions state as it returns from the backend as explained in section \ref{sec:impr-backend}. The field can be modified in the future to store \gls{json} instead of simple text, if more information about a submission becomes available when executing code on the backend. \textit{Future developers should stribe to always keep users up-to-date with the state of their submissions}, and the new field aims to enable such feedback as explained in the section \ref{sec:impr-frontend} above. \\
+\label{subsec:impr-database}
+The updates to the previous database schema is shown in Figure \ref{fig:updated-database-schema}. The Submissions-table have been updated with two new fields. The ``detailed state''-field was added to provide more information about a run to the user. In the current improved system, it contains a detailed string about a submissions state as it returns from the backend as explained in section \ref{sec:impr-backend}. The field can be modified in the future to store \gls{json} instead of simple text, if more information about a submission becomes available when executing code on the backend. \textit{Future developers should stribe to always keep users up-to-date with the state of their submissions}, and the new field aims to enable such feedback as explained in the section \ref{sec:impr-frontend} above. \\
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{figs/updated_database_schema.jpg}
+    \caption[Database schema updates]{Database schema updates. The figure does only include the tables that are updated. Added table columns are highlighted. }
+    \label{fig:updated-database-schema}
+\end{figure}
 
 A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called \textit{valid\_until} which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in section \ref{sec:impr-frontend} above. \\
 
 Cascading deletes has also been added between the Submission- and Run-tables. This ensures that all rows in the Run-table associated with a Submission-row gets deleted upon delition of a submission, which ensures that there are no dangling rows in the Run-table and the database is left in a consistent state after deleting submissions. This is particularly important as both administrators and users are able to delete submissions.
 
 \subsection{Routes}
-The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{tab:cmb-updated-routes}. The table does not include changes made to \gls{api} routes due to the implementation of the real time update improvement explained in section \ref{sec:real-time}, as the improvements does not change the internal logic of the original routes and has only added code to emit events to enable real-time updates of possible connected clients. \\
+The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{tab:cmb-updated-routes}. Figure \ref{fig:postman-request} shows an example GET-request against one of the routes defined in the table, which fetches data from a local server. The table does not include changes made to \gls{api} routes due to the implementation of the real time update improvement explained in section \ref{sec:real-time}, as the improvements does not change the internal logic of the original routes and has only added code to emit events. \\
 
-Add example from postman + image.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figs/postman_request.jpg}
+    \caption[Example request against local API]{Example request against local \gls{api} using Postman \cite{POSTMAN}. The request executes the GET-request \url{http://localhost:5000/api/group/1?with-submissions=1} presented in Table \ref{tab:cmb-updated-routes} with the query parameter \texttt{with-submissions} equal to one to also include the submissions made by the members of the group.}
+    \label{fig:postman-request}
+\end{figure}
 
 \begin{table}[h!]
     \centering
@@ -124,16 +140,16 @@ Add example from postman + image.
     \textbf{\gls{api} Route} & \textbf{Method} & \textbf{Description} \\
     \hline
     \textit{/api/submission/$<$int:sub\_id$>$} & DELETE & If the submission with the given \texttt{id} exists and have been created by the current logged in user, the submission is deleted from the database as well as the file system. Requires login.\\ \hline
-    \textit{/api/group/$<$int:group\_id$>$} & GET & Fetches information about a group by \texttt{id} depending on login status. If the user is not logged in, only public groups can be fetched. However, if the user is logged in, the user can also request information about private groups. If the query parameter \texttt{with-submissions} is set equal to 1, submissions made from group members is included in the response if the user is either a group member or leader. The response for leaders also include those submissions set to be unvisible. \\ \hline
+    \textit{/api/group/$<$int:group\_id$>$} & GET & Fetches information about a group by \texttt{id} depending on login status. If the user is not logged in, only public group information can be fetched. However, if the user is logged in, the user can also request information about private groups. If the query parameter \texttt{with-submissions} is set equal to 1, submissions made from group members is included in the response if the user is either a group member or leader. The response for leaders also include those submissions set to be unvisible. \\ \hline
     \textit{/api/bulletins} & GET & Returns all created bulletins. \\ \hline
     \textit{/api/bulletins/active} & GET & Returns all bulletins currently active. \\ \hline
     \end{tabular}
     \caption[\gls{cmb} API route updates with responses]{\gls{cmb} API route updates with responses. The routes listed shows the substring necessary to query the \gls{api}, and need to be combined with the \textit{path} of the server providing the \gls{api}. For example to delete a submission with \texttt{id} 1 from the development server \gls{api}, a delete request needs to be made against \url{http://climb-dev.idi.ntnu.no/api/submission/1}.}
     \label{tab:cmb-updated-routes}
 \end{table}
-
+\clearpage
 \subsection{Admin Interface}
-Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker program locked itself, as the backend and server is Unix based systems and uses Unix line endings (LF). \\
+Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
 
 The bug is removed in the new admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
 
@@ -141,7 +157,21 @@ In addition some errors occured when administrators tried to remove locked submi
 
 The Flask-Admin \cite{FLASKADMIN} procedure \texttt{on\_model\_delete} solves the above inconsistency problem. It has been added to handle when submissions are deleted from the database, and takes care of removing all files in the server file system assoociated with a deleted submission. However, it is still possible to leave the database in a inconsistent state if one do not use the admin interface to delete database content. If other tools than the Flask-Admin module are to be used in the future to handle database, SQLALchemy provides event listeners which can be used instead of the above mentioned procedure. As the \gls{cmb} team currently uses the admin interface to handle database content, the \texttt{on\_model\_delete} procedure in the Flask-Admin interface is used. \\
 
-Bulletin board admin view + images.
+Administration of the Bulletin-table peresented in sub-section \ref{subsec:impr-database} has also been added using the Flask-Admin module. This is shown in Figure \ref{fig:admin-bulletin}, which shows how to create bulletins and how to view the bulletins stored in the database.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{figs/bulletin_creation.jpg}
+    \end{subfigure}
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{figs/bulletin_list.jpg}
+    \end{subfigure}
+    \caption{Bulletin creation and overview in the admin interface}
+    \label{fig:admin-bulletin}
+\end{figure}
 
 \section{Backend}
 \label{sec:impr-backend}
