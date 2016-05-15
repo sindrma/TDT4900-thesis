@@ -100,7 +100,7 @@ This section will present figures of the views in the frontend that have changed
     \centering
     \includegraphics[width=0.7\textwidth]{figs/new_homepage.jpg}
     \caption[The updated leader view]{The updated leader view.}
-    \label{fig:new-leader}
+    \label{fig:new-homepage}
 \end{figure}
 
 \begin{figure}[h!]
@@ -121,20 +121,26 @@ This section will present figures of the views in the frontend that have changed
     \centering
     \includegraphics[width=0.7\textwidth]{figs/new_profile.jpg}
     \caption[The updated profile view]{The updated profile view.}
-    \label{fig:new-leader}
+    \label{fig:new-profile}
 \end{figure}
 
 \subsection{Bug Fixes}
-Feedback from users during user testing
-Upload fixes in frontend
-Sorting bug
+Feedback from previous user testing showed that Apple OSX users were unable to upload files to the system. The system requires the user to compress a folder containing all the source files, which has confused some users. However on OSX, users who seemingly constructed a correct zip still were unable to submit files to the system. It turned out that the most regular way of creating zip-files on OSX also sometimes generated a hidden directory called \textit{\_\_MACOSX} within the zip-file. This made the upload fail, as the server assumes it receives a single compressed folder, and not multiple directories in a single zip. The users were also presented with an error message which contained little information about what went wrong. \\
+
+The upload bug is removed in the new system. Before the zip file is sent to the server, the frontend ensures that the zip file has the required format as described above. The scan also removes all files that is not source or header files, and ensures that the zip only contains a single directory containing the source files. The directory \textit{\_\_MACOSX} is also automatically removed if present in the zip. If a user tries to upload zip-files with a different format than the format described above, they are presented with an error message telling them to learn more about uploading on the HowTo-page. \\
+
+The problem view shown in Figure \ref{fig:new-problem} also contained a bug in the highscore list. When sorting on different metrics, hidden submission present in the fetched submissions would suddenly appear in the highscore list. The bug is fixed in the new system, and ensures that hidden submissions are filtered out when the highscore list is sorted on the different metrics used by the system.
 
 \subsection{Views and Feedback}
-Spinners
-More visible colored error and info messages messages.
-Symbols added for usability.
+The views in the new system has a updated styling. The home-page view shown in Figure \ref{fig:new-homepage} has a simpler table design and has removed unnecessary information, such as database ids, present in the old system. All views containing tables has been updated according to the new table design. The problem-view shown in Figure \ref{fig:new-problem} has changed drastically compared to the old view. In the old problem-view, users needed to scroll to the bottom of the view to check out the highscore list. In the new view, the problem description and file upload functionality is vertically aligned with the highscore list, which makes it easy for users to locate the highscore list when entering the view. The old view also had a single table containing all uploads made by a user, while the new view splits the old upload table into a  ``Uploaded Solutions'' and ``Accepted Submissions'' table. The table ``Accepted Submissions'' contains all submissions marked as finished and successful, while the rest of the submissions are shown in the ``Uploaded Solutions'' table. This makes the upload information more structured, and the user can quickly find information about submissions. \\
 
-A bulletin board displaying administrator generated messages have been added to the frontend. Figure \ref{fig:bulletin-view} shows an example of how active bulletins looks like in the system frontend, with both removable and non-removable bulletins. Bulletins may also conatain HTMLSection \ref{sec:impr-server} explains the server extensions made to the server code to support the bulletin board feature.
+The old system displayed info and error messages in the lower right corner of the screen as shown in Figure \ref{}. The messages are very small, and can sometimes be hard to spot as they are only visible for short period of time. Since all messages also have the same styling, it is hard to differentiate between message types. The new system displays messages right below the navigation bar as shown in Figure \ref{}, which makes messages easy to spot. The messages are also split into the four message types \textit{info}, \textit{success}, \textit{danger}, \textit{error}, and each message type has their own color as shown by Figure \ref{}. Error messages has also been updated with more descriptive messages where possible. \\
+
+Most buttons in the new frontend also have symbols inside buttons. Symbols were added to more clearly state the functionality of the system and to improve usability. As an example, the problem view includes a ``play''-symbol inside the ``Run Program''-button upon successfully uploading a zip-file. The same ``play''-symbol is included in the ``Accepted Submission'' table to rerun submissions, which improves \textit{learnability} and \textit{memorability}. The old system also required users to through a two-stage sequence to compile and run a program, and this has been further simplified into a single action which makes the action of running a program simpler and more logical. Other buttons in the new interface has symbols as well, for example a navigation button from the homepage to a problem view includes a right arrow to indicate movement \textit{to} a certain view. Users can thereby infer that a backward arrow means navigating back to the previous view if such a button is displayed in the system. \\
+
+The new problem view also displays spinners on submissions currently running or in queue. An example of an active spinner on a submission in the ``Uploaded Solutions''-table depicted in Figure \ref{}. The table also includes the state of the submissions, which is updated in real-time as the program executes. The state field real-time updates is possible due to the real-time improvement explained in section \ref{sec:real-time}. If there an error occurred during program execution, it is possible view the error in a a popup window or \textit{modal} as shown in Figure \ref{}. The content of the modal depends on the type of error and Table \ref{} shows the different error types which can occur during a programs execution. The content of the modal are decided by the ``detailed\_state''-field in the Submissions-table which is explained in section \ref{sec:impr-server}. \\
+
+A bulletin board displaying administrator generated messages have also been added to the frontend. Figure \ref{fig:bulletin-view} shows an example of how active bulletins looks like in the system frontend, with both removable and non-removable bulletins. Section \ref{sec:impr-server} explains the server extensions made to the server code to support the bulletin board feature.
 
 \begin{figure}
     \centering
@@ -144,15 +150,17 @@ A bulletin board displaying administrator generated messages have been added to 
 \end{figure}
 
 \subsection{Group Functionality Improvements}
-JSON stat file download.
-Gathered group functionality.
+Figure \ref{fig:new-leader} shows the updated group leader view. The view is displayed if users are navigating to a given group from the homepage and is marked as leader of the group in the database, as in the old system. Among the visual improvements mentioned in the above sub-section, the view has an extra button. The button lets the leader of a group download a \gls{json} file, which contains information about group members as well as submissions made to problems registered on the group. The file can be used to generate group statistics, which is done by
+JSON stat file download. The functionality was added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}, and were needed as part of the digital exam evaluation process.
+
+The new homepage view has been extended with a ``Create New Group''-button. The button has been moved from the old profile view into the new homepage view, as user's may not associate adding groups with profile information and it also gathers group information. Gathering functionality into groups makes it easy to find functionality and it follows the Gestalt principle of grouping as described in section \ref{sec:usability-def}. The new profile view is shown in Figure \ref{fig:new-profile}.
 
 \section{Server}
 \label{sec:impr-server}
 \subsection{Database Management System Updates}
-The old version of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms} which requires minimal configuration before use and is therefore popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal were to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it uneccassery to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
+The old version of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms} which requires minimal configuration before use and is therefore popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal were to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it unnecessary to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
 
-Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cmb} team and the IDI Department. We therefore changed the \gls{dbms} to MySQL due to its usage in other applications developed at the IDI Department. IDI provided the databases used by the system, and we also gained access to a database adminstrator interface available at \url{https://phpmyadmin.idi.ntnu.no/}. SQLAlchemy made the switch onto the new \gls{dbms} easy as it has a predefined MySQL adapter, and had no problems in setting up the new databases for our development and production servers. Further, Flask-Migrate \cite{FLASKMIGRATE}, used for database \textit{migrations}\footnote{Database magration is the task of managing versions of a database schema without altering previously stored database content.}, also worked without any changes in configuration. \\
+Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cmb} team and the IDI Department. We therefore changed the \gls{dbms} to MySQL due to its usage in other applications developed at the IDI Department. IDI provided the databases used by the system, and we also gained access to a database administrator interface available at \url{https://phpmyadmin.idi.ntnu.no/}. SQLAlchemy made the switch onto the new \gls{dbms} easy as it has a predefined MySQL adapter, and had no problems in setting up the new databases for our development and production servers. Further, Flask-Migrate \cite{FLASKMIGRATE}, used for database \textit{migrations}\footnote{Database migration is the task of managing versions of a database schema without altering previously stored database content.}, also worked without any changes in configuration. \\
 
 A complete database dump were made from the SQLite databases. All SQL \texttt{INSERT} statements in the database dump were extracted and executed against the new development and production databases, to move all previously stored data in the SQLite databases over to the MySQL databases. The actions were performed with a combination of terminal commands and the database admin interface provided by IDI. MySQL and SQLAlchemy has not had any performance issues in the IDI Department, so the system uses the standard MySQL adapter provided by SQLALchemy. Implementing and enabling non-blocking database access has been added back to the backlog found in Appendix \ref{apdx:backlog} as a performance improvement.
 
@@ -196,7 +204,7 @@ The routes that has been updated or added to the \gls{rest}ful \gls{api} is list
 \end{table}
 \clearpage
 \subsection{Admin Interface}
-Several new problems have been added to the system during the Spring semester. Most problems were added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
+Several new problems have been added to the system during the Spring semester. Most problems were added by the two master students assessing the \gls{cmb} system's suitability for conducting digital exams. However, during the Spring we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinetely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
 
 The bug is removed in the new admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
 
