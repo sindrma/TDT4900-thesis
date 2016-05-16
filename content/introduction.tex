@@ -15,22 +15,28 @@ Developing energy efficient code for heterogeneous systems is challenging. One c
 \clearpage
 
 \section{Problem Statement Interpretation}
-\label{sec:rq}
+\label{sec:ps-inter}
 Three different sub objectives are identified in the problem statement. Usability improvements are the main focus of this thesis and there are several tasks listed in the problem statement that can be interpreted as usability tasks. Further, there are tasks not strictly related to usability and can instead be viewed as general improvements to the system. Finally, the thesis aims to propose a series of improvements and implement them if time permits. The subtasks listed below will, as of the above discussion, either be labeled as \textbf{U} for usability, \textbf{I} for improvements, or \textbf{P} for improvement proposals. As the tasks were already prioritized by the supervisor in the problem statement, the tasks listed in secondary objectives is assumed as less important compared to the main objectives. However, they are of importance to the \gls{cmb} project in general.
 
 \paragraph*{Main objectives} \hfill
 
 \paragraph*{U1} Fix the main bugs and known issues found during user testing of \gls{cmb} in November 2015:
   \begin{itemize}
-    \item \textbf{Uploads on OSX}: Does not work and give an uninformative error message.
-    \item \textbf{Submissions locked in a running state}: There should be a timeout on submissions containing infinite loops or code which may leave the submission in a inconsistent state.
-    \item \textbf{Highscore list bug}: When switching the sort metric, private submissions should still be hidden.
+    \item \textbf{U1.1 Uploads on OSX}: Does not work and give an uninformative error message.
+    \item \textbf{U1.2 Submissions locked in a running state}: There should be a timeout on submissions containing infinite loops or code which may leave the submission in a inconsistent state.
+    \item \textbf{U1.3 Highscore list bug}: When switching the sort metric, private submissions should still be hidden.
   \end{itemize}
 
 \paragraph*{I1} Change and/or optimize the existing database management system if necessary to handle more frequent user submissions. Early in this thesis we discovered that optimizing the database were not as important at this point as first predicted, as the system is still a prototype and we have few active users on the system. As a result, we did not think that optimizing the database was of importance at this point. However, switching to a more sophisticated \gls{dbms} should still be done.
 
-\paragraph*{U2} Improve and extend the CMB system's usability features in accordance with the CMB team's priorities. The features prioritized by the CMB team, is a combination of some features listed in the Appendix \ref{apdx:backlog} as well needed usability features found throughout the semester:
-
+\paragraph*{U2} Improve and extend the CMB system's usability features in accordance with the CMB team's priorities. The features prioritized by the CMB team, is a combination of some features listed in the Appendix \ref{apdx:backlog}, previous user feedback, as well needed usability features found throughout the semester:
+  \begin{itemize}
+    \item \textbf{U2.1 Improved feedback during errors}: Error messages should be structured, clear, and visible.
+    \item \textbf{U2.2 Add support real-time updates during submission execution}: State of submissions should update in real-time without the need of manually refresh to check for state changes.
+    \item \textbf{U2.3 Newly added problems sometimes behaves strange}: Some newly added problems behave strange and the success of submissions seems to be random on the added problem.
+    \item \textbf{U2.4 Bulletin board extension}: A bulletin board is needed to display administrator messages to the CMB users.
+    \item \textbf{U2.5 Views upgrade}: Views should only display neccessary information to users. It is also important that users are satisfied with the judge's user interface.
+  \end{itemize}
 
 \paragraph*{U3} Conduct a user-experiment to evaluate system usability.
 
@@ -57,7 +63,10 @@ Usability is a broad term and there is always room for usability improvements in
 \label{sec:out}
 This report is structured as follows:\\
 
-\noindent
-\textbf{Chapter \ref{ch:background}}: Explains the state-of-art. It will present the Mont Blanc project, the project which motivates the Climbing Mont Blanc project. The chapter will also present the Climbing Mont Blanc project, and the system architecture, energy measurement method, the system environment, and system security will be presented. The chapter will also present the extensions planned during the Spring of 2016. Finally, related \glspl{oj} and programming competitions finishes the chapter. \\
+\textbf{Chapter \ref{ch:background}}: Explains the state-of-art. It will present the Mont Blanc project, the project which motivates the Climbing Mont Blanc project. The chapter will also present the Climbing Mont Blanc project, that is, the system architecture, energy measurement method, the system environment, and system security. The chapter will also present the extensions planned during the Spring of 2016. Finally, related \glspl{oj} and programming competitions finishes the chapter. \\
 
-There are also many appendices attached to this thesis due to a request from the main supervisor.
+\textbf{Chapter \ref{ch:design}}: The chapter will present the definition of usability in software systems. Based on theory, aspects which makes an \gls{oj} usable are briefly discussed. The chapter ends with a discussion of the objectives set by this thesis and their relevance to the usability definition. \\
+
+\textbf{Chapter \ref{ch:improvements}}: A presentation of the improvements done to the system will be presented in this chapter. The chapter will present the technical solutions for the usability goals set in section \ref{sec:ps-inter}, as well as present implementation proposals for a improved stability test, improved HowTo-information and base of provided problems, and a discussion forum. \\
+
+%There are also many appendices attached to this thesis due to a request from the main supervisor.
