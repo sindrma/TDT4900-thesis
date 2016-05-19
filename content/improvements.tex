@@ -225,7 +225,7 @@ The updates to the previous database schema are shown in Figure \ref{fig:updated
     \label{fig:updated-database-schema}
 \end{figure}
 
-A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called ``valid\_until'' which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in section \ref{sec:impr-frontend} above. Another field called \textit{removable} indicates if a bulletin should be removable or not, and if the bulletin is marked as removable the user are allowed to remove the bulletin from the view. \\
+A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called ``valid\_until'' which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in section \ref{sec:impr-frontend} above. Another field called ``removable'' indicates if a bulletin should be removable or not, and if the bulletin is marked as removable the user are allowed to remove the bulletin from the frontend view. \\
 
 Cascading deletes has also been added between the Submission- and Run-tables. Cascading deletes ensures that all rows in the Run table associated with a Submission row get deleted upon deletion of a submission, which ensures that there are no dangling rows in the Run table, and the database are left in a consistent state after deleting submissions. Database consistency is of importance for both administrators and users, as both user groups can delete submissions.
 
@@ -304,6 +304,10 @@ Both frameworks mentioned above requires a running \gls{cmb} server and backend 
 The user feedback from TDT4200 \cite{TDT4200} pointed out that HowTo-page were unclear on how to structure the content of zip files to be uploaded. Some users also reported that it would be nice with an explanation of Unix error codes, which is presented to users if their submission terminates with an run time error. In addition, a solution to the OSX upload bug were discovered during the Spring and has been implemented as explained in section \ref{sec:frontend-impr}. As the system were to be used in experiments in the course TDT4102 \cite{TDT4102} and in the user test presented in section \ref{sec:user-testing}, the HowTo page were updated with the above information. Figure \ref{} shows the small extensions made to the HowTo page during the Spring. \\
 
 The page should also be further extended as the system is . Among the things missing is examples if input and output code samples in C, as the current page only has an example of C++ code IO handling. Further explanation
+Often asked questions and answers.
+
+About project page link.
+
 
 \subsection{Adding Problems}
 
