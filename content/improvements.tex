@@ -1,7 +1,13 @@
 %!TEX root=../main.tex
 \chapter{Climbing Mont Blanc Improvements}
 \label{ch:improvements}
-
+This chapter describes the implementation of the usability and improvement goals presented in section \ref{sec:ps-inter}, as well as a short discussion of the proposal objectives presented in the same section:
+\begin{itemize}
+    \item Fix bugs and known issues in the system, i.e objective \texttt{U1}.
+    \item Change the existing \gls{dbms} into a more sophisticated one, i.e objective \texttt{I1}.
+    \item Implement and extend the \gls{cmb} system's usability features in accordance with the \gls{cmb} team, i.e objective \texttt{U2}.
+    \item Propose improvements to a existing stability test, improvements to the HowTo-page and existing provided problems, and implementation of a discussion forum, i.e objectives \texttt{P1}, \texttt{P2}, and \texttt{P3} respectively.
+\end{itemize}
 %In this chapter it is assumed that a web interface follows the \gls{mvc} pattern. As briefly mentioned in sub-section \ref{subsec:cmb-arch-frontend}, Angular structures the HTML and Javascript code according to the \gls{mvc} pattern, and the reader should have the abstraction in mind when reading about browser or frontend implementations.
 
 \section{Real Time Updates}
@@ -71,7 +77,8 @@ The two sub-sections below describes the technologies used by the server and fro
 \end{table}
 
 \begin{figure}
-    \includegraphics[width=1.0\textwidth]{figs/namespaces_and_rooms.jpg}
+    \centering
+    \includegraphics[width=0.87\textwidth]{figs/namespaces_and_rooms.jpg}
     \caption[Socketio namespaces and rooms in the \gls{cmb} system]{Socketio namespaces and rooms in the \gls{cmb} system. }
     \label{fig:namespaces-and-rooms}
 \end{figure}
@@ -301,14 +308,16 @@ Another framework alternative is Locust \cite{LOCUST} which were also mentioned 
 Both frameworks mentioned above requires a running \gls{cmb} server and backend to work. The previous integration test only required a running backend as the test automatically started a test server, and it should be explored if it is possible to do the same with the introduction of one of the above frameworks to follow the testing standard in the project. Another alternative is to run the stability test on a designated server which is a true copy of the production server, which is used by few real users. The introduction of a new designated production like test server is discussed further in section \ref{sec:future-work} as possible future development.
 
 \subsection{How-To Page and About Page}
-The user feedback from TDT4200 \cite{TDT4200} pointed out that HowTo-page were unclear on how to structure the content of zip files to be uploaded. Some users also reported that it would be nice with an explanation of Unix error codes, which is presented to users if their submission terminates with an run time error. In addition, a solution to the OSX upload bug were discovered during the Spring and has been implemented as explained in section \ref{sec:frontend-impr}. As the system were to be used in experiments in the course TDT4102 \cite{TDT4102} and in the user test presented in section \ref{sec:user-testing}, the HowTo page were updated with the above information. Figure \ref{} shows the small extensions made to the HowTo page during the Spring. \\
+The user feedback from TDT4200 \cite{TDT4200} pointed out that HowTo-page were unclear on how to structure the content of zip files to be uploaded. Some users also reported that it would be nice with an explanation of Unix error codes, which is presented to users if their submission terminates with an run time error. In addition, a solution to the OSX upload bug were discovered during the Spring and has been implemented as explained in section \ref{sec:impr-frontend}. However, if OSX users still experiences problems, an explanation of how to correctly create a zip on OSX systems should be added to the HowTo page. As the system were to be used in experiments in the course TDT4102 \cite{TDT4102} and in the user test presented in section \ref{sec:user-testing}, the HowTo page were updated with the above information. \\
 
-The page should also be further extended as the system is . Among the things missing is examples if input and output code samples in C, as the current page only has an example of C++ code IO handling. Further explanation
-Often asked questions and answers.
+The page should also be further extended as the system is extended with more features. There is also some small possible extensions which can be made to improve the content on the HowTo-page. Among the things missing is examples if input and output code samples in C, as the current page only has an example of C++ code IO handling. The text explaining the uploads can also be further extended with a descriptive figure to make it even more clear how to upload code to the current system. The HowTo could also contain a FAQ, which can be updated as questions are reported by users. \\
 
-About project page link.
-
+Another idea apart from the HowTo page is to add an About page. The About page should describe the project and system in an easy way, as well as describing the motivation and purpose of the project and system. The page should also explain technical aspects, such as an explanation of \gls{edp} which may be an unknown metric for programmers new to energy efficient metrics. A list of publications related to the system would also be nice. The About page was not added to the system in this thesis.
 
 \subsection{Adding Problems}
+This thesis has not contributed towards adding new problems. However, all problems used in the \gls{cmb} system is advised to follow the standard of problems present in other \glspl{oj}. Some of the \glspl{oj} mentioned in section \ref{sec:related} are used in \gls{icpc} programming competitions, and seems to follow the same format in their provided problem descriptions. The \gls{cmb} system should aim to offer problems following a similar format, as the system maybe used in similar competitions in the future. The \gls{cmb} team should also strive to add more problems, hopefully with as much diversity as offered by other \glspl{oj}.
 
 \subsection{Discussion Forum}
+A discussion forum is wanted by the \gls{cmb} team. There exist multiple third party solutions offering online forums which offers varying degrees of modifiability, and we here restrict the discussion of third party solutions by requiring that the software is related to technologies used in the system or is known by the \gls{cmb} team. The framework FlaskBB \cite{FLASKBB} is a Python Flask based lightweight forum module, and seems to offer some degree of modifiability. The framework offers simple forum functionality such as posting questions, issue tracking, private messages, and forum administration. It is also possible to create own themes to better match the frontend view. There is also a popular Javascript based open-source forum software called Flarum \cite{FLARUM}, which offers much the same features as FlaskBB. It is also worth mentioning that third party software like Piazza is an option, but future developers should keep in mind that the software offers only small modifications of its appearance. \\
+
+A deeper study should be conducted before choosing how to implement a discussion forum. To make the system look more professional, a third party module with a highly modifiable appearance should be chosen. Another possibility is to build the forum software from scratch. A con is that it takes a lot of time to develop forum software, but a benefit is that no new software needs to be introduced in order to develop the forum and it makes the system look more professional to the outside world.
