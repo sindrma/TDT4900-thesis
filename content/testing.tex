@@ -33,9 +33,13 @@ Further, it is interesting to investigate if the overall usability of the system
 \paragraph*{Hypothesis 2:} The overall usability of system version two is higher compared to system version one. \hfill \\
 
 \subsection{Methodology}
-The user test conducted April 18th this Spring assesses the system improvements presented in Chapter \ref{ch:improvements} with focus on usability. The goal of the test is to further improve the results from the TDT4200 questionnaire. The test required an interest in programming and programming experience from the participants, but no prior knowledge of C or C++ or any parallel programming libraries offered by the system were set as a requirement. The weak requirements were set since there were generally little interest from students in participating in the test, most likely due to bad timing as many students have several assignment deliverables before the last lectures in mid April. Further, attracting students or others to participate in an user test for a master thesis is generally hard if the test consumes more than a couple of minutes. \textit{As the focus of this test were to test the usability of the system, it should be sufficient for participants to have general knowledge and interest in programming to assess the system usability}. \\
+The user test were conducted April 18th this Spring assesses the system improvements presented in Chapter \ref{ch:improvements} with focus on usability. The goal of this second test is to further improve the results received from Specialization project user test or user test one. The second test required an interest in programming and programming experience from the participants, but no prior knowledge of C or C++ or any parallel programming libraries were set as a requirement to participate in the test. \\
 
-The user test described a set of tasks to be completed by each participant. Since we are comparing the two system versions, the test does not assess the new features implemented and is assumed covered by section \ref{sec:cont-user-testing}. Appendix \ref{apdx:usertest} presents the tasks along with a questionnaire each participant were to complete before finishing the user test. Nearly all participants conducted the test simultanously in a lecture hall to simulate the heavy submission traffic we experienced before assignment deadlines in TDT4200. A couple of participants started the user test late or participated a couple of days after the official user test, to simulate the students in TDT4200 that experienced little or no traffic. Participants were informed that questions related to how to complete a task would not be answered during the test and that tasks should be completed individually. They were also informed that they could abort the test at any time. \\
+The weak requirements were set since there were generally little interest from students in participating in the test. The low interest in the test is most likely due to bad timing, as many students have several assignment deliverables before the last lectures in mid April. Further, attracting students or others to participate in a user test for a master thesis is generally hard if the test takes several hours. \textit{As the focus of this test were to test the usability of the system, it should be sufficient for participants to have general knowledge and interest in programming to assess the system usability}. \\
+
+The user test described a set of tasks to be completed by each participant. Since we are comparing the two system versions, the test does not assess the new features implemented and is assumed covered by section \ref{sec:cont-user-testing}. Appendix \ref{apdx:usertest} presents the tasks executed by every participant during the test, along with a questionnaire each participant were to complete before finishing the user test. \\
+
+Nearly all participants conducted the test simultanously in a lecture hall to simulate the heavy submission traffic we experienced before assignment deadlines in TDT4200. A couple of participants started the user test late or participated a couple of days after the official user test, to simulate the students in TDT4200 that experienced little or no traffic. Participants were informed that questions related to how to complete a task would not be answered during the test and that tasks should be completed individually. They were also informed that they could abort the test at any time. \\
 
 \begin{table}
     \centering
@@ -53,23 +57,13 @@ The user test described a set of tasks to be completed by each participant. Sinc
     \label{tab:avail-prob}
 \end{table}
 
-The most time consuming task the participants had to complete were to submit code to one of the problems presented in Table \ref{tab:avail-prob}. Submitting code to problems is the core of the \gls{oj} and the process of uploading and running submissions were the most common procedure done by TDT4200 students. The procedure and aspects related to submissions was also mentioned the most times in feedback given by the TDT4200 students, and was therefore chosen as one of the main tasks to perform in this user test. Before starting the user test, the participants were also notified to comment extensively on the procure when filling out the survey. The participants who were unfamiliar with C and C++ were given 5 different source files to the "Prime Number"-problem which they were to submit to the system, to simulate that the participants made a number of tries before arriving at the correct solution. The problem were chosen as it is of medium to easy difficulty. Participants who knew either C or C++ were also motivated to try to solve more than one problem if they arrived at a solution quickly, to extensively test the procedure of uploading and running submissions. Other tasks executed by participants included sign-up, login, viewing submissions and highscore lists, joining groups, creating and administering groups, and changing user e-mail and password. \\
+The most time consuming task the participants had to complete were to submit code to one of the problems presented in Table \ref{tab:avail-prob}. Submitting code to problems is the core of the \gls{oj} and the process of uploading and running submissions were the most common procedure done by TDT4200 students. The procedure and aspects related to submissions was also mentioned the most times in feedback given by the TDT4200 students, and was therefore chosen as one of the main tasks to perform in this user test. Before starting the user test, the participants were also notified to comment extensively on the procure when filling out the survey. \\
+
+The participants who were unfamiliar with C and C++ were given 5 different source files to the ``Prime Number''-problem which they were to submit to the system. The thought behind handing out source files, were to simulate that the participants made a number of tries before arriving at the correct solution. The ``Prime Number''-problem were chosen as it is of medium to easy difficulty. Participants who knew either C or C++ were also motivated to try to solve more than one problem if they arrived at a solution quickly, to extensively test the procedure of uploading and running submissions. Other tasks executed by participants included sign-up, login, viewing submissions and highscore lists, joining groups, creating and administering groups, and changing user e-mail and password. \\
 
 The questionnaire found in Appendix \ref{apdx:usertest} contains the same questions about the \gls{cmb} system presented in the questionnaire given to the students in TDT4200. The questionnaire is, as mentioned in the Specialization project report, inspired a by typical Likert scale form devloped by IBM\footnote{See: \url{http://garyperlman.com/quest/quest.cgi}} and complemented with textual based questions. To compare the results of the two questionnaires, it is important that they cover the same aspects and all questions developed in the Specialization project is therefore reused in the questionnaire handed out in this user study. In addition, a couple of extra multiple choice questions were added to the questionnaire of this test for the sake of clarity. \\
 
 Likert scale questions are often used in usability assessment of software systems. In this test, the number of Likert scale alternatives is set to five per question. Each row in Table \ref{tab:likert-scale} shows the possible alternatives for a given question type, as well as each alternatives' corresponding score ranged from one to five. To make it easier for participants to describe their thoughts about system features, the textual based questions are provided in the questionnaire and is further used as qualitative support when discussing the user study results. \\
-
-The tool Gnumeric \cite{GNUMERIC} is used for statistical data analysis comparison on the multiple choice results of the two user tests. Each multiple choice answer from both tests on each of the matching questions are translated into the corresponding Likert scale value. Further, a F-test and student T-test is performed on each question, to determine if a two-tailed student T-test is needed and to determine if the two tests have significantly different means respectively. A Shapiro-Francia test is performed to check for normality in the compared data sets if the result of the T-test indicates a significant difference, as normality is often set as a requirement for a valid T-test. However, if the normality check fails, the Wilcoxon-Mann-Whitney test is performed on each of the question groups accepted by the T-test to support the conclusion of the T-test. \\
-
-The statistical analysis assumes a significance level ($\alpha$) equal to 5\%. Further the null hypothesis ($H_0$) for the T-test assumes equal means of the two datasets, while the alternative hypothesis ($H_1$) is set depending on if we are conducting either a one-tailed or two-tailed T-test. Equation \ref{eq:h1-t-test} shows the possible alternative hypotheses for the T-test, where $\mu_{1}$ and $\mu_{2}$ is the means for user test one and two respectively.
-
-\begin{equation} \label{eq:h1-t-test}
-   H_1 =
-    \begin{cases}
-        \mu_{2} > \mu_{1} & \quad \text{if one-tailed test}\\
-        \mu_{2} > \mu_{1} \text{ or } \mu_{2} < \mu_{1}& \quad \text{if two-tailed test}\\
-    \end{cases}
-\end{equation}
 
 \begin{table}[t!]
     \centering
@@ -84,6 +78,37 @@ The statistical analysis assumes a significance level ($\alpha$) equal to 5\%. F
     \end{tabular}
     \caption{Likert Scale Alternatives on Question Type}
     \label{tab:likert-scale}
+\end{table}
+
+The tool Gnumeric \cite{GNUMERIC} is used for statistical data analysis comparison on the multiple choice results of the two user tests. Each multiple choice answer from both tests on each of the matching questions are translated into the corresponding Likert scale value. Further, a F-test \cite{moore2007} and student T-test \cite{walpole1993} is performed on each question, to determine if a two-tailed student T-test with unequal variances is needed and to determine if the two tests have significantly different means respectively. \\
+
+If the T-test indicates a significant difference between the two user groups further analysis is needed. If so, an Anderson-Darling test \cite{razali2011} is performed to check for normality in the compared data sets, as normality is often set as a requirement for a valid T-test. However, if the normality check fails, the non-parametric Wilcoxon-Mann-Whitney test \cite{hodges2005} is performed on each of the question groups accepted by the T-test. The test is used to support the conclusion of the T-test, as non-parametric tests often are used when . \\
+
+The statistical analysis assumes a significance level ($\alpha$) of 5\%. Further the null hypothesis ($H_0$) for the T-test assumes equal means of the two datasets, while the alternative hypothesis ($H_1$) is set depending on if we are conducting either a one-tailed or two-tailed T-test. Equation \ref{eq:h1-t-test} shows the possible alternative hypothesis for the T-test, where $\mu_{1}$ and $\mu_{2}$ are the means for user test one and two respectively.
+
+\begin{equation} \label{eq:h1-t-test}
+   H_1 =
+    \begin{cases}
+        \mu_{2} > \mu_{1} & \quad \text{if one-tailed test}\\
+        \mu_{2} \neq \mu_{1} & \quad \text{if two-tailed test}\\
+    \end{cases}
+\end{equation}
+
+The statistical effect-size is also reported and used when discussing the results. The effect-size is meant by the statistical \textit{strength} of a result, and will be important in our discussion of the multiple choice results. The reported effect-size metrics used is Cohen's d, Hedge's g, and Pearson's r \cite{cumming2013}\footnote{Calculated using this too: \url{http://www.polyu.edu.hk/mm/effectsizefaqs/calculator/calculator.html}.}. Cohen's d is often used as effect size to measure the strength of a t-test, as well as Person's r which is a well known effect-size metric. Hedge's g is also included in the results, as it is more accurate than Cohen's d with small sample sizes. \\
+
+Table \ref{tab:effect-size} reports the size scale for each of the used effect-size metrics. Cohen's d is also used to calculate the statistical \textit{power} of a conclusion, that is, the probability of correctly rejecting $H_0$ when $H_1$ is true. Statistical power is important when discussing threats against validity, to be sure that our conclusion is correct by some probability. Statistical power of the t-test is calculated using the Real Statistics Resource Pack in Microsoft Excel \cite{RSRP}.
+
+\begin{table}[t!]
+    \centering
+    \begin{tabular}{ | c | c | c | c |}
+    \hline
+    \textbf{Effect size} & \textbf{Pearson's r} & \textbf{Cohen's d} & \textbf{Hedge's g} \\ \hline
+    Small & 0.1 & 0.2 & 0.2 \\ \hline
+    Medium & 0.3 & 0.5 & 0.5 \\ \hline
+    Large & 0.5 & 0.8 & 0.8 \\ \hline
+    \end{tabular}
+    \caption{Effect sizes and corresponding metric values}
+    \label{tab:effect-size}
 \end{table}
 
 \subsection{Results and Evaluation}
@@ -184,7 +209,9 @@ The statistical analysis assumes a significance level ($\alpha$) equal to 5\%. F
     \label{fig:multiplechoice2}
 \end{figure}
 
-There were in total 21 participants in the user test. The Figures \ref{fig:multiplechoice}, \ref{fig:multiplechoice1}, \ref{fig:multiplechoice2} shows the results of the multiplechoice Likert questions. Some sub figures is labeled according to the question types defined in Table \ref{tab:likert-scale}, to easy reference the question in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The results from the user test conducted as part of the Specialization project is included in Appendix \ref{apdx:usertest}.
+There were in total 21 participants in the second user test. The Figures \ref{fig:multiplechoice}, \ref{fig:multiplechoice1}, \ref{fig:multiplechoice2} shows the results of the multiplechoice Likert questions. Some sub figures is labeled according to the question types defined in Table \ref{tab:likert-scale}, to easy reference the question in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The results from the user test conducted as part of the Specialization project is included in Appendix \ref{apdx:usertest}. \\
+
+Table \ref{} shows the mean and variance of user test one and test two on each question. The table also include f-test and t-test data
 
 \subsection{Threats to Validity}
 There are multiple factors in the experimental setup and execution of this test that may threaten the internal validity of the results. First, the participants in the user test does not necessarily have the same background and interests as the students in the course TDT4200. This may have an effect on how the participants percieve the system, and it may be different from the perception made by students students in TDT4200. Most of the TDT4200 students are interested in low-level and parallel programming, and may have little interest in design or frontend functionality as long as the system is in some way usable. A possible side effect might be that the two groups perceive the system usability differently. \\
