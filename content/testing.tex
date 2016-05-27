@@ -26,7 +26,7 @@ During November of 2015 a total of 37 students delivered an optional questionnai
 
 As this thesis potentially has improved system usability, it is interesting to conduct a user study to compare the usability of the two system versions. The new system will be considered as version two in the below discussions, while the system developed by Follan and Støa will be considered as version one. As mentioned in chapter \ref{ch:design}, usability is a broad term and this thesis has contributed mainly against improving effiency, learnability, and satisfaction of users as discussed in the mentioned chapter and implemented in chapter \ref{ch:improvements}. The above observation makes it interesting to test the following hypothesis:
 
-\paragraph*{Hypothesis 1:} The usability, in terms of either efficiency, learnability, or user satisfaction, is higher in version two compared to system verison one. \hfill \\
+\paragraph*{Hypothesis 1:} The usability, in terms of either efficiency, learnability, or user satisfaction, is higher in version two compared to system version one. \hfill \\
 
 Further, it is interesting to investigate if the overall usability of the system has increased in the \gls{cmb} system version two i.e:
 
@@ -80,23 +80,27 @@ Likert scale questions are often used in usability assessment of software system
     \label{tab:likert-scale}
 \end{table}
 
-The tool Gnumeric \cite{GNUMERIC} is used for statistical data analysis comparison on the multiple choice results of the two user tests. Each multiple choice answer from both tests on each of the matching questions are translated into the corresponding Likert scale value. Further, a F-test \cite{moore2007} and student T-test \cite{walpole1993} is performed on each question, to determine if a two-tailed student T-test with unequal variances is needed and to determine if the two tests have significantly different means respectively. \\
+The tool Gnumeric \cite{GNUMERIC} is used for statistical data analysis comparison on the multiple choice results of the two user tests. Each multiple choice answer from both tests on each of the matching questions are translated into the corresponding Likert scale value. The Likert scale values used in the statistical analysis are reproducible, using the pie charts and number of participants of each user test. To simplify the below discussion, the user test conducted as part of the Specialization project will be refered to as test one or T1 and the user test cunducted in this thesis will be refered to as test two or T2. \\
 
-If the T-test indicates a significant difference between the two user groups further analysis is needed. If so, an Anderson-Darling test \cite{razali2011} is performed to check for normality in the compared data sets, as normality is often set as a requirement for a valid T-test. However, if the normality check fails, the non-parametric Wilcoxon-Mann-Whitney test \cite{hodges2005} is performed on each of the question groups accepted by the T-test. The test is used to support the conclusion of the T-test, as non-parametric tests often are used when . \\
+A F-test \cite{moore2007} is conducted to determine if the compared data set variances can be concidered equal. The F-test calculates a P-value, which is a measurement of how extreme the results of a given test are relative to the underlying statistical model. The P-value is compared to a set significance level, and variances are concidered equal if the P-value is less then the decided significance level or unequal if the P-value is bigger than significance level. The result can also be formulated as keeping the null hypothesis ($H_0$), while the opposite situation are refered to as rejecting the null hypothesis and accepting the alternative hypothesis ($H_1$). \\
 
-The statistical analysis assumes a significance level ($\alpha$) of 5\%. Further the null hypothesis ($H_0$) for the T-test assumes equal means of the two datasets, while the alternative hypothesis ($H_1$) is set depending on if we are conducting either a one-tailed or two-tailed T-test. Equation \ref{eq:h1-t-test} shows the possible alternative hypothesis for the T-test, where $\mu_{1}$ and $\mu_{2}$ are the means for user test one and two respectively.
+A T-test \cite{walpole1993} is performed on each question to determine if two user tests have significantly different means. The T-test can be executed either assuming equal or unequal variances, and the result of the F-test determines which version of the T-test to execute. The T-test also outputs a P-value which is used in the same way as explained in the above paragraph. \\
+
+The statistical analysis in this thesis assumes a significance level ($\alpha$) of 5\%. Further, the null hypothesis ($H_0$) for the T-test assumes equal means of the two datasets, while the alternative hypothesis ($H_1$) is set depending on if we are conducting either a one-tailed or two-tailed T-test. Equation \ref{eq:h1-t-test} shows the possible alternative hypothesis for the T-test, where $\mu_{1}$ and $\mu_{2}$ are the means for user test one and two respectively. In this thesis we use the one-tailed alternative hypothesis, as we want to optain stronger results for system version 2.
 
 \begin{equation} \label{eq:h1-t-test}
    H_1 =
     \begin{cases}
         \mu_{2} > \mu_{1} & \quad \text{if one-tailed test}\\
-        \mu_{2} \neq \mu_{1} & \quad \text{if two-tailed test}\\
+        \mu_{1} \neq \mu_{2} & \quad \text{if two-tailed test}\\
     \end{cases}
 \end{equation}
 
-The statistical effect-size is also reported and used when discussing the results. The effect-size is meant by the statistical \textit{strength} of a result, and will be important in our discussion of the multiple choice results. The reported effect-size metrics used is Cohen's d, Hedge's g, and Pearson's r \cite{cumming2013}\footnote{Calculated using this too: \url{http://www.polyu.edu.hk/mm/effectsizefaqs/calculator/calculator.html}.}. Cohen's d is often used as effect size to measure the strength of a t-test, as well as Person's r which is a well known effect-size metric. Hedge's g is also included in the results, as it is more accurate than Cohen's d with small sample sizes. \\
+If the T-test indicates a significant difference between the two user groups further analysis is needed. If so, an Anderson-Darling test \cite{razali2011} is performed to check the normality of the data sets, as normality is often a requirement for a valid T-test. However, if the normality check fails, the non-parametric \gls{wmw} test \cite{hodges2005} is performed on each of the question groups accepted by the T-test. The test is used to support the conclusion of the T-test, as non-parametric tests are often used when the compared data sets are non-normally distributed. \\
 
-Table \ref{tab:effect-size} reports the size scale for each of the used effect-size metrics. Cohen's d is also used to calculate the statistical \textit{power} of a conclusion, that is, the probability of correctly rejecting $H_0$ when $H_1$ is true. Statistical power is important when discussing threats against validity, to be sure that our conclusion is correct by some probability. Statistical power of the t-test is calculated using the Real Statistics Resource Pack in Microsoft Excel \cite{RSRP}.
+The statistical effect-size is also reported and used when discussing the results. The effect-size is meant by the statistical \textit{strength} of a result, and will be important in our discussion of the multiple choice results. The reported effect-size metrics used is Cohen's d, Hedge's g, and Pearson's r \cite{cumming2013}\footnote{Calculated with this tool: \url{http://www.polyu.edu.hk/mm/effectsizefaqs/calculator/calculator.html}.}. Cohen's d is often used as effect size to measure the strength of a t-test, as well as Person's r which is a well known effect-size metric. Hedge's g is also included in the results, as it is more accurate than Cohen's d with small sample sizes. Table \ref{tab:effect-size} reports the size scale for each of the used effect-size metrics, and a conclusion from a test is concidered stronger the higher effect-size reported. \\
+
+Cohen's d and Hedge's g is also used to calculate the statistical \textit{power} of a conclusion. Statistical power is the probability of correctly rejecting $H_0$ when $H_1$ is true, and is important when discussing threats against validity to be sure that we have enough respondents to draw valid conclusions. Statistical power of the t-test is calculated using the Real Statistics Resource Pack in Microsoft Excel \cite{RSRP}.
 
 \begin{table}[t!]
     \centering
@@ -112,111 +116,117 @@ Table \ref{tab:effect-size} reports the size scale for each of the used effect-s
 \end{table}
 
 \subsection{Results and Evaluation}
-
-\begin{figure}
+\begin{table}[t!]
     \centering
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/year_of_study.jpg}}
-        \caption{*}
-        \label{fig:year-of-study}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-      %(or a blank line to force the subfigure onto a new line)
-    \hfill
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/study_programme.jpg}}
-        \caption{*}
-        \label{fig:study-programme}
-    \end{subfigure}
-    %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-    %(or a blank line to force the subfigure onto a new line)
+    \begin{tabular}{ | c | p{9cm} |}
+    \hline
+    \textbf{Label} & \textbf{Question Title} \\ \hline
+    \texttt{O1} & ``What year of study are you in?'' \\ \hline
+    \texttt{O2} & ``Which of the following best describes your study programme?''  \\ \hline
+    \texttt{A1} & ``How would you rate the Climbing Mont Blanc system in general?'' \\ \hline
+    \texttt{B1} & ``It was easy to use the system?'' \\ \hline
+    \texttt{A2} & ``How would you rate the usability of the Climbing Mont Blanc system?'' \\ \hline
+    \texttt{C1} & ``Was it difficult to learn how to use the Climbing Mont Blanc system?'' \\ \hline
+    \texttt{A3} & ``How would you rate the design of the Climbing Mont Blanc user interface?'' \\ \hline
+    \texttt{C2} & ``How would you rate the process uploading and running a program?'' \\ \hline
+    \texttt{D1} & ``How satisfied are you with the feedback given by the Climbing Mont Blanc system?'' \\ \hline
+    \texttt{B2} & ``The feedback given by the system is clear and helpful?'' \\ \hline
+    \texttt{A4} & ``How would you rate the information on the HowTo-page?'' \\ \hline
+    \end{tabular}
+    \caption[Label to question title mapping]{Label to question title mapping: Labels are created according to Table \ref{tab:likert-scale}. Questions marked \texttt{O*} are meant as other questions not within the five point Likert scale range.}
+    \label{tab:label-to-title}
+\end{table}
 
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/general_cmb.jpg}}
-        \caption{A1}
-        \label{fig:cmb-general}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/easy_to_use.jpg}}
-        \caption{B1}
-        \label{fig:cmb-easy-use}
-    \end{subfigure}
-    \caption{Multiple Choice Results}
-    \label{fig:multiplechoice}
-\end{figure}
+There were in total 21 participants in the second user test. Table \ref{tab:label-to-title} shows a mapping between questions question titles and question labels, which makes it easier to reference the questions in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The pie-charts and a summary of textual based feedback for both the user test one and two can be found in Appendix \ref{apdx:usertest}. All statistical test results reported in tables are rounded to three decimal places if applicable, that is, we do not round if it changes the outcome of the conclusion. \\
 
+Table \ref{tab:results-tests-all} shows the means and variances of user test one and two responses for each Likert scale question in common for the two user tests. The table also include F-test P-values and the conclusion of the F-test compared to the significance level, which determines to either assume equal or unequal variances when performing the T-test. The T-test P-value is also reported, and is used to determine if a rejection of null hypothesis is needed. \\
 
-\begin{figure}
+The three questions \texttt{A3}, \texttt{D1}, and \texttt{A4} should reject $H_0$ as indicated by the T-test results in Table \ref{tab:results-tests-all}. However, none of the data sets are normally distributed according to the Anderson-Darling test. Subsequently, a \gls{wmw}-test is conducted to support the conclusion of the T-test. Table \ref{tab:significant-results} reports the resulting P-value of the \gls{wmw}-test, as well as effect-sizes and power calculations. \\
+
+The \gls{wmw}-test also indicate significant results as its P-values are lower than $\alpha$. Question \texttt{D1} has the most significant results, as the effect-size is large and the power is high using both Cohen's d and Hedge's g. Using Hedge's g to compute power, we can by a 97.2\% probability be certain that we have correctly rejected $H_0$ when $H_1$ is true. We can therefore conclude that users, most probably, are more satisfied with the feedback of the system version 2. The results reported for question \texttt{B2} in Appendix \ref{apdx:usertest} also indicates that feedback is good, as over 80\% of participants either agree or strongly agree that the feedback given by the system is clear and helpful.  \\
+
+\begin{table}[t!]
     \centering
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/usability_cmb.jpg}}
-        \caption{A2}
-        \label{fig:cmb-usability}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-      %(or a blank line to force the subfigure onto a new line)
-    \hfill
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/learn_cmb.jpg}}
-        \caption{C1}
-        \label{fig:cmb-learn}
-    \end{subfigure}
+    \begin{tabular}{|c||c|c||c|c||c|c||c|c||}
+      \hline
+      \multirow{2}{*}{\textbf{Question}} & \multicolumn{2}{ |c|| }{\textbf{A1}} & \multicolumn{2}{ |c|| }{\textbf{A2}} & \multicolumn{2}{ |c|| }{\textbf{C1}} & \multicolumn{2}{ |c|| }{\textbf{A3}} \\ \cline{2-9}
+      &  T1 & T2 & T1 & T2 & T1 & T2 & T1 & T2 \\ \hline
+      \textbf{Mean} & 3.676 & 3.857 & 3.730 & 3.809 & 3.919 & 3.905 & 3.730 & 4.143 \\ \hline
+      \textbf{Variance} & 0.392 & 0.429 & 0.592 & 0.162 & 0.521 & 0.590 & 0.369 & 0.329 \\ \hline
+      \textbf{F P-value} & \multicolumn{2}{c||}{0.396} & \multicolumn{2}{c||}{0.002} & \multicolumn{2}{c||}{0.362} & \multicolumn{2}{c||}{0.400} \\ \hline
+      \textbf{Variance} & \multicolumn{2}{c||}{Equal} & \multicolumn{2}{c||}{Unequal} & \multicolumn{2}{c||}{Equal} & \multicolumn{2}{c||}{Equal} \\ \hline
+      \textbf{T P-value} & \multicolumn{2}{c||}{0.151} & \multicolumn{2}{c||}{0.303} & \multicolumn{2}{c||}{0.472} & \multicolumn{2}{c||}{0.002}\\ \hline
+      \textbf{Reject $H_0$?} & \multicolumn{2}{c||}{No} & \multicolumn{2}{c||}{No} & \multicolumn{2}{c||}{No} & \multicolumn{2}{c||}{Yes}\\ \hline
+    \end{tabular} \\[5pt]
+    \begin{tabular}{|c||c|c||c|c||c|c||}
+      \hline
+      \multirow{2}{*}{\textbf{Question}} & \multicolumn{2}{ |c|| }{\textbf{C2}} & \multicolumn{2}{ |c|| }{\textbf{D1}} & \multicolumn{2}{ |c|| }{\textbf{A4}} \\ \cline{2-7}
+      &  T1 & T2 & T1 & T2 & T1 & T2 \\ \hline
+      \textbf{Mean} & 3.595 & 3.524 & 2.568 & 3.619 & 3.324 & 3.842 \\ \hline
+      \textbf{Variance} & 0.970 & 0.762 & 0.919 & 0.947 & 0.892 & 0.474 \\ \hline
+      \textbf{F P-value} & \multicolumn{2}{c||}{0.287} & \multicolumn{2}{c||}{0.454} & \multicolumn{2}{c||}{0.060}\\ \hline
+      \textbf{Variance} & \multicolumn{2}{c||}{Equal} & \multicolumn{2}{c||}{Equal} & \multicolumn{2}{c||}{Equal} \\ \hline
+      \textbf{T P-Value} & \multicolumn{2}{c||}{0.393} & \multicolumn{2}{c||}{$9.6x10^{-5}$} & \multicolumn{2}{c||}{0.022} \\ \hline
+      \textbf{Reject $H_0$?} & \multicolumn{2}{c||}{No} & \multicolumn{2}{c||}{Yes} & \multicolumn{2}{c||}{Yes} \\ \hline
+    \end{tabular}
+    \caption{Mean, variance, F-test, and T-test results}
+    \label{tab:results-tests-all}
+\end{table}
 
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/design_cmb.jpg}}
-        \caption{A3}
-        \label{fig:cmb-design}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-      %(or a blank line to force the subfigure onto a new line)
-    \hfill
-    \begin{subfigure}[h]{0.48\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/submission_cmb.jpg}}
-        \caption{C2}
-        \label{fig:cmb-submission}
-    \end{subfigure}
-    \caption{Multiple Choice Results (continuation of Figure \ref{fig:multiplechoice})}
-    \label{fig:multiplechoice1}
-\end{figure}
+The questions \texttt{A3} and \texttt{A4} is also accepted by both the T-test and \gls{wmw}-test. However, their strength in terms of all effect-size metrics indicates medium stength for \texttt{A3} and low to medium strength for \texttt{A4}. The statistical power of question \texttt{A3} and question \texttt{A4} should have been higher for us to draw any valid conclusions. We can only conclude that system version 2 might have a better user interface design and an improved HowTo-page. \\
 
-\begin{figure}
+The overall usability is good in both system versions. This also corresponds to the conclusion of tests ran against question  \texttt{C1}, and answers to textual based feedback received from both user test one and user test two. There is also generally little overlap in textual based feedback, which indicates that there have been some improvements to usability. Some of the textual based feedback, such as adding language versions and project information to the HowTo-page as proposed in section \ref{sec:impr-proposals}, has already been noted by the \gls{cmb} team and is added to the backlog. Proposals of new features wanted by users has also been noted, and is marked in the backlog in Appendix \ref{apdx:backlog}. \\
+
+The experiment results indicates that users are more satisfied with version 2 of the system. Users are from the above study more satisfied with the feedback given by system version 2, and there is also a trend towards users being more satisfied with the user interface design and the information displayed at the HowTo-page. We can therefore conclude that it is likely that usability in terms of either efficiency, learnability, or user satisfaction is better in version 2 of the system i.e Hypothesis 1 seem to be true. \\
+
+Likert scale questions covering overall usability does not indicate a significant improvement in this experiment. Both test one and test two indicated good overall usability i.e we can not conclude that Hypothesis 2 is true. However, users were only testing actions in common of the two system versions. New features implemented during the Spring were not included in this experiment, but is covered by section \ref{sec:cont-user-testing}. Since the range of possible actions against the system has increased in version two and users has approved the new features, we can to some extent also argue that the overall usability has improved.
+
+\begin{table}[t!]
     \centering
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.45\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/feedback_cmb.jpg}}
-        \caption{D1}
-        \label{fig:cmb-feedback}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[h]{0.45\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/clear_feedback_cmb.jpg}}
-        \caption{B2}
-        \label{fig:cmb-feedback-clear}
-    \end{subfigure}
+    \begin{tabular}{|c||c||c||c||}
+      \hline
+      \textbf{Question} & \textbf{A3} & \textbf{D1} & \textbf{A4} \\\hline
+      \textbf{WMW P-value} & 4.231\% & 0.081\% & 4.400\%  \\ \hline
+      \textbf{r} & 0.330 & 0.478 & 0.283\\ \hline
+      \textbf{d} & 0.699 & 1.088 & 0.590 \\ \hline
+      \textbf{g} & 0.684 & 1.076 & 0.557\\ \hline
+      \textbf{Power (using d)} & 0.711 & 0.975 & 0.564 \\ \hline
+      \textbf{Power (using g)} & 0.692 & 0.972 & 0.518 \\ \hline
+    \end{tabular}
+    \caption{Wilcoxon-Mann-Whitney P-values, effect-sizes, and power results}
+    \label{tab:significant-results}
+\end{table}
 
-    %\hspace*{-1.5cm}
-    \begin{subfigure}[h]{0.45\textwidth}
-        \centerline{\includegraphics[width=1.5\textwidth]{results/howto_cmb.jpg}}
-        \caption{A4}
-        \label{fig:cmb-howto}
-    \end{subfigure}
-    \caption{Multiple Choice Results (continuation of Figure \ref{fig:multiplechoice1})}
-    \label{fig:multiplechoice2}
-\end{figure}
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{cc|c|c|c|c|c|c|c|c|}
+%      \hline
+%      \multicolumn{2}{ |c| }{\textbf{Question}} & \textbf{Mean} & \textbf{Variance} & \textbf{F} & \textbf{F Crit} & \textbf{One-tailed?} & \textbf{T stat} & \textbf{T crit} & \textbf{Reject $H_0$?} \\ \hline
+%      \multicolumn{1}{ |c  }{\multirow{2}{*}{\textbf{A1}} } &
+%      \multicolumn{1}{ |c| }{T1} & 3,676 & 0,392 & \multirow{2}{*}{1,904} & \multirow{2}{*}{1,870} & \multirow{2}{*}{No} & \multirow{2}{*}{1,031} & \multirow{2}{*}{2,021} & \multirow{2}{*}{No}  \\ \cline{2-4}
+%      \multicolumn{1}{ |c| }{}                    &
+%      \multicolumn{1}{ |c| }{T2} & 3,857 & 0,429 & & & & & &    \\ \hline
+%    \end{tabular}
+%    \caption{Mean, Variance, F-test, and T-test results multiple choice questions}
+%    \label{tab:result-tests-all}
+%\end{table}
 
-There were in total 21 participants in the second user test. The Figures \ref{fig:multiplechoice}, \ref{fig:multiplechoice1}, \ref{fig:multiplechoice2} shows the results of the multiplechoice Likert questions. Some sub figures is labeled according to the question types defined in Table \ref{tab:likert-scale}, to easy reference the question in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The results from the user test conducted as part of the Specialization project is included in Appendix \ref{apdx:usertest}. \\
-
-Table \ref{} shows the mean and variance of user test one and test two on each question. The table also include f-test and t-test data
 
 \subsection{Threats to Validity}
+Construct validity concerns to what extent conclusions from statistical analysis are correct. It is closely related to statistical power, and is important when concidering to reject $H_0$. We can have false positives (called Type I errors) which means a significant results are found even though data indicates otherwise, for example due to too few participants. Further, false negatives (called type II error) can be present which means that $H_0$ is not rejected even though there could have been an effect with a larger number of participants. We set a wanted level of power to accept the conclusion made, and in this discussion we will assume we at least want a power of 80\% to be sure that a conclusion is correct.
+
+Question \texttt{D1} seems to be a valid conclusion. We could actually had a power of 80\% with only 20 participants in user test one and 12 participants in user test two to draw a valid conclusion from the results.\footnote{Calculated using this tool: \url{http://www.biomath.info/power/ttest.htm}.} Question \textit{A3} has too few participants to draw a valid conclusion, however there is a trend indicating a better scored user interface. We would have reached our target statistical power with 47 participants in user test one and 27 participants in user test two. However, satisfiability in system design is only one aspect of usability and we also has to account for feedback in the textual based questions, which indicated that the user interface of system version two is satisfiable to users. \\
+
+Question \textit{A4} had statistically lowest power of the three statistically significant results. The power at 51.7\% using Hedge's g is not strong enough to draw a valid conclusion. We would have needed 70 participants in test one and 40 participants in test two to correctly accept $H_0$. However, improvements to the HowTo-page is listed as secondary improvements in the objectives listed in section \ref{sec:ps-inter}, and the small changes made presented in section \ref{sec:impr-proposals} were due to the usage of the system in a learning experiment.
+
 There are multiple factors in the experimental setup and execution of this test that may threaten the internal validity of the results. First, the participants in the user test does not necessarily have the same background and interests as the students in the course TDT4200. This may have an effect on how the participants percieve the system, and it may be different from the perception made by students students in TDT4200. Most of the TDT4200 students are interested in low-level and parallel programming, and may have little interest in design or frontend functionality as long as the system is in some way usable. A possible side effect might be that the two groups perceive the system usability differently. \\
 
-Second, the participants of this test used the system for a short period of time. The students in TDT4200 used the system in a total of 5 exercises throughout the Autumn semester, and have tried using the system multiple times. The participants in this test may not have been able to test the system thoroughly like the students in TDT4200 had a chance to do. Third, the number of participants in this test may not be as statistically significant as in the user test conducted during the Autumn. Conclusions drawn from unequal quantities of participants in the two tests may be less correct than two tests having equal amount of participants, and the reader should keep this in mind during evalution. Fourth, since it was hard to get participants to the test, many of the participants are friends of or familiar to the \gls{cmb} team. This might further affect the results in either a positive or negative way. \\
+Second, the participants of this test used the system for a short period of time. The students in TDT4200 used the system in a total of 5 exercises throughout the Autumn semester, and have tried using the system multiple times. The participants in this test may not have been able to test the system thoroughly like the students in TDT4200 had a chance to do.
+
+Third, the number of participants in this test may not be as statistically significant as in the user test conducted during the Autumn.
+
+Fourth, since it was hard to get participants to the test, many of the participants are friends of or familiar to the \gls{cmb} team. This might further affect the results in either a positive or negative way. \\
+
 
 
 \section{System Unit Tests}
