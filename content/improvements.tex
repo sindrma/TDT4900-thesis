@@ -8,8 +8,9 @@ This chapter describes the implementation of the usability and improvement goals
     \item Implement and extend the \gls{cmb} system's usability features in accordance with the \gls{cmb} team, i.e objective \texttt{U2}.
     \item Propose improvements to a existing stability test, improvements to the HowTo-page and existing provided problems, and implementation of a discussion forum, i.e objectives \texttt{P1}, \texttt{P2}, and \texttt{P3} respectively.
 \end{itemize}
+A frontend data model is in the below sections meant by an entity which stores data. A data model does also contain control logic to modify or update stored data. For example, fetching data from \gls{rest}ful \glspl{api} is common in the \gls{cmb} prototype frontend data models. Each model is also coupled with a frontend view, which uses the internal logic of the data model to present the model data to users.
 %In this chapter it is assumed that a web interface follows the \gls{mvc} pattern. As briefly mentioned in sub-section \ref{subsec:cmb-arch-frontend}, Angular structures the HTML and Javascript code according to the \gls{mvc} pattern, and the reader should have the abstraction in mind when reading about browser or frontend implementations.
-
+\clearpage
 \section{Real Time Updates}
 \label{sec:real-time}
 The frontend view changes when a user performes actions against the frontend models as mentioned in sub-section \ref{subsec:cmb-arch-frontend}. However, the frontend view presented to a given user does not update automatically as other users interact and changes their data models, as models are stored locally in each of the user’s browser. If the updated model contains data that should be known\footnote{Hereby known as \textit{shared data}.} to all users, the users does not get notified about the model changes dynamically and views may, therefore, display out of date information. Figure \ref{fig:update-problem} an example of the problem, as Alice updates some of her browser’s model data when she interacts with the system. If Alice changes some data present in Bob’s models, Bob will not be notified of the changes as all data transfer are done with HTTP requests between Alice and the server. However, Bob can fetch up to date data by manually refreshing his web page. \\
@@ -82,8 +83,6 @@ The two sub-sections below describes the technologies used by the server and fro
     \caption[Socketio namespaces and rooms in the \gls{cmb} system]{Socketio namespaces and rooms in the \gls{cmb} system. }
     \label{fig:namespaces-and-rooms}
 \end{figure}
-
-\clearpage
 
 \begin{figure}
     \includegraphics[width=1.0\textwidth]{figs/problem_view.jpg}

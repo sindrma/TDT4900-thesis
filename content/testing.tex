@@ -7,7 +7,6 @@ This chapter will explain the testing of usability of the developed system. Sect
 
 \section{Continuous User Testing}
 \label{sec:cont-user-testing}
-
 \subsection{Admin Interface Assessment}
 Some system administrators were also asked to assess the usability of the improved admin interface. The admin interface usability assessment was not a part of the user test, as the user test focused on testing the frontend interface used by normal users. We also have an restrictive amount of system administrators which has been trained in how to use the interface, which makes a test of the admin interface on a wast amount of participants unnecessary.
 
@@ -137,7 +136,7 @@ Cohen's d and Hedge's g is also used to calculate the statistical \textit{power}
     \label{tab:label-to-title}
 \end{table}
 
-There were in total 21 participants in the second user test. Table \ref{tab:label-to-title} shows a mapping between questions question titles and question labels, which makes it easier to reference the questions in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The pie-charts and a summary of textual based feedback for both the user test one and two can be found in Appendix \ref{apdx:usertest}. All statistical test results reported in tables are rounded to three decimal places if applicable, that is, we do not round if it changes the outcome of the conclusion. \\
+There were in total 21 participants in the second user test. Table \ref{tab:label-to-title} shows a mapping between questions question titles and question labels, which makes it easier to reference the questions in the below discussion. As mentioned, there were a total of 37 TDT4200 students providing feedback in the optional questionnaire given during the Autmumn semester. The pie-charts and a summary of textual based feedback for both the user test one and two can be found in Appendix \ref{apdx:usertest}. All statistical test results reported in tables are rounded to three decimal places if applicable, that is, results are not rounded if it changes the outcome of the below discussions. \\
 
 Table \ref{tab:results-tests-all} shows the means and variances of user test one and two responses for each Likert scale question in common for the two user tests. The table also include F-test P-values and the conclusion of the F-test compared to the significance level, which determines to either assume equal or unequal variances when performing the T-test. The T-test P-value is also reported, and is used to determine if a rejection of null hypothesis is needed. \\
 
@@ -175,7 +174,9 @@ The \gls{wmw}-test also indicate significant results as its P-values are lower t
 
 The questions \texttt{A3} and \texttt{A4} is also accepted by both the T-test and \gls{wmw}-test. However, their strength in terms of all effect-size metrics indicates medium stength for \texttt{A3} and low to medium strength for \texttt{A4}. The statistical power of question \texttt{A3} and question \texttt{A4} should have been higher for us to draw any valid conclusions. We can only conclude that system version 2 might have a better user interface design and an improved HowTo-page. \\
 
-The overall usability is good in both system versions. This also corresponds to the conclusion of tests ran against question  \texttt{C1}, and answers to textual based feedback received from both user test one and user test two. There is also generally little overlap in textual based feedback, which indicates that there have been some improvements to usability. Some of the textual based feedback, such as adding language versions and project information to the HowTo-page as proposed in section \ref{sec:impr-proposals}, has already been noted by the \gls{cmb} team and is added to the backlog. Proposals of new features wanted by users has also been noted, and is marked in the backlog in Appendix \ref{apdx:backlog}. \\
+The overall usability is good in both system versions. This also corresponds to the conclusion of tests ran against question  \texttt{C1}, and answers to textual based feedback received from both user test one and user test two. There is also generally little overlap in textual based feedback, which indicates that there have been some improvements to usability. Some of the textual based feedback, such as adding language versions and project information to the HowTo-page as proposed in section \ref{sec:impr-proposals}, has already been noted by the \gls{cmb} team and is already listed in the backlog found in Appendix \ref{apdx:backlog}. \\
+
+The textual based questions are as mentioned meant as support for the multiple choice questions. The questions are also important for the future development of the \gls{cmb} prototype. Proposals of new features, such as low-level noice in timing measurements and multi file uploads, have been noted by the \gls{cmb} team. New feature proposals is marked in the backlog in Appendix \ref{apdx:backlog}, and section \ref{sec:future-work} present proposals of possible next steps in the project. \\
 
 The experiment results indicates that users are more satisfied with version 2 of the system. Users are from the above study more satisfied with the feedback given by system version 2, and there is also a trend towards users being more satisfied with the user interface design and the information displayed at the HowTo-page. We can therefore conclude that it is likely that usability in terms of either efficiency, learnability, or user satisfaction is better in version 2 of the system i.e Hypothesis 1 seem to be true. \\
 
@@ -213,24 +214,94 @@ Likert scale questions covering overall usability does not indicate a significan
 
 
 \subsection{Threats to Validity}
-Construct validity concerns to what extent conclusions from statistical analysis are correct. It is closely related to statistical power, and is important when concidering to reject $H_0$. We can have false positives (called Type I errors) which means a significant results are found even though data indicates otherwise, for example due to too few participants. Further, false negatives (called type II error) can be present which means that $H_0$ is not rejected even though there could have been an effect with a larger number of participants. We set a wanted level of power to accept the conclusion made, and in this discussion we will assume we at least want a power of 80\% to be sure that a conclusion is correct.
+Conclusion validity concerns to what extent conclusions from statistical analysis are correct. It is closely related to statistical power, and is important when concidering to reject $H_0$. In statistical analysis we typically have false neagtives or false postives. False positives (called Type I errors) means a significant results are found even though data indicates otherwise, for example due to too few participants. Further, false negatives (called type II error) can be present which means that $H_0$ is not rejected even though there could have been an effect with a larger number of participants. In the below discussion we will assume we at least want a power of 80\%, to be sure that a conclusion is correct. \\
 
-Question \texttt{D1} seems to be a valid conclusion. We could actually had a power of 80\% with only 20 participants in user test one and 12 participants in user test two to draw a valid conclusion from the results.\footnote{Calculated using this tool: \url{http://www.biomath.info/power/ttest.htm}.} Question \textit{A3} has too few participants to draw a valid conclusion, however there is a trend indicating a better scored user interface. We would have reached our target statistical power with 47 participants in user test one and 27 participants in user test two. However, satisfiability in system design is only one aspect of usability and we also has to account for feedback in the textual based questions, which indicated that the user interface of system version two is satisfiable to users. \\
+Question \texttt{D1} seems to be a valid conclusion. We could actually had a power of 80\% with only 20 participants in user test one and 12 participants in user test two to draw a valid conclusion from the results\footnote{Calculated using this tool: \url{http://www.biomath.info/power/ttest.htm}.}. Question \textit{A3} has too few participants to draw a valid conclusion, however there is a trend indicating a better scored satisfaction over the new user interface. We would have reached our target statistical power with 47 participants in user test one and 27 participants in user test two. However, satisfiability in system design is only one aspect of usability and we also need to keep in mind that participants were only testing a sub set of the new features in the system. \\
 
-Question \textit{A4} had statistically lowest power of the three statistically significant results. The power at 51.7\% using Hedge's g is not strong enough to draw a valid conclusion. We would have needed 70 participants in test one and 40 participants in test two to correctly accept $H_0$. However, improvements to the HowTo-page is listed as secondary improvements in the objectives listed in section \ref{sec:ps-inter}, and the small changes made presented in section \ref{sec:impr-proposals} were due to the usage of the system in a learning experiment.
+Question \textit{A4} had statistically lowest power of the three statistically significant results. The power at 51.7\% using Hedge's g is not strong enough to draw a valid conclusion. We would have needed 70 participants in test one and 40 participants in test two to correctly accept $H_0$. However, improvements to the HowTo-page is listed as secondary improvements in the objectives listed in section \ref{sec:ps-inter}, and the small changes made presented in section \ref{sec:impr-proposals} were due to the usage of the system in a learning experiment. \\
 
-There are multiple factors in the experimental setup and execution of this test that may threaten the internal validity of the results. First, the participants in the user test does not necessarily have the same background and interests as the students in the course TDT4200. This may have an effect on how the participants percieve the system, and it may be different from the perception made by students students in TDT4200. Most of the TDT4200 students are interested in low-level and parallel programming, and may have little interest in design or frontend functionality as long as the system is in some way usable. A possible side effect might be that the two groups perceive the system usability differently. \\
+Construct validity concerns if the experiment actually measure what it declares to measure \cite{Cronbach1955}. The user experiment tried to measure if there were any improvements to usability in system version 2. As mentioned, some questions were added to the questionnaire this Spring which could potentially damage the validity of results. However, these were only added for clarity and should not damage the conclusions made above. Also, participants might have had trouble assessing usability as they might have used a long time developing code instead. However, participants were given the option of receiving a set of programs simulating multiple tries against the system before arriving at the correct solution. \\
 
-Second, the participants of this test used the system for a short period of time. The students in TDT4200 used the system in a total of 5 exercises throughout the Autumn semester, and have tried using the system multiple times. The participants in this test may not have been able to test the system thoroughly like the students in TDT4200 had a chance to do.
+Internal validity concerns if there is a causal correspondence between the methodology used and the results of the experiment \cite{Oates2006}. If there are other factors, or confouncding variables, in the experiment which leads us to the same conclusions, the measurements has poor internal validity. There are some factors in the above experimental setup that may threaten the internal validity of the results. \\
 
-Third, the number of participants in this test may not be as statistically significant as in the user test conducted during the Autumn.
+Participants in the second user test does not necessarily have the same background and interests as the participants of the first user test. This may have an effect on how the participants percieve the system, and it may be different from the perception made by students students in TDT4200. Also, some participants of the second user test were not familiar with C or C++, and received a set of executables for a programming problem to simulate normal system users. The goal of this user test were to test system usability and not programming skills or personal interests, and both groups of participants also had the same foundation when starting to use the system.  \\
 
-Fourth, since it was hard to get participants to the test, many of the participants are friends of or familiar to the \gls{cmb} team. This might further affect the results in either a positive or negative way. \\
+Participants in user test two also used the system for a short period of time compared to participants in user test one. The participants in user test two may not have been able to test the system thoroughly like the students in TDT4200 had a chance to do, as they used the system in a total of 5 exercises throughout the Autumn semester. Participants in user test one might therefore have more experience in using the system. However, participants in the second user test were adviced to test the system thouroghly if they finished early.\\
 
+Many of the participants are friends of or familiar to the \gls{cmb} team. They were invited due to low interest in the user experiment. Participants familiar to the system or \gls{cmb} team might effect the above results further in either a positive or negative way. The participants were therefore kindly asked to give as objective feedback as possible. In order to strengthen the above statistical analysis more research can be conducted. \\
 
+External validity concerns the generalizability of measurements and results \cite{Oates2006}. The participants who conducted the second user test were familiar to the \gls{cmb} team, and some also had little interest in parallel programming or C/C++ programming. More research needs to be conducted in order to determine if the improvements are generalizable to cover programmers interested in low-level parallel programming. It is also worth mentioning the difference in distribution of year of study, were most participants in user test two are 5th year students apposed to 4th year students in user test one. A further discussion of possible test setups is presented in section \ref{sec:eval-user-testing}. Regardless of participants' background, the results of the experiment is interesting and we have hopefully made more programmers aware of heterogenous programming and \gls{oj} systems. \\
 
 \section{System Unit Tests}
+This section will present the statement coverage of system unit tests. A high test coverage is important to ensure correct functionality, and allows quick detection of features that breaks system functionality during development. Unit tests were developed during implementation of the system improvements described in chapter \ref{ch:improvements}, and are reported to demonstrate the correctness of developed code and the resulting system. This thesis has a goal of 90\% test coverage for the system, as introduced to the project by Follan and Støa \cite{mt:T&S}. The reader should be aware that many of the unit tests developed by Follan and Støa is also included in the below presentation of coverage. This thesis has only developed or extended unit tests for the improvements presented in chapter \ref{ch:improvements}. \\
 
-\subsection{Coverage}
+\subsection{Frontend}
 
-\subsection{Validity}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c}
+      \hline
+      \textbf{Directory} & \textbf{Statements} & \textbf{Statements covered} & \textbf{Coverage} \\ \hline
+      \textit{config/} & 1 & 1 & 100.00\% \\
+      \textit{controllers/} & 759 & 676 & 89.06\% \\
+      \textit{directives/} & 78 & 9 & 11.54\% \\
+      \textit{services/} & 33 & 19 & 57.58\% \\ \hline
+      \textbf{Total} & 871 & 705 & 80.94\% \\ \hline
+    \end{tabular}
+    \caption{Frontend total test coverage}
+    \label{tab:frontend-coverage-all}
+\end{table}
+
+Table \ref{} shows the coverage of all files for the frontend code. Developed using jasmine, generated using karma + gulp as be Follan and støa.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c}
+      \hline
+      \textbf{Controller} & \textbf{Statements} & \textbf{Statements covered} & \textbf{Coverage} \\ \hline
+      \textit{error\_msg.js} & 21 & 21 & 100\% \\
+      \textit{forgot\_password.js} & 9 & 9 & 100\% \\
+      \textit{group.js} & 63 & 58 & 92\% \\
+      \textit{home.js} & 32 & 28 & 88\% \\
+      \textit{leader.js} & 81 & 72 & 89\% \\
+      \textit{leader\_problem\_stats.js} & 70 & 67 & 96\% \\
+      \textit{leader\_user\_stats.js} & 45 & 42 & 93\% \\
+      \textit{login.js} & 12 & 12 & 100\% \\
+      \textit{logout} & 11 & 11 & 100\% \\
+      \textit{navbar.js} & 3 & 3 & 100\% \\
+      \textit{newgroup.js} & 17 & 17 & 100\% \\
+      \textit{problem.js} & 323 & 265 & 82\% \\
+      \textit{profile.js} & 54 & 53 & 98\% \\
+      \textit{signup.js} & 18 & 18 & 100\% \\ \hline
+      \textbf{Total} & 759 & 676 & 89\% \\ \hline
+    \end{tabular}
+    \caption{Frontend controller test coverage}
+    \label{tab:frontend-coverage-controllers}
+\end{table}
+
+\subsection{Server}
+Table \ref{} shows the unit test coverage for the server code. The
+
+Does not cover socketio events, but only contains functionality of other imported and installed modules.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c c c c}
+      \hline
+      \textbf{Module} & \textbf{Statements} & \textbf{Statements missing} & \textbf{Coverage} \\ \hline
+      \textit{admin.admin} & 150 & 28 & 81\% \\
+      \textit{cmb\_utils.helpers} & 86 & 17 & 80\% \\
+      \textit{cmb\_utils.mail} & 5 & 0 & 100\% \\
+      \textit{cmb\_utils.wrappers} & 50 & 15 & 70\% \\
+      \textit{database.models} & 168 & 10 & 94\% \\
+      \textit{routes.bulletin} & 21 & 0 & 100\% \\
+      \textit{routes.groups} & 208 & 3 & 99\% \\
+      \textit{routes.problems} & 21 & 12 & 95\% \\
+      \textit{routes.submissions} & 150 & 1 & 91\% \\
+      \textit{routes.users} & 93 & 3 & 97\% \\
+      \textit{server} & 72 & 7 & 90\% \\ \hline
+      \textbf{Total} & 1024 & 98 & 90\% \\ \hline
+    \end{tabular}
+    \caption{Server modules test coverage}
+    \label{tab:server-module-coverage}
+\end{table}

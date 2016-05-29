@@ -5,7 +5,7 @@ This chapter starts with a definition of usable software systems in section \ref
 
 \section{Usability in Online Judge Systems}
 \label{sec:usability-def}
-Usability is defined in the ISO 9241 standard Part 11 as ``the extent to which a product can be used by specified users to achieve specified goals with effectiveness, efficiency, and satisfaction in a specified context of use.'' \cite{ISO1998}. The definition is broad and covers many aspects of a product, or in our case a software system. Usability is a broad term and can be hard to define precisely, however, literature seems to agree that the following five characteristics describe a usable software system  \cite{holzinger2005, ferre2001}; \textit{learnability}, \textit{efficiency}, \textit{user retention over time}, \textit{error rate}, and \textit{satisfaction}. A quick summary of each characteristic is summarized below.
+Usability is defined in the ISO 9241 standard Part 11 \cite{ISO1998} as ``the extent to which a product can be used by specified users to achieve specified goals with effectiveness, efficiency, and satisfaction in a specified context of use.'' The definition is broad and covers many aspects of a product, or in our case a software system. Usability is a broad term and can be hard to define precisely, however, literature seems to agree that the following five characteristics describe a usable software system  \cite{holzinger2005, ferre2001}; \textit{learnability}, \textit{efficiency}, \textit{user retention over time}, \textit{error rate}, and \textit{satisfaction}. A quick summary of each characteristic is summarized below.
 
 \paragraph*{Learnability:} The users ability to learn to use the system. Learnability also involves the users ability to gain efficiency in using the system and reach their objectives in a quick manner.
 
@@ -15,9 +15,12 @@ Usability is defined in the ISO 9241 standard Part 11 as ``the extent to which a
 
 \paragraph*{Error Rate:} The number of errors a user makes along the path of actions before reaching his or hers goal. A low error rate among users improves the usability of the system.
 
-\paragraph*{Satisfaction:} The users subjective thoughts about the system as well as making the system pleasant to use. Satisfaction may involve functionality that is both visible and invisible through the system frontend. \\
+\paragraph*{Satisfaction:} The users subjective thoughts about the system as well as making the system pleasant to use. Satisfaction may involve functionality that is both visible and invisible through the system frontend.\\
 
-Another related term to system usability is the notion of \textit{affordance} of things, which is defined by Donald Norman as ``the perceived and actual properties of the thing, primarily those fundamental properties that determine just how the thing could be used'' \cite{norman1988design}. Good affordances of entities and components in software systems will improve learnability, efficiency, memorability, and user satisfaction while lowering error rates, and thereby improve the usability of the system. \\
+Another related term to system usability is the notion of \textit{affordance} of things, which is described by Donald Norman:
+\blockquote{``...the perceived and actual properties of the thing, primarily those fundamental properties that determine just how the thing could be used [..] Affordances provide strong clues to the operations of things. Plates are for pushing. Knobs are for turning. [..] Complex things may require explanation, but simple things should not. When simple things need pictures, labels, or instructions, the design has failed.''  \cite{norman1988design}}
+
+Good affordances of entities and components in software systems will improve learnability, efficiency, memorability, and user satisfaction while lowering error rates, and thereby improve the usability of the system. \\
 
 The definition of \glspl{oj} as presented in section \ref{sec:related} is quite straightforward. However, because of its simplicity, it is fairly important that the \gls{oj} is highly usable when users are actively using the system to solve programming problems. The most time-consuming tasks done by most users in an \gls{oj}, at least in the \gls{cmb} system, is to read problem descriptions as well as submit code for automatic judgement. The time spent on reading and submitting is minimalistic compared to the time spent on developing code, and code development often happen off site in an offline environment if not explicitly offered by the \gls{oj}\footnote{Some of the mentioned \glspl{oj} has web based code editors, such as Kattis \cite{KATTIS} or HackerEarth \cite{HACKEREARTH}}. \\
 
