@@ -1,5 +1,6 @@
 %!TEX root=../main.tex
 \chapter{Evaluation and Discussion}
+\label{ch:evaluation}
 
 \section{Technology Stack}
 \label{sec:eval-tech}
@@ -15,8 +16,17 @@ Zip file forat check + submission id in compile and runscript.
 
 \subsection{Backend}
 
-\section{User and System Testing}
+\section{User Experiment}
 \label{sec:eval-user-testing}
 There are also a number of ways to setup user tests than the setup described above. As mentioned, it was hard to get participants to the user test and the test therefore only used the improved version of the system. Another possibility would be to split the participants into two groups, and have each group try out both the older and the improved system. One of the groups would then start out with the new system and the other group with the old, filling out a questionnaire before switching system. The downside with this method however, is that the users starting out with the old system might be affected when assessing the usability of the new system or vice versa. The test also takes double the amount of time to execute and requires more administrative work. The optimal experimental setup would be to have preferably 60-80 random people with an interest for C or C++ and parallel computing, such that the group could be split into two random groups of participants where each group either tested the old or the improved system. Comparing usability would then be more valid and conclusions drawn would probably be more correct.
 
+\section{System Testing}
+
 \section{Project Objective Achievements}
+This section will evaluate if the objectives listed in \Cref{sec:ps-inter} have been reached. \\
+
+\paragraph*{Main Objectives:} \hfill \\
+
+\paragraph*{U1 - Fix the main bugs and known issues found during user testing of CMB in November 2015}: The objective has been covered by this thesis. Objective \texttt{U1} contained three sub-goals \texttt{U1.1}, \texttt{U1.2}, and \texttt{U1.2}. Uploads on OSX is concidered fixed and is covered by Sub-\Cref{},
+
+\paragraph*{I1 - Change the existing database management system if necessary}: Concidered covered by Sub-\Cref{sub-sec:impr-dbms}.The SQLite \gls{dbms} were replaced by the MySQL \gls{dbms}, and all data present in the SQLite databases were transferred to the new databases for both the development and production server. 
