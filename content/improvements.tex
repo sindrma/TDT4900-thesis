@@ -91,12 +91,14 @@ The two sub-sections below describes the technologies used by the server and fro
 \end{figure}
 
 \subsection{Frontend Technology}
+\label{sub-sec:real-time-frontend}
 The frontend uses the client Socket.io library \cite{SOCKETIO} through an existing Angular component called \texttt{angular-socket-io} provided by Brian Ford \cite{ANGULARSOCKETIO}. The component is used to define an Angular \textit{factory}, which is simply a component that gathers and structures the setup of Socket.io in the client into a single service. The defined factory can then be used by other components in the Angular app, by marking components as a dependency of the Socket.io factory. \\
 
 \subsection{Server Technology}
+\label{sub-sec:real-time-server}
 The Python module Flask-SocketIO \cite{FLASKSOCKETIO} enables Flask applications to use the SocketIO \gls{api}. Also, the modules gevent \cite{GEVENT} and gevent-websocket \cite{GEVENTWEBSOCKET}  is installed in combination with the Socket.io module to enable the use of the WebSocket protocol. Gevent is a coroutine-based networking library providing a high-level synchronous API on top of an asynchronous webserver. Asynchronous coroutines are used to handle multiple concurrent requests from multiple clients and is required by the Flask-SocketIO module to support the WebSocket transport. \\
 
-To fully support the WebSocket protocol Gunicorn also needs to make use custom gevent worker supporting the WebSocket protocol. As stated by Miguel Grinberg on the Flask-Socketio documentation website, Gunicorn can only enable one worker due to limitations in the implemented load balancing algorithm. The Gunicorn load balancing algorithm cannot simply handle multiple workers and persistent WebSockets connections, which limits us to one worker per server. However, the worker uses coroutines to handle multiple concurrent requests as stated above. The gevent worker is enabled on the development server of \gls{cmb}, which also required some changes to the Nginx setup to support the WebSocket protocol entirely. Appendix \ref{apdx:setup} describes setup information necessary to setup servers with Gunicorn and Nginx, while \Cref{sec:eval-tech} discusses pros and cons with selected technologies as well as presenting alternatives to the selected technology stack.
+To fully support the WebSocket protocol Gunicorn also needs to make use custom gevent worker supporting the WebSocket protocol. As stated by Miguel Grinberg on the Flask-Socketio documentation website, Gunicorn can only enable one worker due to limitations in the implemented load balancing algorithm. The Gunicorn load balancing algorithm cannot simply handle multiple workers and persistent WebSockets connections, which limits us to one worker per server. However, the worker uses coroutines to handle multiple concurrent requests as stated above. The gevent worker is enabled on the development server of \gls{cmb}, which also required some changes to the Nginx setup to entirely support the WebSocket protocol. Appendix \ref{apdx:setup} describes setup information necessary to setup servers with Gunicorn and Nginx, while \Cref{sec:eval-tech} discusses pros and cons with selected technologies as well as presenting alternatives to the selected technology stack.
 
 \section{Frontend}
 \label{sec:impr-frontend}
@@ -131,6 +133,7 @@ This section will present figures of the views in the frontend that have changed
 \end{figure}
 
 \subsection{Bug Fixes}
+\label{sub-sec:impr-frontend-bug}
 Feedback from previous user testing showed that Apple OSX users were unable to upload files to the system. The system requires the user to compress a folder containing all the source files, which has confused some users. However on OSX, users who seemingly constructed a correct zip still were unable to submit files to the system. It turned out that the most regular way of creating zip files on OSX also sometimes generated a hidden directory called \textit{\_\_MACOSX} within the zip-file. This made the upload fail, as the server assumes it receives a single compressed folder, and not multiple directories in a single zip. The users were also presented with an error message which contained little information about what went wrong. \\
 
 The upload bug is removed in the new system. Before the zip file is sent to the server, the frontend ensures that the zip file has the required format as described above. The scan also removes all files that are not source or header files and ensures that the zip only contains a single directory containing the source files. The directory \textit{\_\_MACOSX} is also automatically removed if present in the zip. If a user tries to upload zip files with a different format than the format described above, they are presented with an error message telling them to learn more about uploading on the HowTo-page. \\
@@ -237,7 +240,8 @@ A Bulletin-table were added to enable administrators to notify users about news 
 
 Cascading deletes has also been added between the Submission- and Run-tables. Cascading deletes ensures that all rows in the Run table associated with a Submission row get deleted upon deletion of a submission, which ensures that there are no dangling rows in the Run table, and the database are left in a consistent state after deleting submissions. Database consistency is of importance for both administrators and users, as both user groups can delete submissions.
 
-\subsection{Routes}
+\subsection{Endpoint Updates}
+\label{sub-sec:impr-server-endpoint}
 The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{tab:cmb-updated-routes}. Figure \ref{fig:postman-request} shows an example GET-request against one of the routes defined in the table, which fetches data from a local server. The table does not include changes made to \gls{api} routes due to the implementation of the real-time update improvement explained in \Cref{sec:real-time}, as the improvements do not change the internal logic of the original routes and has only added code to emit events. \\
 
 \begin{figure}[h!]

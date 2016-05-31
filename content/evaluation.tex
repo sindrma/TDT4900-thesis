@@ -1,32 +1,47 @@
 %!TEX root=../main.tex
-\chapter{Evaluation and Discussion}
+\chapter{Discussion and Evaluation}
 \label{ch:evaluation}
+This chapter will discuss several aspects of this thesis. \Cref{sec:eval-tech} will discuss pros and cons of the real-time updates described in \Cref{sec:real-time}. The Section will also discuss planned immidiate next steps which were not integrated into the system before the user test, due to limited time to verify correctness of the code. Further, \Cref{sec:eval-user-testing} presents alternative ways of conducting the user experiment presented in \Cref{ch:testing}, and \Cref{sec:eval-sys-testing} will discuss aspects of the system testing executed as part of this thesis. Finally, we will evaluate in \Cref{sec:eval-pr-achiev} if the goals set in \Cref{sec:ps-inter} have been reached.
 
-\section{Technology Stack}
+\section{Improvements}
 \label{sec:eval-tech}
 
-\subsection{Dynamic Update}
-Mention Websockets vs SSE
-Eventlet vs Gevent
+\subsection{Real Time Updates}
+\Cref{sec:real-time} describes the implementation of real time updates of data models using Socket.io and WebSockets. However, the current use case of WebSockets in the \gls{cmb} only sends event from the server to the frontend to notify users about submission state updates. Another technology called \gls{sse} \cite{hickson2009} also enables the server to send updates to clients automatically without the need for polling. \gls{sse} uses the HTTP protocol to push updates from the server to connected clients i.e it is not full-duplex as the WebSocket protocol.  \\
 
-\subsection{Server}
-Zip file forat check + submission id in compile and runscript.
+The great benefit of \gls{sse} is that it does not introduce a new protocol to acheive real time updates. \gls{sse} is thereby concidered more fit to applications who only need to push updates from the server to the connected clients. The downside of \gls{sse} is that it not support the browser \gls{ie}, which in our case is unacceptable. The user interface of \gls{cmb} is web-site, and we do not want to restrict users to certain browsers or \glspl{os}. Since \gls{ie} is one of the main browsers used world-wide, WebSockets with Socket.io is used instead of \gls{sse}.  \\
+
+A benefit of using Socket.io is that the framework does automatically detect which protocol that is supported by a given client, as mentioned in \Cref{sec:real-time}. As the framework automatically choose the protocol suited for a client, users are not restricted to a specific browser or oprating system in order to use the system. As the socket is a full-duplex communication channel, it also makes it possible to implement features which is not possible using \gls{sse}. For the \gls{cmb} system, a online code editor with automatic syntax error highlighting or a chatting service is possible using the Socket.io framework. Appendix \ref{apdx:backlog} and \Cref{sec:future-work} mention possible future extensions using the Socket.io framework. \\
+
+The server uses the modules gevent \cite{GEVENT} and gevent-websocket \cite{GEVENTWEBSOCKET} as mentioned in Sub-\Cref{sub-sec:real-time-server}. However, as mentioned at the documentation site of Flask-SocketIO creator Miguel Grinberg, it is also possible to use networking library eventlet \cite{EVENTLET} instead of gevent when using the Flask-SocketIO module \cite{FLASKSOCKETIO}, and is reported to be the best performant option in combination with the module. There are however some benefits of using gevent, as it is tested in real-world high-scale environments and the module interface also follows Python standard library conventions.\footnote{For a further discussion on the matter, see: \url{https://blog.gevent.org/2010/02/27/why-gevent/}, \url{https://groups.google.com/forum/\#!topic/gevent/TelwPl3KgnE}.} The gevent module is therefore used in the \gls{cmb} system.
 
 \subsection{Frontend}
+During development, it was also a plan to enable upload of single and multiple source files. The feature did not have a high priority for the \gls{cmb} team at the start of the thesis, as feedback given by students in TDT4200 indicated that they quickly learned how to submit files to the system. However, as indicated by the textual feedback from user experiment conducted as part of this thesis, the feature is wanted by users, and as a result it has been added to the backlog found in Appendix \ref{apdx:backlog}.
+
+\subsection{Server}
+A couple of server improvements were also concidered during development but ended up with lower priority compared to the tasks listed in \Cref{sec:ps-inter}. First, the server should do a simple check to verify the format of the uploaded zip-file. The frontend currently checks and do simple corrections to the zip file before sending it of to the server, as described in Sub-\Cref{sub-sec:impr-frontend-bug}. Since the frontend is the main user interface of the system, zip-files submitted by normal users are therefore checked before sent to the server. However, if the system are to be extended with other user interfaces, for instance a \gls{cli}, it would be beneficial to add server side zip-file checks. \\
+
+During development and maintenance of the system there has been file-name conflicts wheh storing submissions in the file system by submission names. The situation occured frequently during development of the submission delete endpoint described in Sub-\Cref{sub-sec:impr-server-endpoint}. However, to avoid such file name conflicts in the future, it could be an idea to instead save submission files by the unique database id generated by the database. The fix was not implemented due to , but added
+
+queue index real-time updates
+Timers in case of bad internet connections between server and backend
 
 \subsection{Backend}
+Debugging of submissions running over SSH has in some situations been troublesome to debug as mentioned in Sub-\Cref{subsec:related-proj}. The \gls{cmb} team therefore wanted to rewrite the scripts present at the backend into Python scripts instead which makes the scripts easy to unit test. As scalability and code development related to server and backend code were the focus of Master student Christian Chavez, the porting of bash scripts into Python scripts is not concidered in this thesis. 
 
-\section{User Experiment}
+\section{User Testing}
 \label{sec:eval-user-testing}
 There are also a number of ways to setup user tests than the setup described above. As mentioned, it was hard to get participants to the user test and the test therefore only used the improved version of the system. Another possibility would be to split the participants into two groups, and have each group try out both the older and the improved system. One of the groups would then start out with the new system and the other group with the old, filling out a questionnaire before switching system. The downside with this method however, is that the users starting out with the old system might be affected when assessing the usability of the new system or vice versa. The test also takes double the amount of time to execute and requires more administrative work. The optimal experimental setup would be to have preferably 60-80 random people with an interest for C or C++ and parallel computing, such that the group could be split into two random groups of participants where each group either tested the old or the improved system. Comparing usability would then be more valid and conclusions drawn would probably be more correct.
 
 \section{System Testing}
+\label{sec:eval-sys-testing}
 
 \section{Project Objective Achievements}
-This section will evaluate if the objectives listed in \Cref{sec:ps-inter} have been reached. \\
+\label{sec:eval-pr-achiev}
+This section will evaluate if the objectives listed in \Cref{sec:ps-inter} have been reached.
 
-\paragraph*{Main Objectives:} \hfill \\
+\paragraph*{Main Objectives:} \hfill
 
-\paragraph*{U1 - Fix the main bugs and known issues found during user testing of CMB in November 2015}: The objective has been covered by this thesis. Objective \texttt{U1} contained three sub-goals \texttt{U1.1}, \texttt{U1.2}, and \texttt{U1.2}. Uploads on OSX is concidered fixed and is covered by Sub-\Cref{},
+\paragraph*{U1 - Fix the main bugs and known issues found during user testing of CMB in November 2015:} The objective has been covered by this thesis. Objective \texttt{U1} contained three sub-goals \texttt{U1.1}, \texttt{U1.2}, and \texttt{U1.2}. Uploads on OSX is concidered fixed and is covered by Sub-\Cref{},
 
-\paragraph*{I1 - Change the existing database management system if necessary}: Concidered covered by Sub-\Cref{sub-sec:impr-dbms}.The SQLite \gls{dbms} were replaced by the MySQL \gls{dbms}, and all data present in the SQLite databases were transferred to the new databases for both the development and production server. 
+\paragraph*{I1 - Change the existing database management system if necessary:} Concidered covered by Sub-\Cref{sub-sec:impr-dbms}.The SQLite \gls{dbms} were replaced by the MySQL \gls{dbms}, and all data present in the SQLite databases were transferred to the new databases for both the development and production server.
