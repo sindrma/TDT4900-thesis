@@ -33,7 +33,7 @@ Multiple prototypes have been announced, and the specifications of the most sign
 
 \begin{figure}
   \includegraphics[width=1.0\textwidth]{figs/cmb_arch.jpg}
-  \caption[The Climbing Mont Blanc System Architecture]{The Climbing Mont Blanc System Architecture}
+  \caption[The Climbing Mont Blanc system architecture.]{The Climbing Mont Blanc system architecture.}
   \label{fig:cmb_arch}
 \end{figure}
 
@@ -44,7 +44,7 @@ The frontend handles all user based interaction. It is developed in AngularJS \c
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{figs/front_page.jpg}
-    \caption{\gls{cmb} Home Page}
+    \caption{\gls{cmb} Home Page.}
     \label{fig:front-page}
 \end{figure}
 
@@ -52,17 +52,17 @@ The frontend handles all user based interaction. It is developed in AngularJS \c
     \centering
     \begin{subfigure}[b]{0.82\textwidth}
         \includegraphics[width=\textwidth]{figs/problem.jpg}
-        \caption{Problem View, logged out of \gls{cmb}}
+        \caption{Problem View, logged out of \gls{cmb}.}
         \label{fig:problem}
     \end{subfigure}
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[b]{0.82\textwidth}
         \includegraphics[width=\textwidth]{figs/problem_loggedin.jpg}
-        \caption{Problem View, logged into \gls{cmb}}
+        \caption{Problem View, logged into \gls{cmb}.}
         \label{fig:problem-loggedin}
     \end{subfigure}
-    \caption{\gls{cmb} Problem View States}\label{fig:problem-view}
+    \caption{\gls{cmb} Problem View States.}\label{fig:problem-view}
 \end{figure}
 
 The system frontend can be reached at \url{https://climb.idi.ntnu.no} and the front page view is shown in Figure \ref{fig:front-page}. Many actions against the frontend, such as routing to a different view, launches \gls{http} requests to the server that changes models and updates the views dynamically. Angular controllers make these requests to fetch up-to-date data to the frontend models or to update the database with changes made to the models by the user. Routing to a particular problem is an example of dynamic updates of the view, and also displays different views depending on the users state. If the user is not logged in, as shown in Figure \ref{fig:problem}, the view only shows the submitted programs that are \textit{visible}\footnote{A user may change the visibility of their submissions and results through the user interface.}. If the user then logs into the system, as shown in \ref{fig:problem-loggedin}, the problem view changes to make it possible to upload files and view previous submissions. Besides, many actions can be performed in the frontend like routing to a specific problem, login, sign up, create and join groups, manage groups, view the HowTo-page, see public problems and route to a particular problem to solve. The most common action is to upload possible solutions to a problem, which requires a zipped folder containing all source files. \\
@@ -76,7 +76,7 @@ Nginx \cite{NGINX} is used as a \textit{reverse proxy} on our development and pr
 \begin{figure}
   \centering
   \includegraphics[width=1.0\textwidth]{figs/old_database_schema.jpg}
-  \caption[Database schema]{Database schema (taken from Master Thesis of Follan and Støa \cite{mt:T&S})}
+  \caption[Database schema.]{Database schema (taken from Master Thesis of Follan and Støa \cite{mt:T&S}).}
   \label{fig:old-database-schema}
 \end{figure}
 
@@ -90,7 +90,7 @@ The files needed to make a problem solvable are a input file to be piped into th
 
 \begin{sidewaysfigure}
     \includegraphics[width=1.0\textwidth]{figs/block-xu3.jpg}
-    \caption[Odroid XU3 Block Diagram]{Odroid XU3 Block Diagram (source: Hardkernel Website \cite{XU3-BLOCK})}
+    \caption[Odroid XU3 Block Diagram.]{Odroid XU3 Block Diagram (source: Hardkernel Website \cite{XU3-BLOCK}).}
     \label{fig:odroid-block}
 \end{sidewaysfigure}
 
@@ -107,7 +107,7 @@ The Hardkernel EnergyMonitor program is used to monitor power consumption and is
 
 \begin{figure}
   \includegraphics[width=1.0\textwidth]{figs/execution_pipeline.jpg}
-  \caption[Backend Execution Pipeline]{Backend Execution Pipeline (adapted from \cite{mt:T&S})}
+  \caption[Backend execution pipeline.]{Backend execution pipeline (adapted from \cite{mt:T&S}).}
   \label{fig:execution-pipeline}
 \end{figure}
 
@@ -128,7 +128,7 @@ The observant reader might have noticed that the Mont Blanc project uses the met
                                      & bower \cite{BOWER} & Karma \cite{KARMA} &  &  \\ \hline
   \multirow{1}{*}{\textbf{Server}} & pip \cite{PIP} & nose \cite{NOSE} & flake8 \cite{FLAKE8} & virtualenv \cite{VIRTUALENV}\\
   \end{tabular}
-  \caption{\gls{cmb} Code Correctness Tools}
+  \caption{\gls{cmb} code correctness tools.}
   \label{tab:cct}
 \end{table}
 
@@ -141,7 +141,7 @@ To quickly deploy new features, the system makes use of \textit{Jenkins} \cite{J
 
 \begin{figure}
   \includegraphics[width=1.0\textwidth]{figs/build_pipeline.jpg}
-  \caption[Build Pipeline]{Build Pipeline}
+  \caption[Build pipeline.]{Build pipeline.}
   \label{fig:server-ci}
 \end{figure}
 
@@ -167,8 +167,9 @@ The \gls{cmb} backend also has \gls{ufw} \cite{UFW} installed. \gls{ufw} which r
 \subsection{Other Related CMB Projects}
 \label{subsec:related-proj}
 \begin{figure}[ct!]
-  \includegraphics[width=1.0\textwidth]{figs/cmb_scale_arch.jpg}
-  \caption[Scalable \gls{cmb} Architecture]{Scalable \gls{cmb} Architecture}
+  \centering
+  \includegraphics[width=0.7\textwidth]{figs/cmb_scale_arch.jpg}
+  \caption[Scalable \gls{cmb} architecture.]{Scalable \gls{cmb} architecture.}
   \label{fig:cmb-scale-arch}
 \end{figure}
 
@@ -211,7 +212,7 @@ The first version of UVa Online Judge \cite{UVA} was developed by former student
 
 \paragraph*{PKU JudgeOnline} \hfill \\
 PKU JudgeOnline \cite{PKU} released in 2003 and is one of the \glspl{oj} with the highest number of submissions. At its peak in 2010, the judge had over 1.768 million submissions, but the number of submissions has decreased in recent years measuring almost 1,3 submissions in 2015. The \gls{oj} provides mostly the same features as other \glspl{oj}, like viewing statistics, submitting code to problems, and hosting online contests.
-\clearpage
+
 \paragraph*{URI Online Judge} \hfill \\
 The URI Online Judge is served through a website which was first presented in July 2012 \cite{a:Bez2013}. The \gls{oj} aims to support both teaching student about programming and professors aiding them to manage courses and exercises. A total of eight problem categories is offered, training students in various topics in programming. Bez et.al also mentions a couple of features implemented. One feature lets the user send in the input test cases to a problem, in which the online judge responds with the correct expected output. Another lets the user view the code directly in the browser during compilation errors, with highlighted code lines on those lines containing errors \cite{a:Bez2013}.
 
