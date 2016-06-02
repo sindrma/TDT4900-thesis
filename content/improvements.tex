@@ -18,15 +18,15 @@ The frontend view changes when a user performes actions against the frontend mod
 \begin{figure}
     \centering
     \includegraphics[width=1\textwidth]{figs/update_problem.jpg}
-    \caption{Example of updating models without model change notifications}
+    \caption{Example of updating models without model change notifications.}
     \label{fig:update-problem}
 \end{figure}
 
-Many websites requires to share data between multiple clients and dynamically notify clients if there are changes to the data. As an example in the \gls{cmb} system, it would be nice if the frontend interface dynamically updated as a user’s submission finished running at the backend. In the old system before the improvements, the user had to update the data manually by clicking a refresh button provided by the user interface or manually refresh the web page. However, this section presents a technology which has been introduced in the new version of the system to dynamically update data relevant for multiple clients. \\
+Many websites requires to share data between multiple clients and dynamically notify clients if there are changes to the data. As an example in the \gls{cmb} system, it would be nice if the frontend interface dynamically updated as a user’s submission finished running at the backend. In the system version one the user had to update the data manually by clicking a refresh button provided by the user interface or manually refresh the web page, to fetch up-to-date model data. However, this section presents a technology which has been introduced in the version two of the system to dynamically update data relevant for multiple clients. \\
 
 Socket.io \cite{SOCKETIO} is an \gls{api} for enabling real-time communication between the server and connected clients. The \gls{api} was first made as Javascript library, but many open source projects have developed modules for other programming languages integrating the \gls{api}. One benefit of the \gls{api} is that it works as a wrapper around a set of real-time communication protocols to enable support for different browsers, which means that the framework can automatically detect the protocol supported by a client and use that information to select the best-fitted communication protocol. \\
 
-Rohit Rai states the communication protocols supported by the Socket.io \gls{api} \cite{Rai2013}. As many protocols are available, Figure \ref{fig:cmb-protocols} only shows the communication protocols enabled in the new version of \gls{cmb}. The WebSocket protocol \cite{a:Fette2011}, shown in Figure \ref{fig:websocket}, has become more popular since its introduction in 2011 and is now supported by the most popular browsers. The protocol is a bit different from the well known HTTP protocol, as there is a persistent connection, or socket, between the client and the server as long as both entities are connected to the socket. The socket connection is closed if the client closes the browser window or the server goes down, or if the code explicitly indicates to close the socket. WebSockets enables easy two-way communication by letting two entities emit (read: send) messages back and forth on the socket connection and respond differently depending on the type of message emitted on the socket. \\
+Rohit Rai states the communication protocols supported by the Socket.io \gls{api} \cite{Rai2013}. As many protocols are available, Figure \ref{fig:cmb-protocols} only shows the communication protocols enabled in version two of \gls{cmb}. The WebSocket protocol \cite{a:Fette2011}, shown in Figure \ref{fig:websocket}, has become more popular since its introduction in 2011 and is now supported by the most popular browsers. The protocol is a bit different from the well known HTTP protocol, as there is a persistent connection, or socket, between the client and the server as long as both entities are connected to the socket. The socket connection is closed if the client closes the browser window or the server goes down, or if the code explicitly indicates to close the socket. WebSockets enables easy two-way communication by letting two entities emit (read: send) messages back and forth on the socket connection and respond differently depending on the type of message emitted on the socket. \\
 
 Polling and long-polling both use the HTTP protocol and may seem similar at first glance. However, in long-polling, the server keeps the connection between the two entities open until there is an update to the requested data as shown in Figure \ref{fig:long-polling}. In polling, as shown in Figure \ref{fig:polling}, the client continuously requests data with some constant delay between each request, while the server respond on each request with the data currently stored at the server. To make the below discussions more explainable, we can think of the connection between the server and the client as a "socket" which is a persistent communication channel with the same functionality for each of the presented protocols. \\
 
@@ -49,10 +49,10 @@ Polling and long-polling both use the HTTP protocol and may seem similar at firs
         \caption{WebSocket protocol: a two-way connection tunnel open throughout the whole client session. TCP is used as a transport protocol.}
         \label{fig:websocket}
     \end{subfigure}
-    \caption{\gls{cmb} Socket.io communication protocols}\label{fig:cmb-protocols}
+    \caption{\gls{cmb} Socket.io communication protocols.}\label{fig:cmb-protocols}
 \end{figure}
 
-Each socket can be "\textit{namespaced}" into separate communication channels within an application. A namespace can be viewed as an endpoint or network path, for example in the new \gls{cmb} prototype the namespace \textit{/cmb} is used as default namespace to emit messages between the client and the server. Every client initiating a socket on the namespace receives all messages emitted to the namespace, which makes it easy to share information between the server and clients connected to the namespace. \\
+Each socket can be "\textit{namespaced}" into separate communication channels within an application. A namespace can be viewed as an endpoint or network path, for example in the version two of the \gls{cmb} prototype the namespace \textit{/cmb} is used as default namespace to emit messages between the client and the server. Every client initiating a socket on the namespace receives all messages emitted to the namespace, which makes it easy to share information between the server and clients connected to the namespace. \\
 
 Each namespace can also define a set of \textit{rooms}, which can be viewed as sub-channels of a given namespace. A client needs to join a room explicitly to receive the messages emitted within a sub-channel. Figure \ref{fig:namespaces-and-rooms} illustrates the concept. Each message emitted to the namespace \textit{/cmb} are received by both client one and two. Client three will only receive those messages emitted to the namespace \textit{/test}. If a message is emitted to room one within the \textit{/cmb} namespace, only client one will receive the message. \\
 
@@ -102,32 +102,32 @@ To fully support the WebSocket protocol Gunicorn also needs to make use custom g
 
 \section{Frontend}
 \label{sec:impr-frontend}
-This section will present figures of the views in the frontend that have changed in the new version of the system. Appendix \ref{apdx:theory} shows screenshots of the old system frontend for comparison. The below sub-sections will explain the improvements and updates done to the listed views. The other views in the system are not listed here as their functionality nor appearance has changed drastically but have rather been changed to keep the views’ styling consistent throughout the system.
+This section will present figures of the views in the frontend that have changed in the version two of the system. Appendix \ref{apdx:screenshots} shows screenshots of the version one and two of the system frontend for comparison. The below sub-sections will explain the improvements and updates done to the listed views. The other views in the system are not listed here as their functionality nor appearance has changed drastically but have rather been changed to keep the views’ styling consistent throughout the system.
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figs/new_homepage.jpg}
-    \caption[The updated leader view]{The updated leader view.}
+    \includegraphics[width=0.75\textwidth]{figs/new_homepage.jpg}
+    \caption[The updated leader view]{The updated home page view.}
     \label{fig:new-homepage}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figs/new_problem.jpg}
+    \includegraphics[width=0.75\textwidth]{figs/new_problem.jpg}
     \caption[The updated problem view]{The updated problem view.}
     \label{fig:new-problem}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figs/new_leader.jpg}
+    \includegraphics[width=0.8\textwidth]{figs/new_leader.jpg}
     \caption[The updated group leader view]{The updated group leader view.}
     \label{fig:new-leader}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figs/new_profile.jpg}
+    \includegraphics[width=0.8\textwidth]{figs/new_profile.jpg}
     \caption[The updated profile view]{The updated profile view.}
     \label{fig:new-profile}
 \end{figure}
@@ -136,20 +136,20 @@ This section will present figures of the views in the frontend that have changed
 \label{sub-sec:impr-frontend-bug}
 Feedback from previous user testing showed that Apple OSX users were unable to upload files to the system. The system requires the user to compress a folder containing all the source files, which has confused some users. However on OSX, users who seemingly constructed a correct zip still were unable to submit files to the system. It turned out that the most regular way of creating zip files on OSX also sometimes generated a hidden directory called \textit{\_\_MACOSX} within the zip-file. This made the upload fail, as the server assumes it receives a single compressed folder, and not multiple directories in a single zip. The users were also presented with an error message which contained little information about what went wrong. \\
 
-The upload bug is removed in the new system. Before the zip file is sent to the server, the frontend ensures that the zip file has the required format as described above. The scan also removes all files that are not source or header files and ensures that the zip only contains a single directory containing the source files. The directory \textit{\_\_MACOSX} is also automatically removed if present in the zip. If a user tries to upload zip files with a different format than the format described above, they are presented with an error message telling them to learn more about uploading on the HowTo-page. \\
+The upload bug is removed in system version two. Before the zip file is sent to the server, the frontend ensures that the zip file has the required format as described above. The scan also removes all files that are not source or header files and ensures that the zip only contains a single directory containing the source files. The directory \textit{\_\_MACOSX} is also automatically removed if present in the zip. If a user tries to upload zip files with a different format than the format described above, they are presented with an error message telling them to learn more about uploading on the HowTo-page. \\
 
-The problem view shown in Figure \ref{fig:new-problem} also contained a bug in the highscore list. When sorting on different metrics, hidden submission present in the fetched submissions would suddenly appear in the highscore list. The bug is fixed in the new system and ensures that hidden submissions are filtered out when the highscore-list is sorted on the different metrics used by the system.
+The problem view shown in Figure \ref{fig:new-problem} also contained a bug in the highscore list. When sorting on different metrics, hidden submission present in the fetched submissions would suddenly appear in the highscore list. The bug is fixed in the system version two and ensures that hidden submissions are filtered out when the highscore-list is sorted on the different metrics used by the system.
 
 \subsection{Views and Feedback}
 \label{sub-sec:impr-views-feedback}
-The views in the new system have an updated styling. The home-page view shown in Figure \ref{fig:new-homepage} has a simpler table design and has removed unnecessary information, such as database ids, present in the old system. All screens containing tables has been updated according to the new table design. The problem-view shown in Figure \ref{fig:new-problem} has changed drastically compared to the old view. In the old problem-view, users needed to scroll to the bottom of the view to check out the highscore list. In the new view, the problem description and file upload functionality is vertically aligned with the highscore list, which makes it easy for users to locate the highscore list when entering the view. The old view also had a single table containing all uploads made by a user, while the new view splits the old upload table into a “Uploaded Solutions” and “Accepted Submissions” table. The table “Accepted Submissions” contains all submissions marked as finished and successful, while the rest of the submissions are shown in the “Uploaded Solutions” table. Having two tables makes the upload information more structured, and the user can quickly find information about submissions. \\
+The views in system version two have an updated styling. The home-page view shown in Figure \ref{fig:new-homepage} has a simpler table design and has removed unnecessary information, such as database ids, present in system version one. All screens containing tables has been updated according to the new table design. The problem-view shown in Figure \ref{fig:new-problem} has changed drastically compared to version one of the view. In the problem-view of system version one, users needed to scroll to the bottom of the view to check out the highscore list. In the updated view, the problem description and file upload functionality is vertically aligned with the highscore list, which makes it easy for users to locate the highscore list when entering the view. Version one of the view also had a single table containing all uploads made by a user, while the updated view splits the old upload table into a “Uploaded Solutions” and “Accepted Submissions” table. The table “Accepted Submissions” contains all submissions marked as finished and successful, while the rest of the submissions are shown in the “Uploaded Solutions” table. Having two tables makes the upload information more structured, and the user can quickly find information about submissions. \\
 
-The old system displayed info and error messages in the lower right corner of the screen. The messages are very small, and can sometimes be hard to spot as they are only visible for short period of time. Since all messages also have the same styling, it is hard to differentiate between message types. An example of the old message component is shown in Figure \ref{fig:old-message}. The new system displays messages right below the navigation bar as shown in Figure \ref{fig:new-message}, which makes messages easy to spot. The messages are also split into the four message types \textit{info}, \textit{success}, \textit{danger}, \textit{error}, and each message type has their own color as shown by Figure \ref{fig:type-color}. Error messages have also been updated with more descriptive messages if needed. \\
+System version one displayed info and error messages in the lower right corner of the screen. The messages are very small, and can sometimes be hard to spot as they are only visible for short period of time. Since all messages also have the same styling, it is hard to differentiate between message types. An example of the message component used in system version one is shown in Figure \ref{fig:old-message}. System version two displays messages right below the navigation bar as shown in Figure \ref{fig:new-message}, which makes messages easy to spot. The messages are also split into the four message types \textit{info}, \textit{success}, \textit{danger}, \textit{error}, and each message type has their own color as shown by Figure \ref{fig:type-color}. Error messages have also been updated with more descriptive messages if needed. \\
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{figs/old_message.jpg}
-    \caption[Example of an old popup feedback message]{Example of an old popup feedback message}
+    \caption[Example of an old popup feedback message]{Example of an old popup feedback message.}
     \label{fig:old-message}
 \end{figure}
 
@@ -158,29 +158,29 @@ The old system displayed info and error messages in the lower right corner of th
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{figs/new_message.jpg}
-        \caption{Example of view displaying new feedback message.}
+        \caption{Example of view displaying updated feedback message.}
         \label{fig:new-message}
     \end{subfigure}
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{figs/type_color.jpg}
-        \caption{The color of each of the defined message types}
+        \caption{The color of each of the defined message types.}
         \label{fig:type-color}
     \end{subfigure}
     \caption{\gls{cmb} feedback messages}
     \label{fig:new-feedback}
 \end{figure}
-Most buttons in the new frontend also have symbols inside buttons. Symbols were added to more clearly state the purpose of the button and thereby improve usability. As an example, the problem view includes a ``play''-symbol inside the ``Run Program''-button upon successfully uploading a zip-file. The same ``play''-symbol is included in the ``Accepted Submission'' table to rerun submissions, which improves \textit{learnability} and \textit{memorability}. \\
+Most buttons in the frontend of system version two also have symbols inside buttons. Symbols were added to more clearly state the purpose of the button and thereby improve usability. As an example, the problem view includes a ``play''-symbol inside the ``Run Program''-button upon successfully uploading a zip-file. The same ``play''-symbol is included in the ``Accepted Submission'' table to rerun submissions, which improves \textit{learnability} and \textit{memorability}. \\
 
-The old system also required users to through a two-stage sequence to compile and run a program. The procedure has been further simplified into a single action in the new system, which makes the action of running a program simpler and more logical. Other buttons in the new interface have symbols as well, for example, a navigation button from the homepage to a problem view includes a right arrow to indicate movement \textit{to} a certain view. Users can thereby infer that a backward arrow means navigating back to the previous view if such a button is displayed in the system. \\
+System version one also required users to through a two-stage sequence to compile and run a program. The procedure has been further simplified into a single action in system version two, which makes the action of running a program simpler and more logical. Other buttons in the new version of the interface have symbols as well, for example, a navigation button from the homepage to a problem view includes a right arrow to indicate movement \textit{to} a certain view. Users can thereby infer that a backward arrow means navigating back to the previous view if such a button is displayed in the system. \\
 
-The new problem view also displays spinners on submissions currently running or in queue. An example of an active spinner on a submission in the ``Uploaded Solutions''-table shown in Figure \ref{fig:new-problem}. The table also includes the state of the submissions, which is updated in real-time as the program executes. The state field real-time updates is possible due to the real-time improvement explained in \Cref{sec:real-time}. If an error occurrs during program execution, it is possible to view the error in a popup window, or more technically a \textit{modal}, as shown in Figure \ref{fig:error-modal}. The content of the modal depends on the type of error and Table \ref{tab:error-types} shows the different error types which can occur during a program's execution. The content of the modal are decided by the ``detailed\_state'' database field in the Submissions table, which is explained in section  \ref{sec:impr-server}. The old system had an own view displaying error messages which navigated the user away from the problem view, however, in the new frontend, users stay within the problem view removing an uneccassary navigation stage. \\
+The updated problem view also displays spinners on submissions currently running or in queue. An example of an active spinner on a submission in the ``Uploaded Solutions''-table shown in Figure \ref{fig:new-problem}. The table also includes the state of the submissions, which is updated in real-time as the program executes. The state field real-time updates is possible due to the real-time improvement explained in \Cref{sec:real-time}. If an error occurrs during program execution, it is possible to view the error in a popup window, or more technically a \textit{modal}, as shown in Figure \ref{fig:error-modal}. The content of the modal depends on the type of error and Table \ref{tab:error-types} shows the different error types which can occur during a program's execution. The content of the modal are decided by the ``detailed\_state'' database field in the Submissions table, which is explained in \Cref{sec:impr-server}. System version one had an own view displaying error messages which navigated the user away from the problem view, however, in version two of the frontend, users stay within the problem view removing an uneccassary navigation stage. \\
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figs/error_modal.jpg}
-    \caption[Error modal example]{Error modal example}
+    \caption[Error modal example]{Error modal example.}
     \label{fig:error-modal}
 \end{figure}
 
@@ -197,7 +197,7 @@ The new problem view also displays spinners on submissions currently running or 
     \textit{PROGRAM\_RUNTIME\_ERROR} & A runtime error occured during the big correctness test. \\ \hline
     \textit{PROGRAM\_BAD\_OUTPUT} & Output from the big correctness test was not accepted by checker. \\ \hline
     \end{tabular}
-    \caption{\gls{cmb} error types}
+    \caption{\gls{cmb} error types.}
     \label{tab:error-types}
 \end{table}
 
@@ -207,21 +207,21 @@ A bulletin board displaying administrator generated messages have also been adde
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.5\textwidth]{figs/bulletin_view.jpg}
-    \caption[Bulletin board frontend examples]{Bulletin board frontend examples}
+    \caption[Bulletin board frontend examples]{Bulletin board frontend examples.}
     \label{fig:bulletin-view}
 \end{figure}
 
 \subsection{Group Functionality Improvements}
-Figure \ref{fig:new-leader} shows the updated group leader view. The view is displayed if users are navigating to a given group from the homepage and is marked as the leader of the group in the database, as in the old system. Among the visual improvements mentioned in the above sub-section, the view has an extra button. The button lets the leader of a group download a \gls{json} file, which contains information about group members as well as submissions made to problems registered on the group. The file can be used to generate group statistics, which is done by
+Figure \ref{fig:new-leader} shows the updated group leader view. The view is displayed if users are navigating to a given group from the homepage and is marked as the leader of the group in the database, as in system version one. Among the visual improvements mentioned in the above sub-section, the view has an extra button. The button lets the leader of a group download a \gls{json} file, which contains information about group members as well as submissions made to problems registered on the group. The file can be used to generate group statistics, which is done by
 JSON stat file download. The functionality was added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}, and were needed as part of the digital exam experiment with the \gls{cmb} system. \\
 
-The new homepage view has been extended with a ``Create New Group''-button. The button has been moved from the old profile view into the new homepage view, as users may not associate adding groups with profile information and it also gathers group information and functionality, which makes it easier to locate components related to groups in the system. The new profile view is shown in Figure \ref{fig:new-profile}.
+The updated homepage view has been extended with a ``Create New Group''-button. The button has been moved from the profile view present in system version one into the updated homepage view in system version two, as users may not associate adding groups with profile information. The update also gathers group information and functionality, which makes it easier to locate components related to groups. The updated profile view is shown in Figure \ref{fig:new-profile}.
 
 \section{Server}
 \label{sec:impr-server}
 \subsection{Database Management System Updates}
 \label{sub-sec:impr-dbms}
-The old version of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms}, which requires minimal configuration before use and is popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal was to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it unnecessary to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
+Version one of \gls{cmb} used SQLite \cite{SQLITE} as \gls{dbms} at both the development and production server. SQLite is a lightweight \gls{dbms}, which requires minimal configuration before use and is popular to use during automatic unit testing, which also is done in the \gls{cmb} system. The initial goal was to improve, and thereby possibly change, the \gls{dbms} into a more sophisticated system. However, during the Spring the \gls{cmb} team found it unnecessary to change the \gls{dbms} of performance reasons and we found it more important to extend the system with new features. \\
 
 Unrelated to the performance reasons, a new \gls{dbms} was wanted by the \gls{cmb} team and the IDI Department. We, therefore, changed the \gls{dbms} to MySQL due to its usage in other applications developed at the IDI Department. IDI provided the databases used by the system, and we also gained access to a database administrator interface available at \url{https://phpmyadmin.idi.ntnu.no/}. SQLAlchemy made the switch onto the new \gls{dbms} easy as it has a predefined MySQL adapter and had no problems in setting up the new databases for our development and production servers. Further, Flask-Migrate \cite{FLASKMIGRATE}, used for database \textit{migrations}\footnote{Database migration is the task of managing versions of a database schema without altering previously stored database content.}, also worked without any changes in configuration. \\
 
@@ -233,7 +233,7 @@ The updates to the previous database schema are shown in Figure \ref{fig:updated
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figs/updated_database_schema.jpg}
-    \caption[Database schema updates]{Database schema updates. The figure does only include the tables that are updated. Added table columns are highlighted. }
+    \caption[Database schema updates]{Database schema updates. The figure does only include the tables that are updated. Added table columns are highlighted.}
     \label{fig:updated-database-schema}
 \end{figure}
 
@@ -269,9 +269,9 @@ The routes that has been updated or added to the \gls{rest}ful \gls{api} is list
 \clearpage
 \subsection{Admin Interface}
 \label{sub-sec:impr-admin}
-Several new problems have been added to the system during the Spring semester. Most problems were added by the two master students assessing the \gls{cmb} system's suitability for conducting digital exams. However, during the Spring, we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinitely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
+Several new problems have been added to the system during the Spring semester by various administrators. Most problems were added by the two master students assessing the \gls{cmb} system's suitability for conducting digital exams. However, during the Spring, we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinitely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
 
-The bug is removed in the new admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
+The bug is removed in the updated admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
 
 Also, some errors occurred when administrators tried to remove locked submissions in the database through the admin interface. Due to lack of training, it often left the database and the server file system in an inconsistent state. As explained above, cascading delete were added between the \texttt{Run} and \texttt{Submission} tables to partially solve the problem, but the files associated with a submission would remain in the server file system and had to be removed manually. However, deletion of submission files was often forgotten, and it caused filename conflicts if the user re-submitted zip files with equal folder and file names as a previous submission\footnote{A suggested future improvement is presented in \Cref{sec:future-work}, which is based upon storing submission files by the uniquely generated database id instead of using user defined folder and file names.}.\\
 
@@ -289,7 +289,7 @@ Administration of the Bulletin table presented in Sub-\Cref{subsec:impr-database
     \begin{subfigure}[b]{0.48\textwidth}
         \includegraphics[width=\textwidth]{figs/bulletin_list.jpg}
     \end{subfigure}
-    \caption{Bulletin creation and overview in the admin interface}
+    \caption{Bulletin creation and overview in the admin interface.}
     \label{fig:admin-bulletin}
 \end{figure}
 
@@ -327,7 +327,7 @@ Another idea apart from the HowTo page is to add an About page. The About page s
 \subsection{Adding Problems}
 \label{sub-sec:prop-problems}
 %// mer her
-This thesis has not contributed towards adding new problems. However, all problems used in the \gls{cmb} system is advised to follow the standard of problems present in other \glspl{oj}. Some of the \glspl{oj} mentioned in \Cref{sec:related} are used in \gls{icpc} programming competitions, and seems to follow the same format in their provided problem descriptions. The \gls{cmb} system should aim to offer problems following a similar format, as the system may be used in similar competitions in the future. Follan and Støa also described this in their Master Thesis \cite{mt:F&S}. The \gls{cmb} team should also strive to add more problems, hopefully with as much diversity as offered by other \glspl{oj}.
+This thesis has not contributed towards adding new problems. However, all problems used in the \gls{cmb} system is advised to follow the standard of problems present in other \glspl{oj}. Some of the \glspl{oj} mentioned in \Cref{sec:related} are used in \gls{icpc} programming competitions, and seems to follow the same format in their provided problem descriptions. The \gls{cmb} system should aim to offer problems following a similar format, as the system may be used in similar competitions in the future. Follan and Støa also described this in their Master Thesis \cite{mt:T&S}. The \gls{cmb} team should also strive to add more problems, hopefully with as much diversity as offered by other \glspl{oj}.
 
 \subsection{Discussion Forum}
 \label{sub-sec:prop-forum}

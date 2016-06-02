@@ -3,6 +3,17 @@
 \label{ch:conclusion}
 
 \section{Conclusion}
+This thesis has improved and added more features to the \gls{cmb} system. The features are mainly usability features whith a focus on efficiency, learnability, and satisfiability. As usability is a broad term and there always is room for usability improvements in a software system, only a sub-set of the usability improvements listed in Appendix \ref{apdx:backlog} and urgent usability aspects discovered throughout this Spring have been implemented. \\
+
+Features implemented into the frontend, server, and backend code have been described in detail. Real-time notifications with Socket.io was integrated into the system to enable automatic state updates of submissions.  Further use cases of Socket.io and implementation suggestions of these features has briefly been presented. The potential of Socket.io in the system is huge and enables future developers to implement interesting features which presents information to users in real-time. \\
+
+Further, solutions to bugs such as enabling uploads for Mac OS X users and cancel submissions that locks the backend have been described. The frontend views have also had some renovation, such as removal unnecassery information, gathering equal functionality, and updating components with symbols. The improvements aims to make it easier for users find important information, to navigate easier, and to more clearly state the outcome of interracting with system components. \\
+
+Feedback messages presented to users has also changed in system version two. Users are now presented with colored feedback messages when interacting with the system to make it easier to differentiate between feedback. Submission errors are also displayed in a pop-up message instead of in a designated view, which removes unnecassary navigation stages. A spinner and real-time updates of state when running submissions is also implemented in the system. \\
+
+Automatic conversion to Unix file type when uploading problem specific files to the server has been added to the administrator interface. Easier deletion of submissions from the database and file system has also been added to the administrator interface. The \gls{dbms} used has also been switched from SQLite to MySQL, and all previous data present at the development and production server of \gls{cmb} have successfully been moved into the new databases. \\
+
+A user experiment have been conducted to evaluate system usability. The user experiment compared version one developed by Follan and Støa, with system version two developed in this thesis.
 
 \section{Future Work}
 \label{sec:future-work}
