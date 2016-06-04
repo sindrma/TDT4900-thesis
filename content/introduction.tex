@@ -28,7 +28,7 @@ Three different sub objectives are identified in the problem statement. Usabilit
 
 \paragraph*{I1} Change and/or optimize the existing database management system if necessary to handle more frequent user submissions. Early in this thesis we discovered that optimizing the database were not as important at this point as first predicted, as the system is still a prototype and we have few active users on the system. As a result, we did not think that optimizing the database was of importance at this point. However, switching to a more sophisticated \gls{dbms} should still be done.
 
-\paragraph*{U2} Improve and extend the CMB system's usability features in accordance with the CMB team's priorities. The features prioritized by the CMB team, is a combination of some features listed in the Appendix \ref{apdx:backlog}, previous user feedback, as well needed usability features found throughout the semester:
+\paragraph*{U2} Improve and extend the CMB system's usability features in accordance with the CMB team's priorities. The features prioritized by the CMB team, is a combination of some features listed in Appendix \ref{apdx:backlog}, previous user feedback, as well needed usability features found throughout the semester:
   \begin{itemize}
     \item \textbf{U2.1 Improved feedback during errors}: Error messages should be structured, clear, and visible.
     \item \textbf{U2.2 Add support real-time updates during submission execution}: State of submissions should update in real-time without the need of manually refresh to check for state changes.
@@ -53,12 +53,30 @@ Three different sub objectives are identified in the problem statement. Usabilit
 \label{sec:cont}
 This project will contribute towards improving the usability of the Climbing Mont Blanc system. System usability is here defined as the ease of use, ease of learning, satisfaction of a software system, as well as user error rates. \Cref{ch:design} presents the definition of usability used in this thesis. The definition includes giving sensible feedback when executing actions against the system, as potentially wrong feedback might distract users and either make the system more difficult to use or learn. This thesis also assumes that the usability of a software system is extended if more features are added to the system frontend, since the range of possible actions for users are extended. \\
 
-Usability is a broad term and there is always room for usability improvements in a software system. This thesis is restricted to improve a subset of the usability aspects listed in Appendix \ref{apdx:backlog}, as well as urgent usability aspects discovered throughout this thesis. Users of the system is defined in this thesis as both administrators using the admin interface and regular users using the frontend browser interface (the website \url{https://climb.idi.ntnu.no}). Furthermore, this thesis also aims to further extend the functionality of the system with focus on contributing towards usability. Usability contributions are summarized in Table \ref{}. \\
+Usability is a broad term and there is always room for usability improvements in a software system. This thesis is restricted to improve a subset of the usability aspects listed in Appendix \ref{apdx:backlog}, as well as urgent usability aspects discovered throughout the work on this thesis. Users of the system is defined in this thesis as both administrators using the admin interface and regular users using the frontend browser interface (the website \url{https://climb.idi.ntnu.no}). Furthermore, this thesis also aims to further extend the functionality of the system with focus on contributing towards usability. All contributions and their corresponding sections are summarized in Table \ref{tab:contributions}. \\
 
 It is also worth mentioning that contributions has been made to the \gls{cmb} project which are not related to the objectives set in \Cref{sec:ps-inter}. A rough estimate of contributions not related to defined objectives is calculated to be around 15\%; about 5\% of time spent on unrelated tasks has been used helping other Master students with development or usage of the system, and another 10\% of time spent on unrelated tasks has been used to on maintain the system and also attend meetings to plan the future of the \gls{cmb} project. These contributions are not discussed in this thesis.
 
 %awesome table
-
+\begingroup
+\renewcommand{\arraystretch}{1.4}
+\begin{table}[t!]
+    \centering
+    \begin{tabular}{  p{2.0cm} | p{7.0cm} | p{1.9cm} }
+    \textbf{Objective} & \textbf{Description Summary}  & \textbf{Section(s)} \\ \hline \hline
+    \texttt{U1} & Fix the main bugs and known issues found during user testing of \gls{cmb}. & \Cref{sub-sec:impr-frontend-bug} and \ref{sec:impr-backend} \\
+    \texttt{I1} & Switch the \gls{dbms} system used by the \gls{cmb} system. & \Cref{sub-sec:impr-dbms} \\
+    \texttt{U2} & Improve or extend the \gls{cmb} system's usability features. & \Cref{sec:real-time}, \ref{sub-sec:impr-views-feedback}, and \ref{subsec:impr-database} \\
+    \texttt{U3} & Conduct a user-experiment to evaluate system usability. & \Cref{sec:cont-user-testing} and \ref{sec:user-testing} \\ \hline
+    \texttt{P1} & Propose improvements to the existing stability test. & \Cref{sub-sec:prop-stability-test} \\
+    \texttt{P2} & Propose improvements to the HowTo-page and existing problem descriptions, and add new problems. & \Cref{sub-sec:prop-howto} and \ref{sub-sec:prop-problems} \\
+    \texttt{P3} & Propose how to implement a discussion forum. & \Cref{sub-sec:prop-forum} \\
+    \end{tabular}
+    \caption{Contributions made in this thesis.}
+    \label{tab:contributions}
+\end{table}
+\renewcommand{\arraystretch}{0.0}
+\endgroup
 
 \section{Outline}
 \label{sec:out}
@@ -66,8 +84,8 @@ This report is structured as follows:\\
 
 \textbf{Chapter \ref{ch:background}}: Explains the state-of-art. It will present the Mont Blanc project, the project which motivates the Climbing Mont Blanc project. The chapter will also present the Climbing Mont Blanc project, that is, the system architecture, energy measurement method, the system environment, and system security. The chapter will also present the theme of another Master Thesis working to improve system scalability. Finally, related \glspl{oj} and programming competitions finishes the chapter. \\
 
-\textbf{Chapter \ref{ch:design}}: The chapter will present the definition of usability in software systems. Based on theory, aspects which makes an \gls{oj} usable are briefly discussed. The chapter ends with a discussion of the objectives set by this thesis and their relevance to the usability definition. \\
-
+\textbf{Chapter \ref{ch:design}}: The chapter will present the definition of usability in software systems. Based on theory, aspects which makes an \gls{oj} usable are briefly discussed. The chapter ends with a discussion of the objectives set by this thesis and their relevance to the usability definition.
+\clearpage
 \textbf{Chapter \ref{ch:improvements}}: A presentation of the improvements done to the system will be presented in this chapter. The chapter will present the technical solutions for the usability goals set in \Cref{sec:ps-inter}, as well as present implementation proposals for a improved stability test, improved HowTo-information and base of provided problems, and a discussion forum. \\
 
 \textbf{Chapter \ref{ch:testing}}: The chapter starts with a presntation of contineous user testing conducted during development. The chapter will also present a user experiment and analyze if the usability has improved after implementing the usability features mentioned in \Cref{sec:ps-inter}. The chapter ends with a presentation of system unit test coverage, to justify the correctness of implemented features. \\

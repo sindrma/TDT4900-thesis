@@ -104,37 +104,15 @@ To fully support the WebSocket protocol Gunicorn also needs to make use custom g
 \label{sec:impr-frontend}
 This section will present figures of the views in the frontend that have changed in the version two of the system. Appendix \ref{apdx:screenshots} shows screenshots of the version one and two of the system frontend for comparison. The below sub-sections will explain the improvements and updates done to the listed views. The other views in the system are not listed here as their functionality nor appearance has changed drastically but have rather been changed to keep the views’ styling consistent throughout the system.
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=0.75\textwidth]{figs/new_homepage.jpg}
-    \caption[The updated leader view]{The updated home page view.}
-    \label{fig:new-homepage}
-\end{figure}
-
-\begin{figure}[t!]
+\subsection{Bug Fixes}
+\label{sub-sec:impr-frontend-bug}
+\begin{figure}[b!]
     \centering
     \includegraphics[width=0.75\textwidth]{figs/new_problem.jpg}
     \caption[The updated problem view]{The updated problem view.}
     \label{fig:new-problem}
 \end{figure}
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figs/new_leader.jpg}
-    \caption[The updated group leader view]{The updated group leader view.}
-    \label{fig:new-leader}
-\end{figure}
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figs/new_profile.jpg}
-    \caption[The updated profile view]{The updated profile view.}
-    \label{fig:new-profile}
-\end{figure}
-
-\subsection{Bug Fixes}
-\label{sub-sec:impr-frontend-bug}
-Feedback from previous user testing showed that Apple OSX users were unable to upload files to the system. The system requires the user to compress a folder containing all the source files, which has confused some users. However on OSX, users who seemingly constructed a correct zip still were unable to submit files to the system. It turned out that the most regular way of creating zip files on OSX also sometimes generated a hidden directory called \textit{\_\_MACOSX} within the zip-file. This made the upload fail, as the server assumes it receives a single compressed folder, and not multiple directories in a single zip. The users were also presented with an error message which contained little information about what went wrong. \\
+Feedback from previous user testing showed that Apple OS X users were unable to upload files to the system. The system requires the user to compress a folder containing all the source files, which has confused some users. However on OS X, users who seemingly constructed a correct zip still were unable to submit files to the system. It turned out that the most regular way of creating zip files on OS X also sometimes generated a hidden directory called \textit{\_\_MACOSX} within the zip-file. This made the upload fail, as the server assumes it receives a single compressed folder, and not multiple directories in a single zip. The users were also presented with an error message which contained little information about what went wrong. \\
 
 The upload bug is removed in system version two. Before the zip file is sent to the server, the frontend ensures that the zip file has the required format as described above. The scan also removes all files that are not source or header files and ensures that the zip only contains a single directory containing the source files. The directory \textit{\_\_MACOSX} is also automatically removed if present in the zip. If a user tries to upload zip files with a different format than the format described above, they are presented with an error message telling them to learn more about uploading on the HowTo-page. \\
 
@@ -142,11 +120,17 @@ The problem view shown in Figure \ref{fig:new-problem} also contained a bug in t
 
 \subsection{Views and Feedback}
 \label{sub-sec:impr-views-feedback}
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figs/new_homepage.jpg}
+    \caption[The updated home page view]{The updated home page view.}
+    \label{fig:new-homepage}
+\end{figure}
 The views in system version two have an updated styling. The home-page view shown in Figure \ref{fig:new-homepage} has a simpler table design and has removed unnecessary information, such as database ids, present in system version one. All screens containing tables has been updated according to the new table design. The problem-view shown in Figure \ref{fig:new-problem} has changed drastically compared to version one of the view. In the problem-view of system version one, users needed to scroll to the bottom of the view to check out the highscore list. In the updated view, the problem description and file upload functionality is vertically aligned with the highscore list, which makes it easy for users to locate the highscore list when entering the view. Version one of the view also had a single table containing all uploads made by a user, while the updated view splits the old upload table into a “Uploaded Solutions” and “Accepted Submissions” table. The table “Accepted Submissions” contains all submissions marked as finished and successful, while the rest of the submissions are shown in the “Uploaded Solutions” table. Having two tables makes the upload information more structured, and the user can quickly find information about submissions. \\
 
-System version one displayed info and error messages in the lower right corner of the screen. The messages are very small, and can sometimes be hard to spot as they are only visible for short period of time. Since all messages also have the same styling, it is hard to differentiate between message types. An example of the message component used in system version one is shown in Figure \ref{fig:old-message}. System version two displays messages right below the navigation bar as shown in Figure \ref{fig:new-message}, which makes messages easy to spot. The messages are also split into the four message types \textit{info}, \textit{success}, \textit{danger}, \textit{error}, and each message type has their own color as shown by Figure \ref{fig:type-color}. Error messages have also been updated with more descriptive messages if needed. \\
+System version one displayed info and error messages in the lower right corner of the screen. The messages are very small, and can sometimes be hard to spot as they are only visible for short period of time. Since all messages also have the same styling, it is hard to differentiate between message types. An example of the message component used in system version one is shown in Figure \ref{fig:old-message}. System version two displays messages right below the navigation bar as shown in Figure \ref{fig:new-message}, which makes feedback messages easy to spot. The messages are also split into the four message types \textit{info}, \textit{success}, \textit{danger}, \textit{error}, and each message type has their own color as shown by Figure \ref{fig:type-color}. Error messages have also been updated with more descriptive messages if needed. \\
 
-\begin{figure}[h!]
+\begin{figure}[t!]
     \centering
     \includegraphics[width=0.5\textwidth]{figs/old_message.jpg}
     \caption[Example of an old popup feedback message]{Example of an old popup feedback message.}
@@ -156,14 +140,14 @@ System version one displayed info and error messages in the lower right corner o
 
 \begin{figure}[h!]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.56\textwidth}
         \includegraphics[width=\textwidth]{figs/new_message.jpg}
         \caption{Example of view displaying updated feedback message.}
         \label{fig:new-message}
     \end{subfigure}
     ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
     %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.35\textwidth}
         \includegraphics[width=\textwidth]{figs/type_color.jpg}
         \caption{The color of each of the defined message types.}
         \label{fig:type-color}
@@ -173,9 +157,9 @@ System version one displayed info and error messages in the lower right corner o
 \end{figure}
 Most buttons in the frontend of system version two also have symbols inside buttons. Symbols were added to more clearly state the purpose of the button and thereby improve usability. As an example, the problem view includes a ``play''-symbol inside the ``Run Program''-button upon successfully uploading a zip-file. The same ``play''-symbol is included in the ``Accepted Submission'' table to rerun submissions, which improves \textit{learnability} and \textit{memorability}. \\
 
-System version one also required users to through a two-stage sequence to compile and run a program. The procedure has been further simplified into a single action in system version two, which makes the action of running a program simpler and more logical. Other buttons in the new version of the interface have symbols as well, for example, a navigation button from the homepage to a problem view includes a right arrow to indicate movement \textit{to} a certain view. Users can thereby infer that a backward arrow means navigating back to the previous view if such a button is displayed in the system. \\
+System version one required users to go through a two-stage sequence to compile and run a program. The procedure has been further simplified into a single action in frontend version two, which makes the action of running a program simpler and more logical. Other buttons in the new version of the interface have symbols as well, for example, a navigation button from the homepage to a problem view includes a right arrow to indicate movement \textit{to} a certain view. Users can thereby infer that a backward arrow means navigating back to the previous view if such a button is displayed in the system. \\
 
-The updated problem view also displays spinners on submissions currently running or in queue. An example of an active spinner on a submission in the ``Uploaded Solutions''-table shown in Figure \ref{fig:new-problem}. The table also includes the state of the submissions, which is updated in real-time as the program executes. The state field real-time updates is possible due to the real-time improvement explained in \Cref{sec:real-time}. If an error occurrs during program execution, it is possible to view the error in a popup window, or more technically a \textit{modal}, as shown in Figure \ref{fig:error-modal}. The content of the modal depends on the type of error and Table \ref{tab:error-types} shows the different error types which can occur during a program's execution. The content of the modal are decided by the ``detailed\_state'' database field in the Submissions table, which is explained in \Cref{sec:impr-server}. System version one had an own view displaying error messages which navigated the user away from the problem view, however, in version two of the frontend, users stay within the problem view removing an uneccassary navigation stage. \\
+The updated problem view also displays spinners on submissions currently running or in queue. An example of an active spinner on a submission in the ``Uploaded Solutions''-table shown in Figure \ref{fig:new-problem}. The table also includes the state of the submissions, which is updated in real-time as the program executes. The state field real-time updates is possible due to the real-time improvement explained in \Cref{sec:real-time}. If an error occurs during program execution, it is possible to view the error in a popup window, or more technically a \textit{modal}, as shown in Figure \ref{fig:error-modal}. The content of the modal depends on the type of error and Table \ref{tab:error-types} shows the different error types which can occur during a program's execution. The content of the modal are decided by the ``detailed\_state'' database field in the Submissions table, which is explained in \Cref{sec:impr-server}. System version one had an own view displaying error messages which navigated the user away from the problem view, however, in version two of the frontend, users stay within the problem view removing an uneccassary navigation stage. \\
 
 \begin{figure}
     \centering
@@ -212,8 +196,21 @@ A bulletin board displaying administrator generated messages have also been adde
 \end{figure}
 
 \subsection{Group Functionality Improvements}
-Figure \ref{fig:new-leader} shows the updated group leader view. The view is displayed if users are navigating to a given group from the homepage and is marked as the leader of the group in the database, as in system version one. Among the visual improvements mentioned in the above sub-section, the view has an extra button. The button lets the leader of a group download a \gls{json} file, which contains information about group members as well as submissions made to problems registered on the group. The file can be used to generate group statistics, which is done by
-JSON stat file download. The functionality was added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}, and were needed as part of the digital exam experiment with the \gls{cmb} system. \\
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figs/new_leader.jpg}
+    \caption[The updated group leader view]{The updated group leader view.}
+    \label{fig:new-leader}
+\end{figure}
+Figure \ref{fig:new-leader} shows the updated group leader view. The view is displayed if users are navigating to a given group from the homepage and is marked as the leader of the group in the database, as in system version one. Among the visual improvements mentioned in the above sub-section, the view has an extra button. The button lets the leader of a group download a \gls{json} file, which contains information about group members as well as submissions made to problems registered on the group. The file can be used to generate group statistics and the functionality was added due to a master thesis of two students, assessing the \gls{cmb} system's suitability for conducting digital exams in the course TDT4102 Procedural and Object-Oriented Programming \cite{TDT4102}. The feature was needed by the student to be used as part of the digital exam experiment with the \gls{cmb} system. \\
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figs/new_profile.jpg}
+    \caption[The updated profile view]{The updated profile view.}
+    \label{fig:new-profile}
+\end{figure}
 
 The updated homepage view has been extended with a ``Create New Group''-button. The button has been moved from the profile view present in system version one into the updated homepage view in system version two, as users may not associate adding groups with profile information. The update also gathers group information and functionality, which makes it easier to locate components related to groups. The updated profile view is shown in Figure \ref{fig:new-profile}.
 
@@ -237,15 +234,15 @@ The updates to the previous database schema are shown in Figure \ref{fig:updated
     \label{fig:updated-database-schema}
 \end{figure}
 
-A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called ``valid\_until'' which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in \Cref{sec:impr-frontend} above. Another field called ``removable'' indicates if a bulletin should be removable or not, and if the bulletin is marked as removable the user are allowed to remove the bulletin from the frontend view. \\
+A Bulletin-table were added to enable administrators to notify users about news and system messages. Bulletins has a field called ``valid\_until'' which indicates until which date a given bulletin is valid, and the field is used to select the valid bulletins as explained in the below sub-section and is also displayed in the frontend as explained in \Cref{sec:impr-frontend} above. Another field called ``removable'' indicates if a bulletin should be removable or not, and if the bulletin is marked as removable the user are allowed to remove the bulletin from the frontend view.
 
 Cascading deletes has also been added between the Submission- and Run-tables. Cascading deletes ensures that all rows in the Run table associated with a Submission row get deleted upon deletion of a submission, which ensures that there are no dangling rows in the Run table, and the database are left in a consistent state after deleting submissions. Database consistency is of importance for both administrators and users, as both user groups can delete submissions.
 
 \subsection{Endpoint Updates}
 \label{sub-sec:impr-server-endpoint}
-The routes that has been updated or added to the \gls{rest}ful \gls{api} is listed in Table \ref{tab:cmb-updated-routes}. Figure \ref{fig:postman-request} shows an example GET-request against one of the routes defined in the table, which fetches data from a local server. The table does not include changes made to \gls{api} routes due to the implementation of the real-time update improvement explained in \Cref{sec:real-time}, as the improvements do not change the internal logic of the original routes and has only added code to emit events. \\
+The \gls{api} endpoints that has been updated or added is listed in Table \ref{tab:cmb-updated-routes}. Figure \ref{fig:postman-request} shows an example request against one of the routes defined in the table, which fetches data from a local server. The table does not include changes made to \gls{api} routes due to the implementation of the real-time update improvement explained in \Cref{sec:real-time}, as the improvements do not change the internal logic of the original routes and has only added code to emit events. \\
 
-\begin{figure}[h!]
+\begin{figure}[b!]
     \centering
     \includegraphics[width=1.0\textwidth]{figs/postman_request.jpg}
     \caption[Example request against local API]{Example request against local \gls{api} using Postman \cite{POSTMAN}. The request executes the GET-request \url{http://localhost:5000/api/group/1?with-submissions=1} presented in Table \ref{tab:cmb-updated-routes} with the query parameter \texttt{with-submissions} equal to one to also include the submissions made by the members of the group.}
@@ -269,7 +266,7 @@ The routes that has been updated or added to the \gls{rest}ful \gls{api} is list
 \clearpage
 \subsection{Admin Interface}
 \label{sub-sec:impr-admin}
-Several new problems have been added to the system during the Spring semester by various administrators. Most problems were added by the two master students assessing the \gls{cmb} system's suitability for conducting digital exams. However, during the Spring, we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinitely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. The checker locked itself as the backend and server is Unix based systems and uses Unix line endings (LF). \\
+Several new problems have been added to the system during the Spring semester by various administrators. Most problems were added by the two master students assessing the \gls{cmb} system's suitability for conducting digital exams. However, during the Spring, we had a lot of trouble making the newly added problems solvable, as some submissions locked the backend infinitely. It turned out that some of the administrators had uploaded input and answer files with CR/LF (DOS) line endings, which locked the checker program during parsing of the input and answer files. As the server and backend is Unix based and uses Unix line endings (LF), the compiled checker program did not handle DOS file types and such files sometimes caused the checker to pause execution during correctness checking. \\
 
 The bug is removed in the updated admin interface. When uploading files to the server, the files are automatically converted into Unix files with LF line endings. This is done by running all input and answer files through the \texttt{vim} \cite{VIM} command \texttt{vim + "argdo set ff=unix | update" +wqa ./*.txt} in the directory containing the problem files. The checker source file is not run through the command as the g++ compiler handles both Unix and DOS filetypes. \\
 
@@ -297,7 +294,7 @@ Administration of the Bulletin table presented in Sub-\Cref{subsec:impr-database
 \label{sec:impr-backend}
 There have been some small changes in the backend code. The \gls{cmb} team discovered that there was no timeout when running the small correctness test, which could potentially lock the backend if the submitted code contained infinite loops. Locking the backend is not acceptable under any condition, and the Unix program \texttt{timeout} \cite{TIMEOUT} is therefore used during the small correctness test to kill the submitted program after some time if it halts for too long. The big correctness test already uses \texttt{timeout} to kill programs that stalls or are to slow, an the timeout is set to 90 seconds. Since the small input set is much smaller than the big correctness test, it is currently set to a third of the timeout of the big correctness. \\
 
-The \gls{json} returned by the backend is also slightly changed. A ``state'' field were added to track the condition of the program better as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the ``detailed\_state'' database field as described in \Cref{sec:impr-server}, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend are done executing, but can be extended with for example \gls{json} structures as more information about program state becomes available. A quick further discussion of the field and its potential are described in \Cref{sec:eval-tech}.
+The \gls{json} returned by the backend is also slightly changed. A ``state'' field were added to track the condition of the program better as it executes on the backend, especially if there is an error during execution. The field is currently used as input to the ``detailed\_state'' database field as described in \Cref{sec:impr-server}, which is further used in the frontend to specialize the feedback given to the user if there is an error during execution of the program. Currently, the field is a simple string describing the state of the submitted program when the backend is done executing, but can be extended with for example \gls{json} structures as more information about program state becomes available. A quick further discussion of the field and its potential are described in \Cref{sec:eval-tech}.
 
 \section{Improvement Proposals}
 \label{sec:impr-proposals}
