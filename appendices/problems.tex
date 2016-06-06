@@ -1,0 +1,47 @@
+%!TEX root=../main.tex
+\chapter{Administration}
+\label{apdx:problems}
+
+\section{Adding and Hiding Problems}
+Login as an admin user either at http://climb-dev.idi.ntnu.no eller http://climb.idid.ntnu.no depending on where the problem are to be added. Access to the admin interface can be requested by contacting the \gls{cmb} team. When logged in, follow the steps below to add the problem:
+\begin{enumerate}
+  \item Select ``Problem'' in the the topmost main menu.
+  \item Click ``Create'' in the sub menu and execute the following steps:
+  \begin{itemize}
+    \item Insert problem name in the ``Name'' field. Do not use ‘/’ in the problem name!
+    \item Add an explanation in the ``Description'' field. This is an HTML field.
+    \item Insert a date in the ``Created''-field.
+    \item Write the name of the quantity to be optimized in the ``Goodness Name'' field, or leave it empty if not appropriate. Only added if needed by the checker-program (see \Cref{}).
+    \item Note! Do not tick off the ``Visible'' check-box yet, wait until all problem data is uploaded (see below).
+  \end{itemize}
+  \item Insert the new problem by clicking the ``Submit'' button.
+  \item Select ``Uploads'' in the top level horizontal menu bar. Notice that a folder with the newly added problem name has been created, where the name is lower case and spaces are replaced with underscores.
+  \item Select the newly created folder and then select the ``problemIO''-subfolder.
+  \item When in the ``problemIO'' subfolder, upload the following files using the ``Upload File''-button. Notice there is no multi-file upload. The file names must be the following, and all files must be present.
+  \begin{itemize}
+    \item \textit{input.txt}: Input for the measured test.
+    \item \textit{answer.txt}: Correct answer for the measured test.
+    \item \textit{small_input.txt}: Input for the small correctness test.
+    \item \textit{small_answer.txt}: Correct answer for the small correctness test.
+    \item \textit{checker.cpp}: A problem checker written in C++. It will automatically be compiled to a checker executable. The checker should return 0 on success, any other number on failure.
+  \end{itemize}
+  \item This step can be skipped if the checker is correct. The checker is executed in the following way:
+  \begin{lstlisting}[language=sh]
+  ./checker input.txt output.txt answer.txt
+  \end{lstlisting}
+  where \textit{output.txt} is the submitted program’s output. This means the third command line argument is the file name of the output of a submitted program (argv[2]), and can be created by running the program with the arguments present in the \textit{input.txt}-file.
+  \item Return to the ``Problem''-tab, then modify the problem by clicking the pencil symbol, and
+  check the ``Visible'' check-box. Click ``Submit'' to save the change. The ``Visible'' check-box makes the added problem visible at the frontend.
+\end{enumerate}
+
+To hide a problem from the system frontend, the following steps needs to be executed:
+\begin{enumerate}
+  \item Choose ``Problem'' in the topmost main menu.
+  \item To delete the problem press the Recycle Bin symbol, or select the problem with the the checkbox at the lefthand side and press ``With Selected'' in the sub menu and press ``Delete'' in the dropdown menu that appears.
+  \item Choose ``Uploads'' in the topmost main menu.
+  \item \textbf{Note! Deleting problems is not should not be done, as it may leave dangling submissions to the deleted problem.}
+\end{enumerate}
+
+\section{Checker Example, Simple Diff}
+
+\section{Checker Example with Goodness}

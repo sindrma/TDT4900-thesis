@@ -20,7 +20,18 @@ In conclusion, this project has contributed towards improving system usability a
 
 \section{Future Work}
 \label{sec:future-work}
+This section will describe possible future extensions which can be made to the system and the project in general. Each extension will be ordered by a suggested order of priority, and are marked either as A(High), B(medium), or C(low).
 
+\subsection*{Project Workflow}
+
+\paragraph*{A. Project descriptions should follow ACM ICPC standards:} As mentioned in Sub-\Cref{sub-sec:prop-problems}, problem descriptions should be in the same format as problem descriptions presented bu other \glspl{oj}. Follan and Støa also mentioned best practices when adding new problems to the system, and they should be followed by future administrators. Best practices and a manual for adding problems can be found in Appendix \ref{apdx:problems}.
+
+\paragraph*{B. Thorough testing of added problems:} Problems descriptions should be thoroughly tested on the development server of \gls{cmb} before adding the problem to the production server. This means that the input and output files of a problem to be added should be heavily tested to make sure it covers all edge cases present in the problem description. During the semester.
+
+\subsection*{Development Workflow}
+
+
+\subsection*{New Features and Code Extensions}
 More sophisticated testing of submissions, multiple tests.
 
 Should check the uploaded zip file structure before storing the files.
@@ -36,7 +47,5 @@ Updated queue on server, should report submissions index in queue over socketio 
 Port bash scripts to Python scripts, easier to write (unit-)tests and should be less error prone upon code changes.
 
 Add database test fixtures for future programmers!
-
-More thorough testing of problems on climb dev before they are added to prod. Develop test cases of both failing and accepted programs.
 
 Compile threads and cross compiler to restrict inline assembly code.
