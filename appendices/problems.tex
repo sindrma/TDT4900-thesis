@@ -2,6 +2,11 @@
 \chapter{Administration}
 \label{apdx:problems}
 
+\section{Jenkins and Google Analytics}
+The Jenkins server is installed at the development server of \gls{cmb} and can be reached at \url{http://climb-dev.idi.ntnu.no:9000}. The defined pipeline stages and setup information can be found there. The Google Analytics account can be reached at \url{https://www.google.com/analytics}. Access to the services are given by the \gls{cmb} team.
+
+\section{Problem Descriptions Best Practices}
+
 \section{Adding and Hiding Problems}
 Login as an admin user either at \url{http://climb-dev.idi.ntnu.no} eller \url{http://climb.idi.ntnu.no} depending on where the problem are to be added. Access to the admin interface can be requested by contacting the \gls{cmb} team. When logged in, follow the steps below to add the problem:
 \begin{enumerate}
@@ -37,12 +42,179 @@ Login as an admin user either at \url{http://climb-dev.idi.ntnu.no} eller \url{h
 To hide a problem from the system frontend, the following steps needs to be executed:
 \begin{enumerate}
   \item Choose ``Problem'' in the topmost main menu.
-  \item To delete the problem press the Recycle Bin symbol, or select the problem with the the checkbox at the lefthand side and press ``With Selected'' in the sub menu and press ``Delete'' in the dropdown menu that appears.
-  \item Choose ``Uploads'' in the topmost main menu.
+  \item Select the problem that is to be hidden.
+  \item Tick on the ``Visible'' check-box.
+  \item Click ``Submit'' to save changes.
 \end{enumerate}
-\textbf{Note! Deleting problems is not should not be done, as it may leave dangling submissions to the deleted problem.}
+\textbf{Note! Deleting problems should not be done, as it may leave dangling submissions in the database.}
 
 \section{Checker Example, Simple Diff}
+\label{sec:checker-simple}
+The checker below is used if a simple diff between expected and actual output is needed.
+\begin{lstlisting}[language=c++]
+#include <stdlib.h>
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main(int argc, char* argv[]) {
+	if (argc != 4) {
+		cerr << "wrong number of arguments!" << endl;
+		return -1;
+	}
+	stringstream ss;
+	ss << "wdiff -3 " << argv[2] << " " << argv[3] << " > /dev/null";
+	int retval = system(ss.str().c_str());
+	if (retval != 0)
+		return 1;
+	return 0;
+}
+\end{lstlisting}
 
 \section{Checker Example with Goodness}
 \label{sec:checker-advanced}
+The checker below is used for the ``Vertex Cover''-problem and shows how to output the goodness value ``Cover size'', which is defined when adding the problem to the database.
+\begin{lstlisting}[language=c++]
+// C++ Vertex cover checker for exercise-3
+#include <iostream>
+#include <fstream>
+#include <limits>
+#include <assert.h>
+#include <algorithm>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+// Rudimentary edge structure
+struct Edge {
+    int u, v;
+};
+
+// Graph structure
+struct Graph {
+    // Number of vertices (v) and edges (e)
+    int v, e;
+    // A vector of edges
+    std::vector<Edge> edges;
+    // A vector of vertex ids
+    std::vector<int> vertices;
+};
+
+// Struct for keeping track of a vertex cover and its quality
+struct Solution {
+    // A vertex cover and associated fitness value
+    std::vector<int> cover;
+    double fitness;
+};
+
+// Checks to see if the argument solution is a valid vertex cover
+bool validVertexCover(Graph graph, Solution current) {
+    // Anything covers an empty graph
+    if (graph.edges.size() == 0) {
+        return true;
+    }
+    // An empty cover is not a valid cover
+    if (current.cover.size() == 0) {
+        return false;
+    }
+    // A cover cannot include more vertices than the graph
+    if (current.cover.size() > graph.v) {
+        return false;
+    }
+    // No duplicate vertices are allowed
+    std::set<int> s;
+    for (unsigned int i = 0; i < current.cover.size(); i++){
+        s.insert(current.cover[i]);
+    }
+    if (s.size() != current.cover.size()) {
+        return false;
+    }
+    // Check and see if each edge in the graph is incident to at least
+    // one vertex of the solution
+    for (unsigned int i = 0; i < graph.edges.size(); i++) {
+        // Return false if neither of the vertices in the current edge
+        // is covered by the proposed vertex cover
+        if ( (std::find(current.cover.begin(), current.cover.end(),
+                        graph.edges[i].u) == current.cover.end())
+            && (std::find(current.cover.begin(), current.cover.end(),
+                          graph.edges[i].v) == current.cover.end()) ) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Driver program
+int main(int argc, char* argv[]) {
+    // Check argc
+    if (argc < 3) {
+        cout << "Give input filename and solution filename!" << endl;
+        return -1;
+    }
+    // Open input file
+    ifstream inputFile(argv[1]);
+    if (!inputFile) {
+        cout << "No input file found" << endl;
+        return -1;
+    }
+    // Open solution file
+    ifstream solutionFile(argv[2]);
+    if (!solutionFile) {
+        cout << "No solution file found" << endl;
+        return -1;
+    }
+    string code;
+    int c, u, v, N, M;
+    Graph graph;
+
+    while (inputFile >> code) {
+        if (!code.compare("c")) {  // Skip comments
+            inputFile.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        } else if (!code.compare("p")) {
+            // Read number of vertices into N and number of edges into M
+            inputFile >> N >> M;
+
+            graph.v = N;
+            graph.e = M;
+
+            continue;
+        } else if (!code.compare("v")) {
+            inputFile >> c;
+
+            graph.vertices.push_back(c);
+
+            continue;
+        } else if (!code.compare("a")) {
+            inputFile >> u >> v;
+
+            Edge edge = {u, v};
+            graph.edges.push_back(edge);
+
+            continue;
+        } else {
+            // Should never get here with the correct input
+            assert(false);
+        }
+    }
+    // Check student solution //
+    // Validate header
+    string header;
+    solutionFile >> header;
+    assert(!header.compare("s"));
+    // Read in list of vertices and validate that it is a vertex cover
+    std::vector<int> vertices;
+    int vertexId;
+    while (solutionFile >> vertexId) {
+        vertices.push_back(vertexId);
+    }
+    Solution candidate = {vertices, 0.0};
+    assert(validVertexCover(graph, candidate));
+
+    // Output for CMB (size of vertex cover)
+    cout << "OK" << endl;
+    cout << candidate.cover.size() << endl;
+    return 0;
+}
+\end{lstlisting}

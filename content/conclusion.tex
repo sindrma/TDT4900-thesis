@@ -20,32 +20,30 @@ In conclusion, this project has contributed towards improving system usability a
 
 \section{Future Work}
 \label{sec:future-work}
-This section will describe possible future extensions which can be made to the system and the project in general. Each extension will be ordered by a suggested order of priority, and are marked either as A(High), B(medium), or C(low).
+This section will describe possible future extensions which can be made to the system and the project in general. Each extension will have a suggested ordering based on priority, and are marked either as A(high), B(medium), or C(low) priority improvements.
 
-\subsection*{Project Workflow}
+\subsection*{Administration}
 
-\paragraph*{A. Project descriptions should follow ACM ICPC standards:} As mentioned in Sub-\Cref{sub-sec:prop-problems}, problem descriptions should be in the same format as problem descriptions presented bu other \glspl{oj}. Follan and Støa also mentioned best practices when adding new problems to the system, and they should be followed by future administrators. Best practices and a manual for adding problems can be found in Appendix \ref{apdx:problems}.
+\paragraph*{A. Problem descriptions should follow ACM ICPC standards:} As mentioned in Sub-\Cref{sub-sec:prop-problems}, problem descriptions should be in the same format as problem descriptions presented bu other \glspl{oj}. Follan and Støa also mentioned best practices when adding new problems to the system, and they should be followed by future administrators. Best practices and a manual for adding problems can be found in Appendix \ref{apdx:problems}.
 
-\paragraph*{B. Thorough testing of added problems:} Problems descriptions should be thoroughly tested on the development server of \gls{cmb} before adding the problem to the production server. This means that the input and output files of a problem to be added should be heavily tested to make sure it covers all edge cases present in the problem description. During the semester.
+\paragraph*{A. Thorough testing of added problems:} Problems descriptions should be thoroughly tested on the development server of \gls{cmb} before adding the problem to the production server. This means that the input and output files of a problem to be added should be heavily tested to make sure it covers all edge cases present in the problem description. It is also important that heavy testing is performed either locally or at the development server, as we do not want users to be denied use of the system because of testing.
 
-\subsection*{Development Workflow}
+\subsection*{Development and Testing}
+\paragraph*{B. Extra production server for acceptance testing:} As described in Sub-\Cref{sub-sec:prop-stability-test}, an production like server should be added to more easily run extensive test and generate statistics in a production like environment. The Jenkins pipeline stage should also be added to automatically launch automatic stability and integration tests. The server should be added as it is considered a bad \gls{ci} practice to run tests at the production server, as it may prohibit normal users from using the system.
 
+\paragraph*{C. Add Database Fixtures:} Database fixtures should be added to the system. A fixture is a defined set of data which can be loaded into the database with ease, which enables quick setup before testing the system. Fixtures might make it easier for future developers to start developing, and run tests quickly during local development. A possible Python module which can be used is Flask-Fixtures \cite{FLASK-FIXTURES}, which enables fixture definitions in the \gls{json} format among others.
 
-\subsection*{New Features and Code Extensions}
-More sophisticated testing of submissions, multiple tests.
+\subsection*{Features and Improvements}
+\paragraph*{A. Server Side Timeout and Backend Monitoring:} The server should keep track of timers for each submission running in the system as described in \Cref{sec:disc-server}. The server can keep track of timers for each submission by for example using gevent coroutines \cite{GEVENT} as discussed in the section. The server could then kill submissions running on a backend if a timeout occurs and notify users by emitting events to the respective client who submitted the code. This can be done by exploiting Socket.io namespaces and rooms as presented in \Cref{sec:real-time}. Timeout and run-time information can also be sent in real-time to clients to enable users to have up-to-date information about a running submission.
 
-Should check the uploaded zip file structure before storing the files.
+\paragraph*{A. Port Bash Scripts Into Python Scripts:} Bash scripts defined at the server and backend should be ported to Python scripts instead. Debugging Bash scripts executed over \gls{ssh} has proven to be troublesome, and have also proven to be error prone upon code changes. By rewriting all Bash scripts to Python scripts, it should be easier to debug and it is also easier to add unit tests for these parts of the system.
 
-Boilerplate checkers to be provided through the admin interface.
+\paragraph*{A. Server Side Zip File Check:} The frontend parses the submitted zip and checks for the correct format as described in \Cref{sub-sec:impr-frontend-bug}. A similar check should be added to the server code to ensure correct storage of files in the file-system. This is expecially important if \gls{api} documentation is released or a \gls{cli} is implemented.
 
-Time limit per problem language.
+\paragraph*{B. Real-Time Queue Placement:} The server should give real-time information about submission position to clients who has submissions in the run queue. As described in \Cref{sec:disc-server}, a complete copy of the queue can be made on every dequeue and the placement of every submissions can be emitted using Socket.io. As discussed in the section, this solution might yield high network traffic during heavy system load, and it might be to simple. Another solution is to still make a complete copy, but only send submission positions to those clients with submissions in the queue. Socket.io rooms gives a solution to the latter approach.
 
-Server timers (for timeout reporting timeouts to the frontend) and execution time estimation.
+\paragraph*{B. Multi File Upload:} It should be possible to upload source files directly and preferably multiple files. One could also offer a more advanced upload feature such as an online code editor, which is offered by \glspl{oj} like Kattis \cite{KATTIS} and HackerEarth \cite{HACKEREARTH}. 
 
-Updated queue on server, should report submissions index in queue over socketio upon enqueues and dequeues.
+\paragraph*{C. Low-level Statistics:} The server should keep track of low-level submission information, such as memory usage, chip temperature, and cache usage. Further, noise levels in running time and energy consumption measurements should by reported as well if applicable. This feature requires changes to all parts of the system.
 
-Port bash scripts to Python scripts, easier to write (unit-)tests and should be less error prone upon code changes.
-
-Add database test fixtures for future programmers!
-
-Compile threads and cross compiler to restrict inline assembly code.
+\paragraph*{C. Login via Feide:} It should be possible for NTNU students to login via Feide.\footnote{Feide is a student's digital identity on the Uninett network: \url{https://www.feide.no/}.} Enabling login through Feide wuold make it simple for students and professors to start using the system in course related activities.

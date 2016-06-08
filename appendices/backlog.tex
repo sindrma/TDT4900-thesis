@@ -5,17 +5,17 @@
 \begin{itemize}
 \item \textbf{Bugs and known issues}:
     \begin{itemize}
-        \item Uploads: OSX uploads of zip does not work.
-        \item A SSH connection timeout should be added, to kill the SSH connection and stop the program on the backend if timeout is reached.
-        \item Highscore list sorting bug: sorting on another metric should still hide private submissions.
-        \item Disappearing submissions when entering a problem from the group view, while still present when entering from the overview page.
-        \item Remove highscore lists with no successful submissions.
+      \item Remove flickering in the highscore list during Socket.IO updates: The frontend fetches to much information when receiving events from the server.
+      \item Should add cascading deletes on Problem-table: To remove dangling submissions if problems are to be deleted in the future.
     \end{itemize}
 \item \textbf{Stability}:
     \begin{itemize}
         \item Improve stability of measurements: Extend the backend with the possibility to assign programs to cores at the backend. Better control over processor and board temperature is also wanted.
         \item Improved stability test: The stability test should automatically calculate mean, standard deviation and relative standard deviation of runs.
         \item Automatic system monitoring and recovery: The system should be able to detect irregularities such as long submission queues, and take action automatically if things should fail.
+        \item Automatic file checks on server: Should check the format and content of submitted files.
+        \item Port bash scripts to Python code: Will make it easier to write unit tests, and hopefully make the system more robust and stable.
+        \item Compile threads and cross-compiler: Should be introduced if applicable to restrict inline assembly code and make the compile process more stable on both the server and backend.
     \end{itemize}
 \item \textbf{Scalability}
     \begin{itemize}
@@ -24,25 +24,33 @@
     \end{itemize}
 \item \textbf{Usability}:
     \begin{itemize}
-        \item Improved feedback: Compilation and runtime errors should have more clear error messages.
-        \item Compilation-Run Single action: Compilation and running a program should be a single step. Progress bars and feedback during the different phases should also be added.
+        \item Improved feedback: Should report placement of submissions in the run queue dynamically. Should also report expected running time with progress bars, and the server should kill submissions which timeouts.
         \item Upload improvement: Should be possible to upload single source and header files. Also checking of the zip file content, and automatic removal of unnecessary files is wanted.
         \item Highscore list improvement: Should sort on EDP or energy next if the running time between two submission matches. It should also be possible to run the same submission again, and chose which run that should be visible in the highscore list.
-        \item Compilation improvement: Users or admins should be able to specify compiler flags. The makefile should also be made on a per problem basis or on a per programming language basis, instead of having a huge static makefile.
+        \item Multiple test cases during checking: The checking of submissions should be split into stages, to more easily report.
+        \item Multi file upload: Should be possible to upload multiple source files to the system. Could also extend with an online code editor.
+        \item Compilation improvement: Users or admins should be able to specify compiler flags. The makefile should also be made on a per problem basis or on a per programming language basis, instead of having a huge static makefile. The system also lacks a good cross-compilers.
         \item Discussion forum.
         \item Login via Feide: It should be possible to login using your NTNU user.
         \item Group extensions: Add deadline and "Late" mark. Leaders should have the possibility to promote users to leaders.
+        \item Time limit per problem per language: If new languages are to be supported, there should be a designated limit on timeout for the new languages on each problem. Timeouts should be defined by administrators making problems.
         \item Add supported languages: Java, Python and more languages.
         \item More advanced low level statistics: Cache misses, cache hits, memory usage etc. on submissions.
+        \item Improve information on HowTo-page: Should display language version. Should also consider splitting it into an About- and HowTo-page.
         \item News Bulletin and Newsletter.
         \item Searching for problems, users, and groups.
         \item Seasons: Highscores by seasons/timespan.
         \item Command line interface for submitting, compiling and running programs. Release API documentation.
         \item Secrecy in groups: Group results and user names should have the possibility to be secret.
-        \item Frontend statistics: Per users, per group, global etc.
+        \item Frontend statistics: Submission statistics such as mean and standard deviation for a problem per user, per group etc. Also, low-level statistics such as memory usage, cache information, noise in measurements etc. is wanted.
+        \item Placeholders should be present for empty tables.
     \end{itemize}
 \item \textbf{Performance}:
     \begin{itemize}
       \item Non-blocking database: The database access is as of now synchronous. For a performance gain if the system load is high, a non-blocking (asynchronous) MySQL adapter could be used in combination with the default MySQL SQLAlchemy adapter.
+    \end{itemize}
+\item \textbf{Admin Interface}
+    \begin{itemize}
+      \item Boilerplate checkers in the admin interface: The admin interface should add boilerplate checkers to allow easy setup of new problems.
     \end{itemize}
 \end{itemize}
