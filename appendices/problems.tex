@@ -1,11 +1,20 @@
 %!TEX root=../main.tex
 \chapter{Administration}
 \label{apdx:problems}
+It should be noted that the information stated in this chapter was created by Follan and Støa \cite{mt:T&S}. The information is repeated in this chapter in a slightly rewritten and compressed form as it was requested by the main supervisor.
 
-\section{Jenkins and Google Analytics}
-The Jenkins server is installed at the development server of \gls{cmb} and can be reached at \url{http://climb-dev.idi.ntnu.no:9000}. The defined pipeline stages and setup information can be found there. The Google Analytics account can be reached at \url{https://www.google.com/analytics}. Access to the services are given by the \gls{cmb} team.
+\section{Bitbucket, Jenkins and Google Analytics}
+The Jenkins server is installed at the development server of \gls{cmb} and can be reached at \url{http://climb-dev.idi.ntnu.no:9000}. The defined pipeline stages and setup information can be found there. The Google Analytics account can be reached at \url{https://www.google.com/analytics}. The git repositories are accessible via Bitbucket at \url{https://bitbucket.org}. Access to the services are granted by the \gls{cmb} team.
 
 \section{Problem Descriptions Best Practices}
+It is important that problem descriptions are clear and unambiguous, and that all necessary information is stated in the description so that users clearly understand the problem. It is recommended to follow the following format when creating problem descriptions:
+\begin{enumerate}
+    \item \textbf{Description}: An overall description of the problem.
+    \item \textbf{Input}: Should present the format of the input. It is also common practice to state the number of inputs as the first line in the input.
+    \item \textbf{Output}: Should present the format of the output.
+    \item \textbf{Example}: Provide an example of inputs and expected outputs. This is valuable, as users can test the example locally before submitting to the system.
+\end{enumerate}
+Remember that good problem descriptions attracts more users and submissions.
 
 \section{Adding and Hiding Problems}
 Login as an admin user either at \url{http://climb-dev.idi.ntnu.no} eller \url{http://climb.idi.ntnu.no} depending on where the problem are to be added. Access to the admin interface can be requested by contacting the \gls{cmb} team. When logged in, follow the steps below to add the problem:
@@ -109,41 +118,7 @@ struct Solution {
 };
 
 // Checks to see if the argument solution is a valid vertex cover
-bool validVertexCover(Graph graph, Solution current) {
-    // Anything covers an empty graph
-    if (graph.edges.size() == 0) {
-        return true;
-    }
-    // An empty cover is not a valid cover
-    if (current.cover.size() == 0) {
-        return false;
-    }
-    // A cover cannot include more vertices than the graph
-    if (current.cover.size() > graph.v) {
-        return false;
-    }
-    // No duplicate vertices are allowed
-    std::set<int> s;
-    for (unsigned int i = 0; i < current.cover.size(); i++){
-        s.insert(current.cover[i]);
-    }
-    if (s.size() != current.cover.size()) {
-        return false;
-    }
-    // Check and see if each edge in the graph is incident to at least
-    // one vertex of the solution
-    for (unsigned int i = 0; i < graph.edges.size(); i++) {
-        // Return false if neither of the vertices in the current edge
-        // is covered by the proposed vertex cover
-        if ( (std::find(current.cover.begin(), current.cover.end(),
-                        graph.edges[i].u) == current.cover.end())
-            && (std::find(current.cover.begin(), current.cover.end(),
-                          graph.edges[i].v) == current.cover.end()) ) {
-            return false;
-        }
-    }
-    return true;
-}
+bool validVertexCover(Graph graph, Solution current) { ... }
 
 // Driver program
 int main(int argc, char* argv[]) {
@@ -212,8 +187,9 @@ int main(int argc, char* argv[]) {
     Solution candidate = {vertices, 0.0};
     assert(validVertexCover(graph, candidate));
 
-    // Output for CMB (size of vertex cover)
+    // Output for CMB
     cout << "OK" << endl;
+    // Goodness value ("Cover") is second output from the checker
     cout << candidate.cover.size() << endl;
     return 0;
 }
